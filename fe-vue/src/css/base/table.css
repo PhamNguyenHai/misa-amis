@@ -1,0 +1,166 @@
+.main-content-table {
+  height: 425px;
+  overflow: auto;
+  font-size: 14px;
+  position: relative;
+  cursor: default;
+}
+
+.main-content-table::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+.main-content-table::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: #f5f5f5;
+}
+
+.main-content-table::-webkit-scrollbar-thumb {
+  background-color: #909090;
+  border-radius: 10px;
+}
+
+table {
+  border-collapse: collapse;
+  min-width: 100%;
+  width: max-content;
+  background-color: #fff;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #efefef;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 5px 9px;
+  box-sizing: border-box;
+  border: 1px dotted var(--border-color-default);
+  white-space: nowrap; /* Ngăn chặn các dòng từ việc ngắt dòng */
+}
+
+tr {
+  height: 48px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+table th,
+table td {
+  width: auto;
+}
+
+tbody tr :hover {
+  cursor: pointer;
+}
+
+.employee-functions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  position: relative;
+  z-index: 1;
+  background-color: #fff;
+}
+
+.function-name {
+  color: #3d83a9;
+  cursor: pointer;
+}
+
+.drop-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -890px -360px;
+  width: 8px;
+  height: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.drop-icon:hover {
+  border: 1px solid #3d83a9;
+}
+
+.drop-list-function {
+  background-color: white;
+  z-index: 2;
+  border: 1px solid var(--border-color-default);
+  min-width: 130px;
+  min-height: 100px;
+  position: absolute;
+  top: 18px;
+  right: 3px;
+  text-align: left;
+  display: none;
+}
+
+.drop-icon:hover + .drop-list-function {
+  display: block;
+}
+
+.drop-list-function:hover {
+  display: block;
+}
+
+tbody tr:last-child .drop-icon + .drop-list-function,
+tbody tr:nth-last-child(2) .drop-icon + .drop-list-function {
+  top: -101px;
+  right: 3px;
+}
+
+tbody tr:first-child .drop-icon + .drop-list-function,
+tbody tr:nth-child(2) .drop-icon + .drop-list-function {
+  top: 18px;
+  right: 3px;
+}
+
+.employee-function-item {
+  padding-left: 8px;
+  box-sizing: border-box;
+  height: 30px;
+  line-height: 30px;
+}
+
+.employee-function-item:hover {
+  background-color: var(--background-color-default);
+  color: rgb(6, 132, 6);
+  cursor: pointer;
+}
+
+th:first-child,
+td:first-child {
+  position: sticky;
+  left: -1px; /* Ghim cột đầu tiên */
+  z-index: 1;
+  background-color: #fff;
+  text-align: center;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  position: sticky;
+  left: 27px; /* Ghim cột đầu tiên */
+  z-index: 1;
+  background-color: #fff;
+}
+
+th:last-child,
+td:last-child {
+  position: sticky;
+  right: 0px; /* Ghim cột cuối */
+  z-index: 1;
+  background-color: #fff;
+}
+
+th:first-child,
+th:nth-child(2),
+th:last-child {
+  background-color: #efefef;
+}

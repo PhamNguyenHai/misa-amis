@@ -1,0 +1,32 @@
+.text-field {
+  height: 36px;
+  border-radius: 4px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  outline: none;
+  border: 1px solid var(--border-color-default);
+}
+
+.text-field:focus {
+  border-color: var(--primary-color) !important;
+}
+
+.text-field.size-s {
+  width: 185px;
+}
+
+.text-field.size-m {
+  width: 245px;
+}
+
+.text-field.size-l {
+  width: 280px;
+}
+
+.text-field.size-xl {
+  width: 470px;
+}
+
+.text-field.size-xxl {
+  width: 960px;
+}

@@ -1,0 +1,236 @@
+/* .date-field {
+  height: 36px;
+  border-radius: 4px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  outline: none;
+  border: 1px solid #c0c0c0;
+}
+
+input[type="date"].input-s {
+  width: 185px;
+}
+
+input[type="date"].input-m {
+  width: 245px;
+}
+
+input[type="date"].input-l {
+  width: 280px;
+}
+
+input[type="date"].input-xl {
+  width: 470px;
+}
+
+input[type="date"].input-xxl {
+  width: 960px;
+} */
+.date-picker {
+  position: relative;
+}
+
+.date-picker-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 36px;
+  border-radius: 4px;
+  padding-right: 9px;
+  box-sizing: border-box;
+  border: 1px solid var(--border-color-default);
+}
+
+.date-picker-area:has(.date-picker-display:focus) {
+  border: 1px solid var(--primary-color);
+}
+
+.date-picker-display {
+  border-radius: 4px;
+  border: none;
+  height: 34px;
+  width: 100%;
+  padding-left: 12px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.date-picker-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -128px -312px;
+  width: 16px;
+  height: 16px;
+  margin-bottom: 3px;
+  padding-right: 2px;
+  cursor: pointer;
+}
+
+.date-picker-selector {
+  z-index: 1;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 3px);
+  width: 320px;
+  border-radius: 4px;
+  min-height: 351px;
+  padding: 24px 22px 0 24px;
+  box-sizing: border-box;
+  border: 1px solid var(--border-color-default);
+  background-color: var(--white-color);
+}
+
+.date-picker-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.date-picker-infor {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.date-infor-heading {
+  font-size: 16px;
+  margin-right: 10px;
+  font-weight: 700;
+}
+
+.date-infor-dropdown {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -1129px -365px;
+  width: 14px;
+  height: 8px;
+}
+
+.date-picker-directions {
+  display: flex;
+  column-gap: 28px;
+}
+
+.date-picker-previous {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -36px -361px;
+  width: 8px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.date-picker-next {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -84px -361px;
+  width: 8px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.date-calendar {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.date-weekdays {
+  line-height: 32px;
+  height: 32px;
+}
+
+.date-weekdays,
+.date-days {
+  cursor: default;
+  display: flex;
+  column-gap: 8px;
+  flex-wrap: wrap;
+}
+
+.date-weekday,
+.date-day-inactive,
+.date-day {
+  font-size: 14px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+}
+
+.date-day-inactive,
+.date-day {
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.date-day:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  border-radius: 50%;
+  color: var(--white-color);
+  background-color: var(--primary-color);
+}
+
+.date-picker-footer {
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary-color);
+  margin: 25px 0 17px 0;
+}
+
+.date-picker-footer:hover {
+  opacity: 0.8;
+}
+
+.date-day-selected {
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.date-day-other-month {
+  color: aqua;
+}
+
+.date-picker.size-s {
+  width: 185px;
+}
+
+.date-picker.size-m {
+  width: 245px;
+}
+
+.date-picker.size-l {
+  width: 280px;
+}
+
+.date-picker.size-xl {
+  width: 470px;
+}
+
+.date-picker.size-xxl {
+  width: 960px;
+}
+
+.date-day-inactive {
+  color: var(--border-color-default);
+}
+
+.date-day-inactive:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  border-radius: 50%;
+  color: var(--white-color);
+  background-color: var(--border-color-default);
+}
+
+/* Với trường hợp chiều dài bị giới hạn thì chỉnh cho phần chọn lịch sang trái */
+.date-picker-left .date-picker-selector {
+  right: 35px;
+  top: calc(100% - 135px);
+}
+
+/* Với trường hợp chiều dài bị giới hạn thì chỉnh cho phần chọn lịch sang phải*/
+.date-picker-right .date-picker-selector {
+  right: -320px;
+  top: calc(100% - 135px);
+}
+
+.date-picker-field.invalid .date-picker-area {
+  border-color: var(--danger-color);
+}

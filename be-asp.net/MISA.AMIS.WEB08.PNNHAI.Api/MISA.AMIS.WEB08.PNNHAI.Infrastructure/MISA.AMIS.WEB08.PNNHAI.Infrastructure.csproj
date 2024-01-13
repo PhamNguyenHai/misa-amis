@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.11" />
+    <PackageReference Include="EPPlus" Version="7.0.5" />
+    <PackageReference Include="MySqlConnector" Version="2.1.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MISA.AMIS.WEB08.PNNHAI.Core\MISA.AMIS.WEB08.PNNHAI.Core.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,139 @@
+.main-content-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-content-heading {
+  font-size: 19px;
+  cursor: default;
+}
+
+.main-content-center {
+  margin-top: 16px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  background-color: #fff;
+}
+
+.main-content-functions {
+  padding: 12px 16px;
+  height: 36px;
+}
+
+.content-left-functions {
+  float: left;
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.selected-row-number {
+}
+
+.unselectd-all {
+  font-size: 14px;
+  font-weight: 1000;
+  cursor: pointer;
+  color: var(--danger-color);
+}
+
+.unselectd-all:hover {
+  text-decoration: underline;
+}
+
+.delete-button {
+}
+
+.content-right-functions {
+  float: right;
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.searching-function {
+  background-image: url("/src/assets/icons/search.png");
+  background-size: 22px;
+  background-repeat: no-repeat;
+  background-position-y: 5px;
+  background-position-x: calc(100% - 10px);
+}
+
+.searching-function:focus {
+  border-color: var(--primary-color);
+}
+
+.refresh-function {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -1091px -83px;
+}
+
+.excel-area {
+  position: relative;
+}
+
+.excel-function {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -1260px -83px;
+}
+
+.excel-area:hover .excel-option {
+  display: block;
+}
+
+.excel-option {
+  display: none;
+  position: absolute;
+  border-radius: 4px;
+  top: calc(100% + 1px);
+  right: 0;
+  min-width: 170px;
+  z-index: 3;
+  background-color: var(--white-color);
+  border: 1px solid var(--border-color-default);
+}
+
+.excel-item {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  list-style: none;
+  padding-left: 4px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.excel-item:hover {
+  background-color: var(--background-color-default);
+}
+
+.main-content-table {
+  width: 100%;
+}
+
+.main-content-footer {
+  display: flex;
+  height: 56px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.record-display-number {
+  cursor: default;
+}
+
+.paging-navigation-area {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.record-number-chooser {
+  height: 36px;
+  width: 160px;
+  border-radius: 4px;
+}

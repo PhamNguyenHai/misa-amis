@@ -1,0 +1,15 @@
+D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\bin\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Infrastructure.deps.json
+D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\bin\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Infrastructure.dll
+D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\bin\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Infrastructure.pdb
+D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\bin\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.dll
+D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\bin\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.pdb
+D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Infrastructure.csproj.AssemblyReference.cache
+D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Infrastructure.AssemblyInfoInputs.cache
+D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Infrastructure.AssemblyInfo.cs
+D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Infrastructure.csproj.CopyComplete
+D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Infrastructure.dll
+D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\obj\Debug\net6.0\refint\MISA.AMIS.WEB08.PNNHAI.Infrastructure.dll
+D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Infrastructure.pdb
+D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\obj\Debug\net6.0\ref\MISA.AMIS.WEB08.PNNHAI.Infrastructure.dll

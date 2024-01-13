@@ -1,0 +1,130 @@
+.form-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #bababa96;
+  z-index: 3;
+}
+
+.form {
+  position: relative;
+  width: 1000px;
+  height: 625px;
+  margin: 50px auto;
+  border-radius: 5px;
+  background-color: white;
+  padding: 15px 20px;
+  box-sizing: border-box;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-header-left {
+  display: flex;
+  align-items: center;
+  column-gap: 15px;
+  margin-top: 10px;
+  /* margin-left: 10px; */
+}
+
+.form-title {
+  font-size: 25px;
+  margin: 0;
+}
+
+.checkbox-field + .checkbox-field {
+  margin-left: 10px;
+}
+
+.form-header-right {
+  display: flex;
+  align-items: flex-start;
+  column-gap: 15px;
+}
+
+.form-support-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -89px -145px;
+  width: 22px;
+  height: 22px;
+}
+
+.form-close-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -147px -147px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.form-main {
+  padding: 20px 0px 40px;
+  border-bottom: 1px solid var(--border-color-default);
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 4px;
+}
+
+.gender-field-area {
+  margin-left: 20px;
+}
+
+.gender-group {
+  display: flex;
+  padding-top: 6px;
+  box-sizing: border-box;
+  column-gap: 20px;
+}
+
+.gender-field {
+  display: flex;
+  align-items: center;
+  column-gap: 3px;
+}
+
+.form-field-area {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  padding: 5px 0;
+  box-sizing: border-box;
+}
+
+.form-field-area label {
+  font-size: 13px;
+  width: fit-content;
+}
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  box-sizing: border-box;
+}
+
+.form-footer .button {
+  padding: 0 15px;
+}
+
+.form-field-area.invalid input,
+.form-field-area.invalid .combobox,
+.form-field-area.invalid .combobox .combobox-button {
+  border-color: var(--danger-color);
+}
+
+.form-footer--right {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+/* Trường bắt buộc nhập*/
+.required label::after {
+  content: " *";
+  font-size: 14px;
+  color: var(--danger-color);
+}

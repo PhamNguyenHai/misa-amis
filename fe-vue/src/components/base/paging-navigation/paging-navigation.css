@@ -1,0 +1,31 @@
+.paging-navigation-bar {
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+  justify-content: right;
+  width: 300px;
+}
+
+.page-number-btn {
+  /* padding: 8px 10px; */
+  width: 22px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.direct-btn,
+.page-number-btn {
+  cursor: pointer;
+}
+
+.current-page {
+  font-weight: 900;
+  background-color: rgb(198, 195, 195);
+}
+
+.space {
+  cursor: default;
+  user-select: none;
+}

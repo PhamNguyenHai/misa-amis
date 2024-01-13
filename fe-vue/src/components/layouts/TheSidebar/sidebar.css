@@ -1,0 +1,157 @@
+.sidebar {
+  width: 200px;
+  height: calc(100vh - 56px);
+  background-color: #022366;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  float: left;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding-top: 20px;
+  box-sizing: border-box;
+}
+
+.sidebar-item.router-link-active {
+  background-color: #2069fc;
+}
+
+.sidebar-item {
+  display: flex;
+  margin: 5px 12px;
+  padding: 10px 8px;
+  box-sizing: border-box;
+  column-gap: 12px;
+  border-radius: 4px;
+  align-items: center;
+  text-decoration: none;
+}
+
+.sidebar-item-icon {
+  width: 24px;
+  height: 24px;
+  /* flex-shrink, grow and basis ngăn chặn việc ảnh bị tăng giảm kích thước trong th text dài */
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: 24px;
+  filter: brightness(0) invert(1);
+}
+
+.sidebar-item-icon.general-page {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -27px -1630px;
+  transform: scale(1.1);
+}
+
+.sidebar-item-icon.buy-page-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -203px -1631px;
+  transform: scale(1.1);
+}
+
+.sidebar-item-icon.sale-page-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -70px -1631px;
+  transform: scale(1.1);
+}
+
+.sidebar-item-icon.management-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -247px -1632px;
+  transform: scale(1.1);
+}
+
+.sidebar-item-icon.tax-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -421px -1634px;
+  transform: scale(1.1);
+}
+
+.sidebar-item-name {
+  color: #fff;
+}
+
+.sidebar-shrink {
+  border-top: 1px solid rgb(116, 116, 116);
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin: 5px 12px; */
+  padding: 10px 8px;
+  box-sizing: border-box;
+  column-gap: 8px;
+  cursor: pointer;
+}
+
+.sidebar-shrink-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -36px -361px;
+  width: 8px;
+  height: 14px;
+}
+
+.sidebar-shrink-title {
+  color: #fff;
+  font-size: 14px;
+}
+
+.sidebar-shrink:hover,
+.sidebar-item:hover {
+  background-color: #7ba6fd;
+  cursor: pointer;
+}
+
+/* Sidebar thu gọn */
+
+.sidebar.sidebar-mini {
+  width: 73px;
+}
+
+.sidebar-mini .sidebar-shrink-title {
+  display: none;
+}
+
+/* Xoay mũi tên đóng từ < thành > */
+.sidebar-mini .sidebar-shrink-icon {
+  transform: rotate(180deg);
+}
+
+/* Biến tên các liên kết ở sidebar thành tooltips */
+.sidebar-mini .sidebar-item {
+  position: relative;
+}
+
+.sidebar-mini .sidebar-item-name {
+  display: none;
+  width: 94px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 3;
+  left: 115px;
+  top: 10px;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.sidebar-mini .sidebar-item-name::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: -15px;
+  margin-right: 10px;
+  border-width: 9px;
+  border-style: solid;
+  border-color: transparent #555 transparent transparent;
+  display: block;
+}
+
+.sidebar-mini .sidebar-item:hover .sidebar-item-name {
+  display: block;
+  opacity: 1;
+}

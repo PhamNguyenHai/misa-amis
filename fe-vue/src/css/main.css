@@ -1,0 +1,35 @@
+@import url("./variable.css");
+/* @import url("./base/table.css"); */
+
+body {
+  font-size: 13px;
+  font-family: GoogleSans;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: GoogleSans;
+  src: url(/src/assets/font/GoogleSans-Regular.otf);
+}
+
+.margin-left-16 {
+  margin-left: 16px;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
+}
+
+.toast-wrapper {
+  position: fixed;
+  bottom: 60px;
+  right: 16px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  z-index: 1000; /*Đảm bảo toast-wrapper luôn ở trên cùng*/
+}

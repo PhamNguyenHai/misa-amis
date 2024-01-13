@@ -1,0 +1,127 @@
+.header {
+  height: 56px;
+  display: flex;
+}
+
+.header-left {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  background-color: #022366;
+}
+
+.header-toggle {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -1157px -32px;
+  width: 16px;
+  height: 16px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.header-software-area {
+  margin-left: 20px;
+  display: flex;
+  column-gap: 2px;
+  cursor: pointer;
+}
+
+.header-logo {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -1232px -1015px;
+  width: 44px;
+  height: 45px;
+  transform: scale(0.9, 0.9);
+}
+
+.header-software-name {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.header-right {
+  flex: 1;
+  padding: 0 24px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-company-current {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  cursor: default;
+}
+
+.header-company-option {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -847px -35px;
+  width: 16px;
+  height: 14px;
+}
+
+.header-company-name {
+  color: #212121;
+  font-size: 13px;
+}
+
+.header-company-arrow {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -1129px -365px;
+  width: 14px;
+  height: 8px;
+}
+
+.header-infor {
+  display: flex;
+  align-items: center;
+}
+
+.header-notify-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -788px -30px;
+  width: 22px;
+  height: 21px;
+  cursor: pointer;
+}
+
+.header-user {
+  margin-left: 25px;
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  cursor: pointer;
+}
+
+.user-avatar {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -352px -894px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.user-name {
+  font-size: 13px;
+}
+
+.user-name-arrow {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -1129px -365px;
+  width: 14px;
+  height: 8px;
+}
+
+/* sidebar mini */
+
+.header.logo-header-mini .header-left {
+  width: 73px;
+  justify-content: center;
+}
+
+/* Bỏ khoảng cách 20px lúc sidebar max  */
+.header.logo-header-mini .header-left .header-software-area {
+  margin-left: 0;
+}
+
+.header.logo-header-mini .header-toggle,
+.header.logo-header-mini .header-software-name {
+  display: none;
+}
