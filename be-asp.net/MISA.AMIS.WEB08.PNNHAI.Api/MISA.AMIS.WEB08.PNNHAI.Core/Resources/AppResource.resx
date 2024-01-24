@@ -124,7 +124,16 @@
     <value>Xóa thành công !</value>
   </data>
   <data name="ExistedEmployeeCode" xml:space="preserve">
-    <value>Mã nhân viên đã tồn tại !</value>
+    <value>Mã nhân viên {0} đã tồn tại !</value>
+  </data>
+  <data name="Gender_Female" xml:space="preserve">
+    <value>Nữ</value>
+  </data>
+  <data name="Gender_Male" xml:space="preserve">
+    <value>Nam</value>
+  </data>
+  <data name="Gender_Orther" xml:space="preserve">
+    <value>Khác</value>
   </data>
   <data name="InputDateNoMoreThanCurrentDateDefault" xml:space="preserve">
     <value>Giá trị nhập vào không được lơn hơn ngày hiện tại !</value>
@@ -137,6 +146,12 @@
   </data>
   <data name="NotFoundById" xml:space="preserve">
     <value>Không tìm thấy thông tin theo Id !</value>
+  </data>
+  <data name="SendWithoutExcelFileError" xml:space="preserve">
+    <value>Chỉ chấp nhận tệp excel (.xlsx) !</value>
+  </data>
+  <data name="SendWithoutFileError" xml:space="preserve">
+    <value>Chưa có file nào được gửi lên !</value>
   </data>
   <data name="SystemError" xml:space="preserve">
     <value>Có lỗi xảy ra. Vui lòng liên hệ Misa để được giúp đỡ !</value>

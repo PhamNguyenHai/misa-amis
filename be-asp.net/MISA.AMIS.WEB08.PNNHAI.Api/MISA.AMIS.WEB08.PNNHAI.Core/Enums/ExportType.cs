@@ -9,7 +9,6 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
     public enum ExportType
     {
         ExportAll = 0,
-        ExportSelectedRow = 1,
-        ExportWithFilterCondition = 2,
+        ExportWithFilterCondition = 1,
     }
 }

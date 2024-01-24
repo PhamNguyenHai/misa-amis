@@ -273,6 +273,7 @@ table th:nth-last-child(2) .filter-column-area::before {
 }
 
 .filter-value-text {
+  text-align: left;
 }
 
 .filter-condition-area {

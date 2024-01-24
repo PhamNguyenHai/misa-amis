@@ -39,7 +39,7 @@ const employeeResources = {
     {
       title: "Giới tính",
       columnKey: "gender",
-      width: 120,
+      width: 110,
       align: "left",
       formatType: MisaEnums.FORMAT_TYPE.GENDER,
       columnType: "selection",
@@ -92,7 +92,7 @@ const employeeResources = {
       width: 170,
       columnType: "selection",
       filterType: MisaEnums.FILTER_COLUMN_TYPE.SELECTION,
-      filterOption: (await getDepartments()).map((item) => ({
+      filterOption: (await getDepartments())?.map((item) => ({
         keyDisplayName: item.departmentName,
         keyValue: item.departmentId,
       })), // Lấy danh sách department

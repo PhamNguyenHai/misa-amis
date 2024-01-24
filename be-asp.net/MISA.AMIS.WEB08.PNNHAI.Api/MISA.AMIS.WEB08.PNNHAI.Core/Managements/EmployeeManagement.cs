@@ -33,7 +33,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Managements
 
             if (employeeExist != null)
             {
-                throw new ValidateException(Core.Resources.AppResource.ExistedEmployeeCode);
+                throw new ValidateException(string.Format(Core.Resources.AppResource.ExistedEmployeeCode, code));
             }
         }
 

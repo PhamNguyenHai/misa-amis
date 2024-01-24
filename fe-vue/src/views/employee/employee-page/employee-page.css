@@ -76,12 +76,7 @@
   background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -1260px -83px;
 }
 
-.excel-area:hover .excel-option {
-  display: block;
-}
-
 .excel-option {
-  display: none;
   position: absolute;
   border-radius: 4px;
   top: calc(100% + 1px);
@@ -134,6 +129,11 @@
 
 .record-number-chooser {
   height: 36px;
-  width: 160px;
+  width: 185px;
   border-radius: 4px;
+  outline: none;
+}
+
+.record-number-chooser:focus {
+  border: 1px solid var(--primary-color);
 }

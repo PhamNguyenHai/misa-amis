@@ -96,9 +96,9 @@
           ]"
           :inputTitle="errorMessages.dateOfBirth"
           dateInputId="dateOfBirth"
-          datePickerClass="size-s"
+          dateInputClass="size-s"
           v-model="formData.dateOfBirth"
-          @notyfyClickChooseDate="
+          @notifyChangeDate="
             validateField(
               'dateOfBirth',
               $_MisaResources.formText.employeeForm.dateOfBirth.title
@@ -214,10 +214,10 @@
             'form-field-area',
           ]"
           dateInputId="identityIssuedDate"
-          datePickerClass="size-s"
+          dateInputClass="size-s"
           :inputTitle="errorMessages.identityIssuedDate"
           v-model="formData.identityIssuedDate"
-          @notyfyClickChooseDate="
+          @notifyChangeDate="
             validateField(
               'identityIssuedDate',
               $_MisaResources.formText.employeeForm.identityIssuedDate.title
@@ -882,7 +882,8 @@ export default {
           this.dialog.type = "confirm";
           this.dialog.numberOfButton =
             this.$_MisaEnums.DIALOG_TYPE_BUTTON.THREE_BUTTONS;
-          this.dialog.text = "Dữ liệu đã bị thay đổi. Bạn có muốn cất không ?";
+          this.dialog.text =
+            this.$_MisaResources.appText.employeePageText.confirmTitle.ConfirmToSaveWhileDataChanged;
         } else {
           this.handleNotifyCloseForm();
         }
@@ -1081,7 +1082,7 @@ export default {
             this.dialog.numberOfButton =
               this.$_MisaEnums.DIALOG_TYPE_BUTTON.ONE_BUTTON;
             this.dialog.text =
-              "Dữ liệu không có gì thay đổi. Không thể thực hiện cập nhật !";
+              this.$_MisaResources.appText.employeePageText.notifyTitle.notifyNothingChange;
           } else {
             res = await this.updateEmployee(this.editEmployeeId, this.formData);
           }
@@ -1119,7 +1120,9 @@ export default {
             // Kiểm tra res.success thành công = true -> add Toast
             this.$store.commit("addToast", {
               type: "success",
-              message: "Lưu thông tin thành công.",
+              message:
+                this.$_MisaResources.appText.employeePageText.successAction
+                  .saveDataSuccess,
             });
           }
         }
@@ -1154,7 +1157,9 @@ export default {
             // Kiểm tra res.success thành công = true -> add Toast
             this.$store.commit("addToast", {
               type: "success",
-              message: "Lưu thông tin thành công.",
+              message:
+                this.$_MisaResources.appText.employeePageText.successAction
+                  .saveDataSuccess,
             });
 
             // Sau khi click nút lưu và thêm => chuyển mode -> add (nếu mode hiện tại đg là add => ko đổi)

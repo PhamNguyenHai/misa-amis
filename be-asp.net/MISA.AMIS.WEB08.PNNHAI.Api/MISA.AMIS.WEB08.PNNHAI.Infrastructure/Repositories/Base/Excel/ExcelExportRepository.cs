@@ -14,14 +14,14 @@ using AutoMapper;
 
 namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
 {
-    public class ExcelExportRepository<TEntity, TModel> : IExcelExportRepository
+    public abstract class ExcelExportRepository<TEntity, TModel> : IExcelExportRepository
     {
         #region Fields
         private readonly IReadOnlyRepository<TEntity, TModel> _readOnlyRepository;
         protected readonly IMapper _mapper;
 
         public virtual string Title { get; set; } = "Danh sách bản ghi";
-        public virtual string Sheet { get; set; } = "sheet 1";
+        public virtual string Sheet { get; set; } = "DanhSachNhanVien";
         #endregion
 
         #region Constructor
@@ -54,10 +54,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
                     var filterInput = _mapper.Map<FilterInput>(excelExportRequest);
                     filterInput.CurrentPage = -1;
                     return ExportExcelFileWithFilterConditiondAsync(filterInput, excelExportRequest.Columns);
-                // Xử lý trường hợp xuất với các dòng đã chọn
-                case ExportType.ExportSelectedRow:
-                    return ExportExcelFileWithAllAsync(excelExportRequest.Columns);
-                // Mặc định xuất tất cả bản ghi
+                // Trả về exception nếu lựa chọn khác
                 default:
                     throw new ValidateException(Core.Resources.AppResource.WrongSelectionError);
             }
@@ -69,11 +66,6 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
 
             var result = CreateExcelAsync(data, columns);
             return result;
-        }
-
-        private Task<byte[]> ExportExcelFileWithSelectedRowsAsync(IEnumerable<ExcelExportColumn> columns)
-        {
-            throw new NotImplementedException();
         }
 
         private async Task<byte[]> ExportExcelFileWithFilterConditiondAsync(FilterInput filterInput, IEnumerable<ExcelExportColumn> columns)

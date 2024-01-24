@@ -32,6 +32,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
         /// Date: 
         public async Task<TEntity?> FindByCodeAsync(string code)
         {
+
             string storedProcedureName = $"Proc_{EntityName}_GetByCode";
 
             var param = new DynamicParameters();

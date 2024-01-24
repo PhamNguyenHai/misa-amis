@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Infrastructure\\MISA.AMIS.WEB08.PNNHAI.Infrastructure.csproj": {}
+    "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Infrastructure\\MISA.AMIS.WEB08.PNNHAI.Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj": {
+    "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj",
+        "projectUniqueName": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj",
         "projectName": "MISA.AMIS.WEB08.PNNHAI.Core",
-        "projectPath": "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj",
+        "projectPath": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj",
         "packagesPath": "C:\\Users\\phamn\\.nuget\\packages\\",
-        "outputPath": "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\obj\\",
+        "outputPath": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\phamn\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[11.0.0, )"
             },
+            "EPPlus": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
@@ -73,14 +77,14 @@
         }
       }
     },
-    "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Infrastructure\\MISA.AMIS.WEB08.PNNHAI.Infrastructure.csproj": {
+    "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Infrastructure\\MISA.AMIS.WEB08.PNNHAI.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Infrastructure\\MISA.AMIS.WEB08.PNNHAI.Infrastructure.csproj",
+        "projectUniqueName": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Infrastructure\\MISA.AMIS.WEB08.PNNHAI.Infrastructure.csproj",
         "projectName": "MISA.AMIS.WEB08.PNNHAI.Infrastructure",
-        "projectPath": "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Infrastructure\\MISA.AMIS.WEB08.PNNHAI.Infrastructure.csproj",
+        "projectPath": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Infrastructure\\MISA.AMIS.WEB08.PNNHAI.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\phamn\\.nuget\\packages\\",
-        "outputPath": "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Infrastructure\\obj\\",
+        "outputPath": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\phamn\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -97,8 +101,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj": {
-                "projectPath": "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj"
+              "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj": {
+                "projectPath": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj"
               }
             }
           }

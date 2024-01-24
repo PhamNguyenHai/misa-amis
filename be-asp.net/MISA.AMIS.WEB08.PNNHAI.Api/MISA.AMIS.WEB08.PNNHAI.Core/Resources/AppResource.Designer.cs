@@ -79,11 +79,38 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã nhân viên đã tồn tại !.
+        ///   Looks up a localized string similar to Mã nhân viên {0} đã tồn tại !.
         /// </summary>
         public static string ExistedEmployeeCode {
             get {
                 return ResourceManager.GetString("ExistedEmployeeCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nữ.
+        /// </summary>
+        public static string Gender_Female {
+            get {
+                return ResourceManager.GetString("Gender_Female", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nam.
+        /// </summary>
+        public static string Gender_Male {
+            get {
+                return ResourceManager.GetString("Gender_Male", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Khác.
+        /// </summary>
+        public static string Gender_Orther {
+            get {
+                return ResourceManager.GetString("Gender_Orther", resourceCulture);
             }
         }
         
@@ -120,6 +147,24 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         public static string NotFoundById {
             get {
                 return ResourceManager.GetString("NotFoundById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chỉ chấp nhận tệp excel (.xlsx) !.
+        /// </summary>
+        public static string SendWithoutExcelFileError {
+            get {
+                return ResourceManager.GetString("SendWithoutExcelFileError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chưa có file nào được gửi lên !.
+        /// </summary>
+        public static string SendWithoutFileError {
+            get {
+                return ResourceManager.GetString("SendWithoutFileError", resourceCulture);
             }
         }
         

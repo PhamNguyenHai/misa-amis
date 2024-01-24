@@ -37,7 +37,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             // Kiểm tra mã nhân viên muốn cập nhật có thay đổi so với ban đầu không. Nếu có kiểm tra
             // xem nó có được cập nhật sang mã chưa tồn tại không (nếu không throw exception)
             await _employeeManagement.CheckEmployeeCodeUpdateToExistedCode(id, entityUpdateDto.EmployeeCode);
-        } 
+        }
         #endregion
     }
 }

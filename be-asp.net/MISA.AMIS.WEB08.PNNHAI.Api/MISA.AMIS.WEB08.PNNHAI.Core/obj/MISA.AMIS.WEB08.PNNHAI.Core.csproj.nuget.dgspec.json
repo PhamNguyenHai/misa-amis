@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj": {}
+    "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj": {}
   },
   "projects": {
-    "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj": {
+    "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj",
+        "projectUniqueName": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj",
         "projectName": "MISA.AMIS.WEB08.PNNHAI.Core",
-        "projectPath": "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj",
+        "projectPath": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj",
         "packagesPath": "C:\\Users\\phamn\\.nuget\\packages\\",
-        "outputPath": "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\obj\\",
+        "outputPath": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\phamn\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -47,6 +47,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[11.0.0, )"
+            },
+            "EPPlus": {
+              "target": "Package",
+              "version": "[7.0.5, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

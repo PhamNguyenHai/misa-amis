@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MISA.AMIS.WEB08.PNNHAI.Core
 {
-    public interface IEmployeeExcelService : IExcelExportService
+    public interface IEmployeeExcelService : IExcelService<EmployeeExcelImportRespondDto>
     {
     }
 }

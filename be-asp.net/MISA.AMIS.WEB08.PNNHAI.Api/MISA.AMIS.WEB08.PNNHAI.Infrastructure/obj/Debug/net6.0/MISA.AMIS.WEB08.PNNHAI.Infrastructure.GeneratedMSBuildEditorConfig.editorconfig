@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MISA.AMIS.WEB08.PNNHAI.Infrastructure
-build_property.ProjectDir = D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\
+build_property.ProjectDir = D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Infrastructure\

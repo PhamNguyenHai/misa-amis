@@ -286,6 +286,7 @@
         "dependencies": {
           "AutoMapper": "11.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
+          "EPPlus": "7.0.5",
           "Swashbuckle.AspNetCore": "6.5.0"
         },
         "runtime": {

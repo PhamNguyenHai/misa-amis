@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9LBUGtnCsZB6TWbRq8fABabAXo2BhHmttSK5ys/Y8xBphDw6n3fm/IbbFiT1z+nxUmHP/LuEhE0OGjeO9sJnwg==",
+  "dgSpecHash": "gI13AWinJNsfSAJ5eN+F3VZOrQsFdeeE+umR2tzdgZo++gZjo8T2IS2rMhzPOgefrZoOtjUScX86Lh1c3LABJw==",
   "success": true,
-  "projectFilePath": "D:\\Save VS Code\\be-api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Api.csproj",
+  "projectFilePath": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\phamn\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\phamn\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

@@ -88,7 +88,7 @@
                       <misa-date-field
                         v-if="header.columnType === 'date'"
                         fieldClass="filter-value-text"
-                        datePickerClass="size-l date-field date-picker-left"
+                        dateInputClass="size-l"
                         :placeholder="$_MisaResources.filterPopup.inputValue"
                         v-model="filterColumns[index].filterString"
                       />
@@ -288,6 +288,7 @@ export default {
     "notifyTableCheckboxChanged",
     "notifyWorkWithRecord",
     "notifySortColumnClicked",
+    "notifyFilterColumnParamsChanged",
   ],
 
   data() {
@@ -730,41 +731,45 @@ export default {
      * @author: PNNHai
      */
     columnsResizable() {
-      var thElm;
-      var startOffset;
+      try {
+        var thElm;
+        var startOffset;
 
-      Array.prototype.forEach.call(
-        document.querySelectorAll("table thead th"),
-        function (th) {
-          th.style.position = "relative";
+        Array.prototype.forEach.call(
+          document.querySelectorAll("table thead th"),
+          function (th) {
+            th.style.position = "relative";
 
-          var grip = document.createElement("div");
-          grip.innerHTML = "&nbsp;";
-          grip.style.top = 0;
-          grip.style.right = 0;
-          grip.style.bottom = 0;
-          grip.style.width = "4px";
-          grip.style.position = "absolute";
-          grip.style.cursor = "col-resize";
-          grip.addEventListener("mousedown", function (e) {
-            thElm = th;
-            startOffset = th.offsetWidth - e.pageX;
-          });
+            var grip = document.createElement("div");
+            grip.innerHTML = "&nbsp;";
+            grip.style.top = 0;
+            grip.style.right = 0;
+            grip.style.bottom = 0;
+            grip.style.width = "4px";
+            grip.style.position = "absolute";
+            grip.style.cursor = "col-resize";
+            grip.addEventListener("mousedown", function (e) {
+              thElm = th;
+              startOffset = th.offsetWidth - e.pageX;
+            });
 
-          th.appendChild(grip);
-        }
-      );
+            th.appendChild(grip);
+          }
+        );
 
-      document.addEventListener("mousedown", function (e) {
-        if (thElm) {
-          thElm.style.width = startOffset + e.pageX + "px";
-          thElm.style.minWidth = startOffset + e.pageX + "px";
-        }
-      });
+        document.addEventListener("mousedown", function (e) {
+          if (thElm) {
+            thElm.style.width = startOffset + e.pageX + "px";
+            thElm.style.minWidth = startOffset + e.pageX + "px";
+          }
+        });
 
-      document.addEventListener("mouseup", function () {
-        thElm = undefined;
-      });
+        document.addEventListener("mouseup", function () {
+          thElm = undefined;
+        });
+      } catch (err) {
+        console.error(err);
+      }
     },
 
     /**
@@ -874,8 +879,6 @@ export default {
         console.error(err);
       }
     },
-
-    handleRemoveColumnFilterInfor() {},
 
     /**
      * Author: PNNHai

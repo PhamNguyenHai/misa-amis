@@ -45,7 +45,8 @@ class EmployeeService extends BaseService {
     try {
       const res = await this.baseApiService.post(
         this.endpoint("/Export"),
-        exportData
+        exportData,
+        { responseType: "blob" } // Yêu cầu phản hồi dưới dạng Blob
       );
       return res;
     } catch (err) {

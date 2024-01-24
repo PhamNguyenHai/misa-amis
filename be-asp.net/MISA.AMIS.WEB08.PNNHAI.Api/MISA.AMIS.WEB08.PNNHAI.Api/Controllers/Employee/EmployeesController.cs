@@ -29,7 +29,14 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
         {
             var excelFile = await _employeeExcelService.ExportExcelFileAsync(excelResquest);
             return File(excelFile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "excel.xlsx");
-        } 
+        }
+
+        [HttpPost("Import")]
+        public async Task<IActionResult> ImportExcelFile(IFormFile? importFile)
+        {
+            var res = await _employeeExcelService.ReadExcelFileAsync(importFile, "DanhSachNhanVien", "Employee");
+            return StatusCode(StatusCodes.Status200OK, res);
+        }
         #endregion
     }
 }

@@ -25,10 +25,38 @@ const MisaResources = {
     previousPage: "Trước",
     sidebarShrinkTitle: "Thu gọn",
     emptyDataImage: "Không có dữ liệu",
+    findInforTitle: "Tìm kiếm theo mã, tên nhân viên",
+    refreshTooltip: "Nạp lại dữ liệu",
+    excelWorkingTooltip: "Xuất, nhập khẩu excel",
+    recordsPerPage: "bản ghi/trang",
+
+    excelExportTitle: {
+      exportAll: "Xuất khẩu tất cả bản ghi",
+      exportWithFilerCondition: "Xuất khẩu bản ghi đã lọc",
+    },
 
     employeePageText: {
       sidebarTitle: "Tổng quan",
       pageTitle: "Nhân viên",
+      successAction: {
+        exportAllSuccess: "Xuất thành công tất cả bản ghi ra file excel !",
+        exportWithFilterConditionSuccess:
+          "Xuất thành công tất cả bản ghi đã lọc ra file excel !",
+        deleteSucess: "Xóa thành công 1 bản ghi !",
+        deleteManySucess: "Xóa thành công các bản ghi đã chọn!",
+        saveDataSuccess: "Lưu thông tin thành công !",
+      },
+      confirmTitle: {
+        ConfirmToDeleteMany:
+          "Bạn có chắc chắn muốn xóa những nhân viên đã chọn không ?",
+        ConfirmToDelete: "Bạn có chắc chắn muốn xóa 1 nhân viên không ?",
+        ConfirmToSaveWhileDataChanged:
+          "Dữ liệu đã bị thay đổi. Bạn có muốn cất không ?",
+      },
+      notifyTitle: {
+        notifyNothingChange:
+          "Dữ liệu không có gì thay đổi. Không thể thực hiện cập nhật !",
+      },
     },
 
     purchasePageText: {

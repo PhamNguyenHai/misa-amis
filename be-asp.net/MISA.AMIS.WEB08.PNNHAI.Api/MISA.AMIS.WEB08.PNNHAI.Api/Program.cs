@@ -65,8 +65,12 @@ builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IEmployeeManagement, EmployeeManagement>();
 
+
 builder.Services.AddScoped<IEmployeeExcelRepository, EmployeeExcelRepository>();
 builder.Services.AddScoped<IEmployeeExcelService, EmployeeExcelService>();
+
+builder.Services.AddScoped<IExcelImportTemplateSettingRepository, ExcelImportTemplateSettingRepository>();
+
 
 var app = builder.Build();
 

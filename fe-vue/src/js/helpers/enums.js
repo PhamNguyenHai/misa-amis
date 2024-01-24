@@ -89,6 +89,11 @@ const MisaEnums = {
     THIS_SELECTED_MONTH: 1,
     NEXT_MONTH: 2,
   },
+
+  EXPORT_TYPE: {
+    EXPORT_ALL: 0,
+    EXPORT_WITH_FILTER_CONDITION: 1,
+  },
 };
 
 export default MisaEnums;

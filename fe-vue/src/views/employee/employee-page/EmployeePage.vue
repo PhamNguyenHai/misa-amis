@@ -32,20 +32,34 @@
       <div class="content-right-functions">
         <misa-text-field
           textFieldClass="searching-function size-l"
-          placeholder="Tìm kiếm theo mã, tên nhân viên"
+          :placeholder="$_MisaResources.appText.findInforTitle"
           v-model="filterParams.searchString"
         />
         <misa-button
           @click.stop="onClickRefreshData"
           buttonClass="refresh-function"
-          buttonTooltips="Nạp lại dữ liệu"
+          :buttonTooltips="$_MisaResources.appText.refreshTooltip"
         />
         <div class="excel-area">
-          <misa-button buttonClass="excel-function" />
-          <ul class="excel-option">
+          <misa-button
+            buttonClass="excel-function"
+            :buttonTooltips="$_MisaResources.appText.excelWorkingTooltip"
+            @click.stop="handleToggleExcelWorking"
+          />
+          <ul class="excel-option" v-if="isShowExcelWorking">
             <li class="excel-item">Nhập khẩu bản ghi</li>
-            <li class="excel-item">Xuất khẩu tất cả bản ghi</li>
-            <li class="excel-item">Xuất khẩu bản ghi đã chọn</li>
+            <li class="excel-item" @click.stop="handleExportAll">
+              {{ $_MisaResources.appText.excelExportTitle.exportAll }}
+            </li>
+            <li
+              class="excel-item"
+              @click.stop="handleExportWithFilterCondition"
+            >
+              {{
+                $_MisaResources.appText.excelExportTitle
+                  .exportWithFilerCondition
+              }}
+            </li>
           </ul>
         </div>
       </div>
@@ -71,10 +85,18 @@
 
     <div class="paging-navigation-area">
       <select class="record-number-chooser" v-model="filterParams.pageSize">
-        <option value="10">10 bản ghi / trang</option>
-        <option value="20">20 bản ghi / trang</option>
-        <option value="60">60 bản ghi / trang</option>
-        <option value="80">80 bản ghi / trang</option>
+        <option :value="10">
+          10 {{ $_MisaResources.appText.recordsPerPage }}
+        </option>
+        <option :value="20">
+          20 {{ $_MisaResources.appText.recordsPerPage }}
+        </option>
+        <option :value="60">
+          60 {{ $_MisaResources.appText.recordsPerPage }}
+        </option>
+        <option :value="80">
+          80 {{ $_MisaResources.appText.recordsPerPage }}
+        </option>
       </select>
 
       <misa-paging-navigation
@@ -159,21 +181,22 @@ export default {
 
       confirmAction: null,
 
+      isShowExcelWorking: false,
+
       excelExportData: {
+        // Loại xuất excel (0: all, 1: các dòng đã chọn, 2: các điều kiện lọc)
+        exportType: null,
+        currentPage: -1,
         columns: [],
         ids: [],
-        search: null,
-        title: null,
-        sheet: null,
+        searchString: null,
+        filterColumns: [],
       },
     };
   },
 
   created() {
     try {
-      // Gán sự kiện keydown
-      window.addEventListener("keydown", this.handleShortHandKeyDown);
-
       // Sử dụng employeeTableResources để gán các heading để hiển thị và key để gọi api
       // Bên trong $_EmployeeTableResources có : resources có title để hiển thị và columnKey là trường để gọi lên api
       // Đồng thời $_EmployeeTableResources có : objectKey là id để khi sử dụng v-for sẽ lấy id này để làm key
@@ -189,8 +212,15 @@ export default {
     }
   },
 
+  mounted() {
+    // Gán sự kiện keydown
+    window.addEventListener("keydown", this.handleShortHandKeyDown);
+    window.addEventListener("click", this.handleHideExcelWorking);
+  },
+
   unmounted() {
     window.removeEventListener("keydown", this.handleShortHandKeyDown);
+    window.removeEventListener("click", this.handleHideExcelWorking);
   },
 
   computed: {
@@ -302,6 +332,7 @@ export default {
         }
       } catch (error) {
         console.error(error);
+        this.$store.state.isLoading = false;
       }
     },
 
@@ -463,17 +494,23 @@ export default {
             this.dialog.type = "warning";
             this.dialog.numberOfButton =
               this.$_MisaEnums.DIALOG_TYPE_BUTTON.TWO_BUTTONS;
-            this.dialog.text = "Bạn có chắc chắn muốn xóa 1 nhân viên không ?";
+            this.dialog.text =
+              this.$_MisaResources.appText.employeePageText.confirmTitle.ConfirmToDelete;
 
             break;
           default:
-            alert("Có lỗi");
+            break;
         }
       } catch (err) {
         console.error(err);
       }
     },
 
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện hiển thị thông báo xác nhận xóa nhiều
+     */
     onClickDeleteMany() {
       try {
         this.confirmAction = this.$_MisaEnums.CONFIRM_ACTION.DELETE_MANY;
@@ -482,7 +519,8 @@ export default {
         this.dialog.type = "warning";
         this.dialog.numberOfButton =
           this.$_MisaEnums.DIALOG_TYPE_BUTTON.TWO_BUTTONS;
-        this.dialog.text = "Bạn có chắc chắn muốn xóa nhiều nhân viên không ?";
+        this.dialog.text =
+          this.$_MisaResources.appText.employeePageText.confirmTitle.ConfirmToDeleteMany;
       } catch (err) {
         console.error(err);
       }
@@ -605,7 +643,9 @@ export default {
           if (res.success) {
             this.$store.commit("addToast", {
               type: "success",
-              message: "Xóa thành công 1 bản ghi",
+              message:
+                this.$_MisaResources.appText.employeePageText.successAction
+                  .deleteSucess,
             });
 
             // load lại table
@@ -644,7 +684,9 @@ export default {
           if (res.success) {
             this.$store.commit("addToast", {
               type: "success",
-              message: "Xóa thành công nhiều bản ghi",
+              message:
+                this.$_MisaResources.appText.employeePageText.successAction
+                  .deleteManySucess,
             });
 
             // load lại table
@@ -665,21 +707,134 @@ export default {
       }
     },
 
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện toggle các option làm việc với excel khi bấm vào button excel
+     */
+    async handleToggleExcelWorking() {
+      try {
+        this.isShowExcelWorking = !this.isShowExcelWorking;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện ẩn các option làm việc với excel
+     */
+    async handleHideExcelWorking() {
+      try {
+        this.isShowExcelWorking = false;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện export tất cả bản ghi ra file excel
+     */
     async handleExportAll() {
       try {
-        this.excelExportData.columns = [
-          ...employeeResources.resources.title,
-          ...employeeResources.resourcescolumnKey,
-        ];
-        for (const column of this.excelExportData.columns) {
-          column.columnKey = convertCamelCaseToPascelCase(column.columnKey);
-        }
+        this.excelExportData.exportType =
+          this.$_MisaEnums.EXPORT_TYPE.EXPORT_ALL;
+        this.excelExportData.columns = employeeResources.resources.map(
+          (column) => ({
+            title: column.title,
+            columnKey: convertCamelCaseToPascelCase(column.columnKey),
+            width: column.width,
+            formatType: column.formatType,
+            align:
+              column.align === "left" ? 0 : column.align === "center" ? 1 : 2,
+          })
+        );
 
         console.log(this.excelExportData.columns);
-        // const res = this.exportToExcelFile(this.excelExportData);
+        const res = await this.exportToExcelFile(this.excelExportData);
+        console.log(res);
 
-        // if (res.success) {
-        // }
+        if (res.success) {
+          const blob = new Blob([res.data], {
+            type: "application/vnd.ms-excel",
+          });
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "DanhSachNhanVien.xlsx");
+          link.style.display = "none";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+
+          this.$store.commit("addToast", {
+            type: "success",
+            message:
+              this.$_MisaResources.appText.employeePageText.successAction
+                .exportAllSuccess,
+          });
+
+          console.log(res);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện export các bản ghi thỏa với điều kiện lọc ra file excel
+     */
+    async handleExportWithFilterCondition() {
+      try {
+        this.excelExportData.exportType =
+          this.$_MisaEnums.EXPORT_TYPE.EXPORT_WITH_FILTER_CONDITION;
+        this.excelExportData.columns = employeeResources.resources.map(
+          (column) => ({
+            title: column.title,
+            columnKey: convertCamelCaseToPascelCase(column.columnKey),
+            width: column.width,
+            formatType: column.formatType,
+            align:
+              column.align === "left" ? 0 : column.align === "center" ? 1 : 2,
+          })
+        );
+
+        this.excelExportData.searchString = this.filterParams.searchString;
+        this.excelExportData.filterColumns = this.filterParams.filterColumns;
+
+        console.log(this.excelExportData.columns);
+        const res = await this.exportToExcelFile(this.excelExportData);
+        console.log(res);
+
+        if (res.success) {
+          const blob = new Blob([res.data], {
+            type: "application/vnd.ms-excel",
+          });
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "DanhSachNhanVien.xlsx");
+          link.style.display = "none";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+
+          this.$store.commit("addToast", {
+            type: "success",
+            message:
+              this.$_MisaResources.appText.employeePageText.successAction
+                .exportWithFilterConditionSuccess,
+          });
+
+          console.log(res);
+        }
       } catch (err) {
         console.error(err);
       }

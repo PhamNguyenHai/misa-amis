@@ -12,3 +12,17 @@ D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\ob
 D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\obj\Debug\net6.0\ref\MISA.AMIS.WEB08.PNNHAI.Core.dll
 D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.Resources.AppResource.resources
 D:\Save VS Code\be-api\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.csproj.GenerateResource.cache
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\bin\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.deps.json
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\bin\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.dll
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\bin\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.pdb
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.csproj.AssemblyReference.cache
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.Resources.AppResource.resources
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.csproj.GenerateResource.cache
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.AssemblyInfoInputs.cache
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.AssemblyInfo.cs
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.csproj.CoreCompileInputs.cache
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.dll
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\obj\Debug\net6.0\refint\MISA.AMIS.WEB08.PNNHAI.Core.dll
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Core.pdb
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Core\obj\Debug\net6.0\ref\MISA.AMIS.WEB08.PNNHAI.Core.dll

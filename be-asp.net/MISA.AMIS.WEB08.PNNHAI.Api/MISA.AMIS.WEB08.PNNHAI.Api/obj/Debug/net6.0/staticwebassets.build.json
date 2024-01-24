@@ -1,11 +1,37 @@
 {
   "Version": 1,
-  "Hash": "TxMQ/ozTe6a7VPS9JX8hZwpAkH4phyDq/e+JwW31rb0=",
+  "Hash": "onrNYo+5+qveULpcXXfPI0m3QYEBe7VO673gYLzNABw=",
   "Source": "MISA.AMIS.WEB08.PNNHAI.Api",
   "BasePath": "_content/MISA.AMIS.WEB08.PNNHAI.Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "MISA.AMIS.WEB08.PNNHAI.Api\\wwwroot",
+      "Source": "MISA.AMIS.WEB08.PNNHAI.Api",
+      "ContentRoot": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Api\\wwwroot\\",
+      "BasePath": "_content/MISA.AMIS.WEB08.PNNHAI.Api",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Api\\wwwroot\\Danh sach nhan vien.xlsx",
+      "SourceId": "MISA.AMIS.WEB08.PNNHAI.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Api\\wwwroot\\",
+      "BasePath": "_content/MISA.AMIS.WEB08.PNNHAI.Api",
+      "RelativePath": "Danh sach nhan vien.xlsx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Danh sach nhan vien.xlsx"
+    }
+  ]
 }
