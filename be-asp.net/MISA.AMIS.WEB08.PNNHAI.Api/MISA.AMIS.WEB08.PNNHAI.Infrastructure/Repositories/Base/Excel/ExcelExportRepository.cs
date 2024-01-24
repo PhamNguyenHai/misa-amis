@@ -33,6 +33,13 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Hàm thực hiện xuất dữ liệu ra file excel
+        /// </summary>
+        /// <param name="excelExportRequest">dữ liệu cần để thực hiện xuất file excel</param>
+        /// <returns>mảng byte chứa dữ liệu xuất</returns>
+        /// Author: PNNHai
+        /// Date:
         public Task<byte[]> ExportExcelFileAsync(ExcelExportRequestDto excelExportRequest)
         {
             if (!string.IsNullOrEmpty(excelExportRequest.Title))
@@ -60,6 +67,11 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
             }
         }
 
+        /// <summary>
+        /// Hàm thực hiện xuất dữ liệu ra file excel với tất cả dữ liệu
+        /// </summary>
+        /// <param name="columns">danh sách column muốn xuất</param>
+        /// <returns>mảng byte chứa dữ liệu sau khi xuất</returns>
         private async Task<byte[]> ExportExcelFileWithAllAsync(IEnumerable<ExcelExportColumn> columns)
         {
             var data = await _readOnlyRepository.GetAllAsync();
@@ -68,6 +80,14 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
             return result;
         }
 
+        /// <summary>
+        /// Hàm thực hiện xuất dữ liệu thỏa mãn điều kiện lọc ra file excel
+        /// </summary>
+        /// <param name="filterInput">điều kiện lọc</param>
+        /// <param name="columns">danh sách column muốn xuất</param>
+        /// <returns>mảng byte chứa dữ liệu</returns>
+        /// Author: PNNHai
+        /// Date:
         private async Task<byte[]> ExportExcelFileWithFilterConditiondAsync(FilterInput filterInput, IEnumerable<ExcelExportColumn> columns)
         {
             var data = await _readOnlyRepository.FilterPagingAsync(filterInput);
@@ -75,6 +95,14 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
             return result;
         }
 
+        /// <summary>
+        /// Hàm thực hiện tạo file excel xuất
+        /// </summary>
+        /// <param name="data">dữ liệu muốn xuất</param>
+        /// <param name="Columns">danh sách các cột muốn xuất</param>
+        /// <returns>mảng byte của file muốn xuất</returns>
+        /// Author: PNNHai
+        /// Date:
         private byte[] CreateExcelAsync(IEnumerable<TModel> data, IEnumerable<ExcelExportColumn> Columns)
         {
             var columnsToList = Columns.ToList();
@@ -175,6 +203,17 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
             return stream.ToArray();
         }
 
+        /// <summary>
+        /// Hàm thực hiện set giá trị cho ô
+        /// </summary>
+        /// <param name="worksheet">sheet thực hiện xuất</param>
+        /// <param name="row">dòng đang xử lý</param>
+        /// <param name="col">cột đang xử lý</param>
+        /// <param name="value">dữ liệu đang xử lý</param>
+        /// <param name="type">loại dữ liệu của cột đó</param>
+        /// <param name="align">căn chỉnh</param>
+        /// Author: PNNHai
+        /// Date:
         private void setValueColumn(ExcelWorksheet worksheet, int row, int col, object? value, FormatType? type, TextAlign? align)
         {
             var horizontalAlign = ExcelHorizontalAlignment.Left;

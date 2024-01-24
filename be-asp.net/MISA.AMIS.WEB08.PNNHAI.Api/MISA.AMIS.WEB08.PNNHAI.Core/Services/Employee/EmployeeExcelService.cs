@@ -1,4 +1,5 @@
-﻿using OfficeOpenXml.FormulaParsing.Excel.Functions;
+﻿using AutoMapper;
+using OfficeOpenXml.FormulaParsing.Excel.Functions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +9,34 @@ using System.Threading.Tasks;
 
 namespace MISA.AMIS.WEB08.PNNHAI.Core
 {
-    public class EmployeeExcelService : ExcelService<EmployeeExcelImportRespondDto, EmployeeCreateDto>, IEmployeeExcelService
+    public class EmployeeExcelService : ExcelService<EmployeeExcelImportRespondDto, EmployeeCreateDto, Employee>, IEmployeeExcelService
     {
+        #region Fields
         protected readonly IEmployeeRepository _employeeRepository;
+        #endregion
 
+        #region Constructor
         public EmployeeExcelService(IEmployeeExcelRepository employeeExcelRepository, 
-            IExcelImportTemplateSettingRepository _excelImportTemplateSettingRepository, IDepartmentRepository _departmentRepository, IEmployeeRepository employeeRepository) 
-            : base(employeeExcelRepository, _excelImportTemplateSettingRepository, _departmentRepository)
+            IExcelImportTemplateSettingRepository _excelImportTemplateSettingRepository, IDepartmentRepository _departmentRepository, 
+            IEmployeeRepository employeeRepository, IMapper mapper)
+            : base(employeeExcelRepository, _excelImportTemplateSettingRepository, _departmentRepository, mapper)
         {
             _employeeRepository = employeeRepository;
         }
+        #endregion
 
-        protected override async Task ValidateObjectDetail(List<EmployeeExcelImportRespondDto> employeeExcelResults, EmployeeCreateDto employeeObject, EmployeeExcelImportRespondDto rowObject)
+        #region Methods
+        /// <summary>
+        /// Hàm thực hiện validate các dữ liệu cụ thể hơn
+        /// </summary>
+        /// <param name="employeeExcelResults">Dữ liệu được đọc từ file excel</param>
+        /// <param name="employeeObject">Đối tượng đang xử lý</param>
+        /// <param name="rowObject">Dữ liệu của dòng đang xử lý</param>
+        /// <returns></returns>
+        /// Author: PNNHai
+        /// Date:
+        protected override async Task ValidateObjectDetail(List<EmployeeExcelImportRespondDto> employeeExcelResults, 
+            EmployeeCreateDto employeeObject, EmployeeExcelImportRespondDto rowObject)
         {
             // Kiểm tra email có hợp lệ không 
             if (!string.IsNullOrEmpty(employeeObject.Email) && !IsEmail(employeeObject.Email))
@@ -109,6 +126,13 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             }
         }
 
+        /// <summary>
+        /// Kiểm tra xem mã có đúng định dạng không
+        /// </summary>
+        /// <param name="input">Mã truyền vào</param>
+        /// <returns>true: nếu đúng định dạng; false nếu sai định dạng</returns>
+        /// Author: PNNHai
+        /// Date:
         protected bool IsEmployeeCode(string input)
         {
             if (input.StartsWith("NV-"))
@@ -117,5 +141,6 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             }
             return false;
         }
+        #endregion
     }
 }

@@ -71,6 +71,8 @@ builder.Services.AddScoped<IEmployeeExcelService, EmployeeExcelService>();
 
 builder.Services.AddScoped<IExcelImportTemplateSettingRepository, ExcelImportTemplateSettingRepository>();
 
+builder.Services.AddMemoryCache();
+
 
 var app = builder.Build();
 

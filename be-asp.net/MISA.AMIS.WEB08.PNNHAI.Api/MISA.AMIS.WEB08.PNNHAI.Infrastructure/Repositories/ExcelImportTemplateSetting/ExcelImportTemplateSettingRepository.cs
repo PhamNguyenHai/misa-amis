@@ -12,13 +12,18 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
 {
     public class ExcelImportTemplateSettingRepository : IExcelImportTemplateSettingRepository
     {
+        #region Fields
         protected readonly IUnitOfWork _uow;
+        #endregion
 
+        #region Constructor
         public ExcelImportTemplateSettingRepository(IUnitOfWork uow)
         {
             _uow = uow;
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Hàm thực hiện đọc dữ liệu để lấy ra cấu hình cho việc đọc file excel
         /// </summary>
@@ -38,7 +43,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
                 commandType: CommandType.StoredProcedure, transaction: _uow.Transaction);
 
             var importFileTemplate = await multipleResults.ReadFirstOrDefaultAsync<ImportFileTemplate>();
-            if(importFileTemplate != null)
+            if (importFileTemplate != null)
             {
                 importFileTemplate.ImportColumns = (List<ImportColumn>)await (multipleResults.ReadAsync<ImportColumn>());
                 return importFileTemplate;
@@ -47,6 +52,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
             {
                 throw new ValidateException("Chưa có chức năng nhập khẩu với đối tượng này !");
             }
-        }
+        } 
+        #endregion
     }
 }

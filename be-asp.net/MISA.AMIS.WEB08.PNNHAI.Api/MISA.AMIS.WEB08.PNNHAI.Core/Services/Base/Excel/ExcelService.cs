@@ -13,20 +13,27 @@ using System.Text.RegularExpressions;
 using System.Reflection;
 using static OfficeOpenXml.ExcelErrorValue;
 using System.Drawing;
+using AutoMapper;
 
 namespace MISA.AMIS.WEB08.PNNHAI.Core
 {
-    public abstract class ExcelService<TRespondDto, TEntityCreateDto> : ExcelExportService, IExcelService<TRespondDto> where TRespondDto : ExcelImportRespondedDto, new() where TEntityCreateDto: new()
+    public abstract class ExcelService<TRespondDto, TEntityCreateDto, TEntity> 
+        : ExcelExportService, IExcelService<TRespondDto> 
+        where TRespondDto : ExcelImportRespondedDto, new() 
+        where TEntityCreateDto: new()
     {
         #region Fields
-        protected readonly IExcelRepository<TRespondDto> _excelRepository;
+        protected readonly IExcelRepository<TRespondDto, TEntity> _excelRepository;
         protected readonly IExcelImportTemplateSettingRepository _excelImportTemplateSettingRepository;
         protected List<TEntityCreateDto> _validEntityToCreate;
         protected readonly IDepartmentRepository _departmentRepository;
+
+        protected readonly IMapper _mapper;
         #endregion
 
         #region Constructor
-        public ExcelService(IExcelRepository<TRespondDto> excelRepository, IExcelImportTemplateSettingRepository excelImportTemplateSettingRepository, IDepartmentRepository departmentRepository)
+        public ExcelService(IExcelRepository<TRespondDto, TEntity> excelRepository, 
+            IExcelImportTemplateSettingRepository excelImportTemplateSettingRepository, IDepartmentRepository departmentRepository, IMapper mmapper)
             : base(excelRepository)
         {
             _excelRepository = excelRepository;
@@ -34,10 +41,57 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             _departmentRepository = departmentRepository;
 
             _validEntityToCreate = new List<TEntityCreateDto>();
+
+            _mapper = mmapper;
         }
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Hàm thực hiện xác nhận có import dữ liệu vào db hay không
+        /// </summary>
+        /// <param name="workingTable">Bảng thực hiện thêm</param>
+        /// <param name="confirmType">Trạng thái xác nhận (0: ko; 1: có)</param>
+        /// <returns></returns>
+        public async Task ConfirmImport(string workingTable, ConfirmType confirmType)
+        {
+            var currentTableName = typeof(TEntity).Name;
+            if (workingTable != currentTableName)
+                throw new ValidateException("Đối tượng thực thi chưa phù hợp !");
+            switch (confirmType)
+            {
+                case ConfirmType.Yes:
+                    var validData = _excelRepository.GetListObjectByTableName(currentTableName);
+
+                    if (validData == null)
+                    {
+                        throw new ValidateException("Dữ liệu nhập khẩu không có hoặc đã quá thời gian xử lý vui lòng nhập khẩu lại tệp để xử lý !");
+                    }
+
+                    var entitiesToInsert = _mapper.Map<List<TEntity>>(validData);
+
+                    // Thêm vào danh sách
+                    await _excelRepository.InsertRangeAsync(entitiesToInsert);
+                    break;
+
+                case ConfirmType.No:
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Hàm thực hiện đọc dữ liệu từ file excel
+        /// </summary>
+        /// <param name="importFile">file truyền lên</param>
+        /// <param name="sheetUsed">sheet cần đọc</param>
+        /// <param name="workingObjectTable">Bảng trong csdl thực hiện nhập khẩu</param>
+        /// <returns>Dữ liệu về các dòng trong file và trạng thái hợp lệ của dòng đó</returns>
+        /// <exception cref="ValidateException">Lỗi file không hợp lệ</exception>
+        /// Author: PNNHai
+        /// Date:
         public async Task<IEnumerable<TRespondDto>> ReadExcelFileAsync(IFormFile importFile, string sheetUsed, string workingObjectTable)
         {
             // Kiểm tra xem file có được gửi lên không 
@@ -69,12 +123,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                         throw new ValidateException("Bạn đã gửi tệp với sheet không thỏa mãn lên !");
                     }
 
-                    //// Lấy danh sách các ô có giá trị
-                    //var cellsWithData = worksheet.Cells.Where(cell => cell.Value != null);
-                    //// Xác định kích thước thực tế của dữ liệu
-                    //int rowCount = cellsWithData.Max(cell => cell.End.Row);
-                    //int columnCount = cellsWithData.Max(cell => cell.End.Column);
-
+                    // Lấy ra các cột trong template
                     var settingTemplate = await _excelImportTemplateSettingRepository.GetExcelImportTemplateSettingAsync(workingObjectTable);
                     var templateColumns = settingTemplate.ImportColumns;
 
@@ -85,10 +134,16 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                     var columnCount = worksheet.Dimension.End.Column;
                     var rowCount = worksheet.Dimension.End.Row;
 
-                    // Lấy ra các cột trong template
-
                     // Build danh sách các đối tượng đọc từ file excel
                     var objectResults = await BuildListObject(worksheet, columnCount, rowCount, settingTemplate, templateColumns);
+
+                    // Set giá trị vào cache
+                    if (_validEntityToCreate.Count() > 0)
+                    {
+                        var tableName = typeof(TEntity).Name;
+                        _excelRepository.SetCache(tableName, _validEntityToCreate.Cast<object>().ToList());
+                    }
+
                     return objectResults;
                 }
             }
@@ -97,12 +152,15 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// <summary>
         /// Hàm thực hiện validate xem mẫu định dạng của file excel truyền lên có đúng định dạng không
         /// </summary>
-        /// <param name="worksheet"></param>
-        /// <param name="columnCount"></param>
-        /// <param name="settingTemplate"></param>
-        /// <param name="templateColumns"></param>
+        /// <param name="worksheet">sheet đang thực hiện</param>
+        /// <param name="columnCount">số lượng cột trong sheet</param>
+        /// <param name="settingTemplate">template về file excel được lưu dưới db</param>
+        /// <param name="templateColumns">danh sách các cột template trong db</param>
         /// <exception cref="ValidateException"></exception>
-        private void ValidateFormatPostedExcelFile(ExcelWorksheet worksheet, ImportFileTemplate settingTemplate, ICollection<ImportColumn> templateColumns)
+        /// Author: PNNHai
+        /// Date:
+        private void ValidateFormatPostedExcelFile(ExcelWorksheet worksheet, ImportFileTemplate settingTemplate, 
+            ICollection<ImportColumn> templateColumns)
         {
             // Thực hiện kiểm tra tệp có đúng mẫu không 
             // Kiểm tra xem có cột/dòng nào trong file chưa 
@@ -153,7 +211,19 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             }
         }
 
-        private async Task<IEnumerable<TRespondDto>> BuildListObject(ExcelWorksheet worksheet, int columnCount, int rowCount, ImportFileTemplate settingTemplate, ICollection<ImportColumn> templateColumns)
+        /// <summary>
+        /// Hàm thực hiện build ra danh sách các object tương ứng trong các dòng của sheet
+        /// </summary>
+        /// <param name="worksheet">sheet đang thực hiện</param>
+        /// <param name="columnCount">số lượng cột</param>
+        /// <param name="rowCount">Số lượng dòng</param>
+        /// <param name="settingTemplate">template về file excel được lưu dưới db</param>
+        /// <param name="templateColumns">danh sách các cột template trong db</param>
+        /// <returns>Danh sách các dữ liệu sau khi đọc từ file excel (có cả trạng thái lỗi nếu có)</returns>
+        /// Author: PNNHai
+        /// Date:
+        private async Task<IEnumerable<TRespondDto>> BuildListObject(ExcelWorksheet worksheet, int columnCount, int rowCount, 
+            ImportFileTemplate settingTemplate, ICollection<ImportColumn> templateColumns)
         {
             var objectResults = new List<TRespondDto>();
             // Bắt đầu từ hàng thứ startRowIndex, bỏ qua hàng tiêu đề
@@ -182,8 +252,26 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             return objectResults;
         }
 
+        /// <summary>
+        /// Hàm để validate cụ thể hơn được override lại ở dưới các class kế thừa
+        /// </summary>
+        /// <param name="objectResults">Danh sách các dòng excel đã đọc</param>
+        /// <param name="createObject">Đối tượng đang xử lý</param>
+        /// <param name="rowObject">Dữ liệu dòng đang xử lý</param>
+        /// <returns></returns>
+        /// Author: PNNHai
+        /// Date:
         protected abstract Task ValidateObjectDetail(List<TRespondDto> objectResults, TEntityCreateDto createObject, TRespondDto rowObject);
 
+        /// <summary>
+        /// Hàm kiểm tra xem dòng đang xử lý có dữ liệu không
+        /// </summary>
+        /// <param name="worksheet">sheet đang xử lý</param>
+        /// <param name="columnCount">số lương cột</param>
+        /// <param name="rowIndex">chỉ số của dòng đang thực hiện</param>
+        /// <returns>true: dòng này không có ô nào có dữ liệu; false: dòng có dữ liệu</returns>
+        /// Author: PNNHai
+        /// Date:
         private bool isExcelRowNullOrEmpty(ExcelWorksheet worksheet, int columnCount, int rowIndex)
         {
             var rangeRow = worksheet.Cells[rowIndex, 1, 1, columnCount];
@@ -198,7 +286,19 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             return true;
         }
 
-        private async Task<TRespondDto> BuildObject(ExcelWorksheet worksheet, int rowIndex, int columnCount, ICollection<ImportColumn> templateColumns, TEntityCreateDto createObject)
+        /// <summary>
+        /// Hàm thực hiện build đối tượng ứng với dòng đang xử lý
+        /// </summary>
+        /// <param name="worksheet">sheet đang xử lý</param>
+        /// <param name="rowIndex">chỉ số của dòng đang xử lý</param>
+        /// <param name="columnCount">số lượng cột</param>
+        /// <param name="templateColumns">template các cột trong file lưu ở db</param>
+        /// <param name="createObject">đối tượng đang xử lý</param>
+        /// <returns>Dữ liệu về dòng kèm theo các trạng thái lỗi (nếu có)</returns>
+        /// Author: PNNHai
+        /// Date:
+        private async Task<TRespondDto> BuildObject(ExcelWorksheet worksheet, int rowIndex, int columnCount, 
+            ICollection<ImportColumn> templateColumns, TEntityCreateDto createObject)
         {
             var rowObject = new TRespondDto();
             for(int columnIndex = 1; columnIndex <= columnCount; columnIndex++)
@@ -220,6 +320,14 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             return rowObject;
         }
 
+        /// <summary>
+        /// Validate required với ô được lưu là required trong template db
+        /// </summary>
+        /// <param name="rowObject">Dòng dữ liệu đang thực hiện</param>
+        /// <param name="cellValue">Ô dữ liệu đang thực hiện</param>
+        /// <param name="currentColumnTemplate">template về các cột trong db</param>
+        /// Author: PNNHai
+        /// Date:
         private void RequiredValidate(TRespondDto rowObject, object cellValue, ImportColumn currentColumnTemplate)
         {
             if (currentColumnTemplate.IsRequired == true && cellValue == null)
@@ -228,7 +336,19 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             }
         }
 
-        private async Task ProcessCellValueByDataType(TEntityCreateDto createObject, TRespondDto rowObject, ColumnImportDataType dataType, object cellValue, ImportColumn currentColumnTemplate)
+        /// <summary>
+        /// Xử lý dữ liệu với kiểu dữ liệu tương ứng
+        /// </summary>
+        /// <param name="createObject">Đối tượng đang xử lý</param>
+        /// <param name="rowObject">Dữ liệu của dòng đang xử lý</param>
+        /// <param name="dataType">Kiểu dữ liệu</param>
+        /// <param name="cellValue">Ô dữ liệu đang xử lý</param>
+        /// <param name="currentColumnTemplate">template của các cột trong db</param>
+        /// <returns></returns>
+        /// Author: PNNHai
+        /// Date:
+        private async Task ProcessCellValueByDataType(TEntityCreateDto createObject, TRespondDto rowObject, 
+            ColumnImportDataType dataType, object cellValue, ImportColumn currentColumnTemplate)
         {
             var objectProperty = currentColumnTemplate.ColumnInsert;
             if(objectProperty != null)
@@ -333,7 +453,19 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             }
         }
 
-        protected virtual async Task ProcessCellValueWithTableReference(TEntityCreateDto createObject, PropertyInfo createObjectProperty, TRespondDto rowObject,  object cellValue, ImportColumn currentColumnTemplate)
+        /// <summary>
+        /// Hàm thực hiện xử lý với ô dữ liệu có kiểu tham chiếu đến table khác
+        /// </summary>
+        /// <param name="createObject">Đối tượng đang xử lý</param>
+        /// <param name="createObjectProperty">proprerty đang xử lý của đối tượng đó</param>
+        /// <param name="rowObject">Dữ liệu về dòng đang xử lý</param>
+        /// <param name="cellValue">Dòng đang xử lý</param>
+        /// <param name="currentColumnTemplate">Template của cột đang xử lý trong db</param>
+        /// <returns></returns>
+        /// Author: PNNHai
+        /// Date:
+        protected virtual async Task ProcessCellValueWithTableReference(TEntityCreateDto createObject, 
+            PropertyInfo createObjectProperty, TRespondDto rowObject,  object cellValue, ImportColumn currentColumnTemplate)
         {
             var tableRerefenceWithCurrentColumn = currentColumnTemplate.ReferenceObjectName;
             if (tableRerefenceWithCurrentColumn != null)
@@ -360,6 +492,13 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             }
         }
 
+        /// <summary>
+        /// Hàm thực hiện convert dữ liệu sang kiểu DateTime
+        /// </summary>
+        /// <param name="dateValue">Chuỗi ngày tháng cần xử lý</param>
+        /// <returns>Ngày tháng sau khi xử lý</returns>
+        /// Author: PNNHai
+        /// Date:
         protected DateTime? ConvertDateTime(string dateValue)
         {
             // Ngày tháng phải nhập theo định dạng (ngày/tháng/năm): 
@@ -393,6 +532,13 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             }
         }
 
+        /// <summary>
+        /// Hàm thực hiện convert kiểu double
+        /// </summary>
+        /// <param name="value">dữ liệu cần xử lý</param>
+        /// <returns>số có dạng double sau khi xử lý</returns>
+        /// Author: PNNHai
+        /// Date:
         protected double? ConvertDouble(string value)
         {
             double result;
@@ -441,11 +587,23 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             return newText.Replace(" ", string.Empty).ToLower();
         }
 
+        /// <summary>
+        /// Hàm thực hiện kiểm tra xem ngày truyền vào có lớn hơn ngày hiện tại không
+        /// </summary>
+        /// <param name="inputDate">ngày cần kiểm tra</param>
+        /// <returns>true: lớn hơn ngày hiện tại; false: nhỏ hơn ngày hiện tại</returns>
         protected bool IsDateGreaterThanToday(DateTime inputDate)
         {
             return inputDate > DateTime.Today;
         }
 
+        /// <summary>
+        /// Hàm thực hiện kiểm tra xem có phải email không
+        /// </summary>
+        /// <param name="input">chuỗi cần kiểm tra</param>
+        /// <returns>true: đúng định dạng email; false: không đúng định dạng email</returns>
+        /// Author: PNNHai
+        /// Date:
         protected bool IsEmail(string input)
         {
 
@@ -457,6 +615,13 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             return regex.IsMatch(input);
         }
 
+        /// <summary>
+        /// Hàm thực hiện kiểm tra xem có đúng định dạng sdt không
+        /// </summary>
+        /// <param name="input">chuỗi cần kiểm tra</param>
+        /// <returns>true: đúng là sdt; false: ko đúng định dạng sdt</returns>
+        /// Author: PNNHai
+        /// Date:
         protected bool IsPhoneNumber(string input)
         {
             // Kiểm tra chuỗi có chỉ chứa chữ số và có độ dài hợp lệ không
@@ -466,6 +631,14 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             return regex.IsMatch(input);
         }
 
+        /// <summary>
+        /// Hàm thực hiện kiểm tra xem chuỗi có độ dài có vượt quá độ dài quy định không
+        /// </summary>
+        /// <param name="input">chuỗi cần kiểm tra</param>
+        /// <param name="length">độ dài</param>
+        /// <returns>true: nếu chuỗi vượt quá độ dài quy định; false nếu không vượt quá độ dài</returns>
+        /// Author: PNNHai
+        /// Date:
         protected bool IsStringLengthGreaterThan(string input, int length)
         {
             return input.Length > length;
