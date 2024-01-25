@@ -47,7 +47,9 @@
             @click.stop="handleToggleExcelWorking"
           />
           <ul class="excel-option" v-if="isShowExcelWorking">
-            <li class="excel-item">Nhập khẩu bản ghi</li>
+            <li class="excel-item" @click="handleShowExcelImportForm">
+              Nhập khẩu bản ghi
+            </li>
             <li class="excel-item" @click.stop="handleExportAll">
               {{ $_MisaResources.appText.excelExportTitle.exportAll }}
             </li>
@@ -114,6 +116,8 @@
     @notifySubmittedForm="handleSubmittedForm"
     @notifyHideForm="handleHideForm"
   />
+
+  <misa-import-form v-if="isShowExcelImportForm" />
 
   <misa-dialog
     v-if="dialog.isShow"
@@ -192,6 +196,8 @@ export default {
         searchString: null,
         filterColumns: [],
       },
+
+      isShowExcelImportForm: false,
     };
   },
 
@@ -838,6 +844,16 @@ export default {
       } catch (err) {
         console.error(err);
       }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện show form import file excel
+     */
+    handleShowExcelImportForm() {
+      this.isShowExcelImportForm = true;
+      this.isShowExcelWorking = false;
     },
   },
 };

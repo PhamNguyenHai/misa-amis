@@ -10,6 +10,15 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
     public interface IExcelRepository<TRequestDto, TEntity> : IExcelExportRepository
     {
         /// <summary>
+        /// Hàm thực hiện dowload file mẫu để import ứng với nghiệp vụ
+        /// </summary>
+        /// <param name="filePath">đường dẫn của file cần lấy</param>
+        /// <returns>Mangr byte của file mẫu</returns>
+        /// Author: PNNHai
+        /// Date
+        Task<byte[]> DowloadTemplateFile(string filePath);
+
+        /// <summary>
         /// Hàm thực hiện thêm nhiều
         /// </summary>
         /// <param name="entities">danh sách muốn thêm</param>
@@ -36,6 +45,15 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// Author: PNNHai
         /// Date:
         void SetCache(string key, object value);
+
+        /// <summary>
+        /// Hàm thực hiện cache dữ liệu value với key
+        /// </summary>
+        /// <param name="key">key muốn xóa cache dữ liệu</param>
+        /// <returns></returns>
+        /// Author: PNNHai
+        /// Date:
+        void RemoveByKeyCache(string key);
 
         /// <summary>
         /// Hàm thực hiện lấy danh sách dữ liệu đã cache vào để thực hiện thêm

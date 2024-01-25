@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "onrNYo+5+qveULpcXXfPI0m3QYEBe7VO673gYLzNABw=",
+  "Hash": "wrKWICYhxDlhKiSWVVCW0Nk74zk0j/RGj+kLyB+nXsg=",
   "Source": "MISA.AMIS.WEB08.PNNHAI.Api",
   "BasePath": "_content/MISA.AMIS.WEB08.PNNHAI.Api",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Api\\wwwroot\\Danh sach nhan vien.xlsx",
+      "Identity": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Api\\wwwroot\\employee-template.xlsx",
       "SourceId": "MISA.AMIS.WEB08.PNNHAI.Api",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Api\\wwwroot\\",
       "BasePath": "_content/MISA.AMIS.WEB08.PNNHAI.Api",
-      "RelativePath": "Danh sach nhan vien.xlsx",
+      "RelativePath": "employee-template.xlsx",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -31,7 +31,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Danh sach nhan vien.xlsx"
+      "OriginalItemSpec": "wwwroot\\employee-template.xlsx"
     }
   ]
 }

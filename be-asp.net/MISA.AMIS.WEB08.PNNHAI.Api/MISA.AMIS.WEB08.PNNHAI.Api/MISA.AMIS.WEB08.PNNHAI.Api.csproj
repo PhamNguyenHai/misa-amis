@@ -15,8 +15,4 @@
     <ProjectReference Include="..\MISA.AMIS.WEB08.PNNHAI.Infrastructure\MISA.AMIS.WEB08.PNNHAI.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
 </Project>

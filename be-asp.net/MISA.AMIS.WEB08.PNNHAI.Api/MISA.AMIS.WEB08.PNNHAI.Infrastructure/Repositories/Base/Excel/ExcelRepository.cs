@@ -39,6 +39,26 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
 
         #region Methods
         /// <summary>
+        /// Hàm thực hiện dowload file mẫu để import ứng với nghiệp vụ
+        /// </summary>
+        /// <param name="filePath">đường dẫn của file cần lấy</param>
+        /// <returns>Mangr byte của file mẫu</returns>
+        /// Author: PNNHai
+        /// Date
+        public async Task<byte[]> DowloadTemplateFile(string filePath)
+        {
+            // Kiểm tra xem tệp có tồn tại không
+            if (!File.Exists(filePath))
+            {
+                throw new ValidateException("File không tồn tại ! Vui lòng thử lại !");
+            }
+
+            // Trả về tệp Excel cho client
+            var fileBytes = await File.ReadAllBytesAsync(filePath);
+            return fileBytes;
+        }
+
+        /// <summary>
         /// Hàm thực hiện set dữ liệu vào cache
         /// </summary>
         /// <param name="key">key muốn set</param>
@@ -96,7 +116,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
                 // Chuyển list data sang dạng json truyền lên stored để insert
                 var entitiesJsonString = JsonSerializer.Serialize(entities);
                 var param = new DynamicParameters();
-                param.Add($"in_{tableName}s", entitiesJsonString);
+                param.Add($"i_{tableName}s", entitiesJsonString);
 
                 _uow.BeginTransaction();
 
@@ -110,6 +130,17 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
                 _uow.Rollback();
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Hàm thực hiện xóa dữ liệu cache bằng key
+        /// </summary>
+        /// <param name="key">key của dữ liệu muốn xóa</param>
+        /// Author: PNNHai
+        /// Date:
+        public void RemoveByKeyCache(string key)
+        {
+            _memoryCache.Remove(key);
         }
         #endregion
     }

@@ -10,6 +10,15 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
     public interface IExcelService<TRespondDto> : IExcelExportService
     {
         /// <summary>
+        /// Hàm thực hiện dowload file mẫu để import ứng với nghiệp vụ
+        /// </summary>
+        /// <param name="workingObjectTable">bảng muốn thực hiện lấy file</param>
+        /// <returns>Mangr byte của file mẫu</returns>
+        /// Author: PNNHai
+        /// Date
+        Task<byte[]> DowloadTemplateFile(string workingObjectTable);
+
+        /// <summary>
         /// Thực hiện đọc file excel được truyền lên
         /// </summary>
         /// <param name="importFile">file truyền lên</param>

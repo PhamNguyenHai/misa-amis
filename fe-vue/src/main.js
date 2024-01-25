@@ -17,6 +17,7 @@ import MisaDateField from "@/components/base/date-field/MisaDateField.vue";
 import MisaRadioField from "@/components/base/radio-field/MisaRadioField.vue";
 import MisaCheckboxField from "@/components/base/checkbox-field/MisaCheckboxField.vue";
 import MisaPagingNavigation from "@/components/base/paging-navigation/MisaPagingNavigation.vue";
+import MisaImportForm from "@/components/base/import-form/MisaImportForm.vue";
 
 const app = createApp(App);
 
@@ -31,6 +32,7 @@ app.component("MisaDateField", MisaDateField);
 app.component("MisaRadioField", MisaRadioField);
 app.component("MisaCheckboxField", MisaCheckboxField);
 app.component("MisaPagingNavigation", MisaPagingNavigation);
+app.component("MisaImportForm", MisaImportForm);
 
 // Sử dụng các thư viện
 app.use(router).use(store);

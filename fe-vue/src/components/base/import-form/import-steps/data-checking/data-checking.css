@@ -1,0 +1,39 @@
+.form-import-current-content {
+  flex: 1;
+  height: 515px;
+  border: 1px solid rgb(219, 219, 219);
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.tb {
+  height: 442px;
+  border: 1px solid;
+}
+
+.dowload-invalid-records {
+  padding: 10px 20px;
+  box-sizing: border-box;
+  display: block;
+}
+
+.records-valid-result {
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 100px;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+}
+
+.records-result {
+  font-weight: 600;
+}
+
+.dowload-invalid-hyperlink {
+  color: blue;
+  cursor: pointer;
+}
+
+.dowload-invalid-hyperlink:hover {
+  text-decoration: underline;
+}

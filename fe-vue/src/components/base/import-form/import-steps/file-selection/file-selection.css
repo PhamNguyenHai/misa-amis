@@ -1,0 +1,30 @@
+.file-selection {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  padding: 8px 0;
+  box-sizing: border-box;
+}
+
+.file-selected-name {
+  height: 36px;
+  width: 400px;
+  line-height: 36px;
+  border: 1px solid var(--border-color-default);
+  border-radius: 4px;
+  padding: 0 8px;
+  box-sizing: border-box;
+
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Ngăn văn bản xuống dòng */
+  overflow: hidden; /* Ẩn phần văn bản vượt quá kích thước của container */
+}
+
+.dowload-template-hyperlink {
+  color: blue;
+  cursor: pointer;
+}
+
+.dowload-template-hyperlink:hover {
+  text-decoration: underline;
+}

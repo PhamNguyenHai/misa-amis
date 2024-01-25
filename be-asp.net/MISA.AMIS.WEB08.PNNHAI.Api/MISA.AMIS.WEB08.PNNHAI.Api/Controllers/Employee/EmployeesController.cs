@@ -52,7 +52,19 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
         public async Task<IActionResult> Confirm(string workingTable, ConfirmType confirmType)
         {
             await _employeeExcelService.ConfirmImport(workingTable, confirmType);
-            return StatusCode(StatusCodes.Status200OK, "Nhập khẩu thành công !");
+            return StatusCode(StatusCodes.Status200OK, "Thực hiện thành công !");
+        }
+
+        /// <summary>
+        /// Endpoint xuất khẩu file excel
+        /// </summary>
+        /// <param name="excelResquest">Param truyền vào để xuất fil excel</param>
+        /// <returns>File excel</returns>
+        [HttpPost("Dowload-File-Template")]
+        public async Task<IActionResult> DowloadFileTemplate(string workingTable)
+        {
+            var excelFile = await _employeeExcelService.DowloadTemplateFile(workingTable);
+            return File(excelFile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "template.xlsx");
         }
         #endregion
     }

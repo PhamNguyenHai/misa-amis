@@ -48,6 +48,22 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
 
         #region Methods
         /// <summary>
+        /// Hàm thực hiện dowload file mẫu để import ứng với nghiệp vụ
+        /// </summary>
+        /// <param name="workingObjectTable">bảng muốn thực hiện lấy file</param>
+        /// <returns>Mangr byte của file mẫu</returns>
+        /// Author: PNNHai
+        /// Date
+        public Task<byte[]> DowloadTemplateFile(string workingObjectTable)
+        {
+            var filePath = $"wwwroot\\{workingObjectTable.Trim().ToLower()}-template.xlsx";
+
+            // Nếu có thì dowload file
+            var templateFileByte = _excelRepository.DowloadTemplateFile(filePath);
+            return templateFileByte;
+        }
+
+        /// <summary>
         /// Hàm thực hiện xác nhận có import dữ liệu vào db hay không
         /// </summary>
         /// <param name="workingTable">Bảng thực hiện thêm</param>
@@ -56,10 +72,12 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         public async Task ConfirmImport(string workingTable, ConfirmType confirmType)
         {
             var currentTableName = typeof(TEntity).Name;
-            if (workingTable != currentTableName)
+            if (workingTable.ToLower().Trim() != currentTableName.ToLower())
                 throw new ValidateException("Đối tượng thực thi chưa phù hợp !");
+
             switch (confirmType)
             {
+                // Nếu người dùng đồng ý nhập khẩu
                 case ConfirmType.Yes:
                     var validData = _excelRepository.GetListObjectByTableName(currentTableName);
 
@@ -74,7 +92,19 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                     await _excelRepository.InsertRangeAsync(entitiesToInsert);
                     break;
 
+                // Nếu không đồng ý nhập khẩu
                 case ConfirmType.No:
+                    var dataInCache = _excelRepository.GetListObjectByTableName(currentTableName);
+                    if (dataInCache == null)
+                    {
+                        throw new ValidateException("Dữ liệu nhập khẩu không có hoặc đã quá thời gian xử lý !");
+                    }
+
+                    // Xóa cache
+                    _excelRepository.RemoveByKeyCache(currentTableName);
+
+                    var abc = _excelRepository.GetListObjectByTableName(currentTableName);
+
                     break;
 
                 default:
