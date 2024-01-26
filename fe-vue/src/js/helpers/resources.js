@@ -35,6 +35,10 @@ const MisaResources = {
       exportWithFilerCondition: "Xuất khẩu bản ghi đã lọc",
     },
 
+    excelImportTitle: {
+      import: "Nhập khẩu bản ghi",
+    },
+
     employeePageText: {
       sidebarTitle: "Tổng quan",
       pageTitle: "Nhân viên",

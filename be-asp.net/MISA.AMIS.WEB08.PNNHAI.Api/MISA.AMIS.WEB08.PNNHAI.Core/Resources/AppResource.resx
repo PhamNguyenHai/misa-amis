@@ -120,11 +120,41 @@
   <data name="ContainsInvalidIdError" xml:space="preserve">
     <value>Tồn tại mã định danh không thỏa mãn ! </value>
   </data>
+  <data name="ContainWrongColumnInFilePosted" xml:space="preserve">
+    <value>Tệp nhập khẩu không đúng mẫu! Tồn tại cột không thỏa mãn dữ liệu quản lý !</value>
+  </data>
+  <data name="DataConflict" xml:space="preserve">
+    <value>{0} xung đột kiểu dữ liệu !</value>
+  </data>
+  <data name="DateOfBirthNoMoreThanCurrent" xml:space="preserve">
+    <value>Ngày sinh không được lớn hơn ngày hiện tại !</value>
+  </data>
   <data name="DeleteSuccessful" xml:space="preserve">
     <value>Xóa thành công !</value>
   </data>
+  <data name="EmailWrongFormat" xml:space="preserve">
+    <value>Email sai định dạng !</value>
+  </data>
+  <data name="EmployeeCodeContainsInDB" xml:space="preserve">
+    <value>Mã nhân viên {0} tồn tại trong hệ thống !</value>
+  </data>
+  <data name="EmployeeCodeContainsInImportFile" xml:space="preserve">
+    <value>Mã nhân viên {0} tồn tại trong tệp nhập khẩu !</value>
+  </data>
+  <data name="EmployeeCodeWrongFormat" xml:space="preserve">
+    <value>Mã nhân viên sai định dạng ! (Dạng NV-...)</value>
+  </data>
+  <data name="ExecuteObjectNotSuitable" xml:space="preserve">
+    <value>Đối tượng thực thi chưa phù hợp !</value>
+  </data>
   <data name="ExistedEmployeeCode" xml:space="preserve">
     <value>Mã nhân viên {0} đã tồn tại !</value>
+  </data>
+  <data name="FieldRequiredError" xml:space="preserve">
+    <value>{0} không được phép để trống !</value>
+  </data>
+  <data name="FileNotFoundError" xml:space="preserve">
+    <value>File không tồn tại ! Vui lòng thử lại !</value>
   </data>
   <data name="Gender_Female" xml:space="preserve">
     <value>Nữ</value>
@@ -135,17 +165,41 @@
   <data name="Gender_Orther" xml:space="preserve">
     <value>Khác</value>
   </data>
+  <data name="IdentityIssuedDateNoMoreThanCurrent" xml:space="preserve">
+    <value>Ngày cấp CCCD không được lớn hơn ngày hiện tại !</value>
+  </data>
+  <data name="ImportDataNotFountOrTimeout" xml:space="preserve">
+    <value>Dữ liệu nhập khẩu không có hoặc đã quá thời gian xử lý!</value>
+  </data>
   <data name="InputDateNoMoreThanCurrentDateDefault" xml:space="preserve">
     <value>Giá trị nhập vào không được lơn hơn ngày hiện tại !</value>
   </data>
   <data name="InsertSuccessful" xml:space="preserve">
     <value>Thêm mới thành công !</value>
   </data>
+  <data name="InvalidValueError" xml:space="preserve">
+    <value>{0} có giá trị không hợp lệ !</value>
+  </data>
+  <data name="LandlineNumberWrongFormat" xml:space="preserve">
+    <value>Số điện thoại cố định sai định dạng !</value>
+  </data>
   <data name="MoreRecordDeleteError" xml:space="preserve">
     <value>Chỉ được phép thực hiện xóa tối đa {0} bản ghi !</value>
   </data>
   <data name="NotFoundById" xml:space="preserve">
     <value>Không tìm thấy thông tin theo Id !</value>
+  </data>
+  <data name="NotImplementWithObjError" xml:space="preserve">
+    <value>Chưa có chức năng nhập khẩu với đối tượng này !</value>
+  </data>
+  <data name="PhoneNumberWrongFormat" xml:space="preserve">
+    <value>Số điện thoại di động sai định dạng !</value>
+  </data>
+  <data name="PostedFileWithNoData" xml:space="preserve">
+    <value>Tệp nhập khẩu gửi lên không có dữ liệu !</value>
+  </data>
+  <data name="PostedWithWrongSheet" xml:space="preserve">
+    <value>Bạn đã gửi tệp với sheet không thỏa mãn lên !</value>
   </data>
   <data name="SendWithoutExcelFileError" xml:space="preserve">
     <value>Chỉ chấp nhận tệp excel (.xlsx) !</value>
@@ -159,10 +213,22 @@
   <data name="UpdateSuccessful" xml:space="preserve">
     <value>Cập nhật thành công !</value>
   </data>
+  <data name="ValueNotFound" xml:space="preserve">
+    <value>{0} có giá trị không tồn tại !</value>
+  </data>
+  <data name="WrongColumnCountWithTemplateInFile" xml:space="preserve">
+    <value>Tệp nhập khẩu không đúng mẫu! Số lượng cột trong tệp khác số lượng quản lý !</value>
+  </data>
   <data name="WrongFilterColumn" xml:space="preserve">
     <value>Cột thực hiện lọc không tồn tại !</value>
   </data>
+  <data name="WrongOrderOfColumnInFilePosted" xml:space="preserve">
+    <value>Tệp nhập khẩu không đúng mẫu! Thứ tự các cột không chính xác !</value>
+  </data>
   <data name="WrongSelectionError" xml:space="preserve">
     <value>Lựa chọn không phù hợp. Vui lòng thử lại !</value>
+  </data>
+  <data name="WrongValueError" xml:space="preserve">
+    <value>{0} sai giá trị !</value>
   </data>
 </root>

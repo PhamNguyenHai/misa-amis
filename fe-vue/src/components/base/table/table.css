@@ -23,27 +23,27 @@
   border-radius: 10px;
 }
 
-table {
+.main-content-table table {
   min-width: 100%;
   width: max-content;
   background-color: #fff;
   border-spacing: 0;
 }
 
-thead {
+.main-content-table thead {
   position: sticky;
   top: 0px;
   z-index: 2;
   background-color: #efefef;
 }
 
-th {
+.main-content-table th {
   position: relative;
   cursor: pointer;
 }
 
-th,
-td {
+.main-content-table th,
+.main-content-table td {
   text-align: left;
   padding: 5px 10px;
   box-sizing: border-box;
@@ -51,24 +51,24 @@ td {
   white-space: nowrap; /* Ngăn chặn các dòng từ việc ngắt dòng */
 }
 
-td {
+.main-content-table td {
   text-overflow: ellipsis;
   white-space: nowrap; /* Ngăn văn bản xuống dòng */
   overflow: hidden; /* Ẩn phần văn bản vượt quá kích thước của container */
 }
 
-tr {
+.main-content-table tr {
   height: 48px;
   padding: 10px;
   box-sizing: border-box;
 }
 
-table th,
-table td {
+.main-content-table table th,
+.main-content-table table td {
   width: auto;
 }
 
-tbody tr :hover {
+.main-content-table tbody tr :hover {
   cursor: pointer;
 }
 
@@ -149,42 +149,42 @@ tbody tr:nth-child(2) .drop-icon + .drop-list-function {
   cursor: pointer;
 }
 
-th:first-child,
-td:first-child {
+.main-content-table th:first-child,
+.main-content-table td:first-child {
   position: sticky !important;
   left: 0px; /* Ghim cột đầu tiên */
   z-index: 1;
   background-color: #fff;
 }
 
-th:nth-child(2),
-td:nth-child(2) {
+.main-content-table th:nth-child(2),
+.main-content-table td:nth-child(2) {
   position: sticky !important;
   left: 40px; /* Ghim cột đầu tiên */
   z-index: 1;
   background-color: #fff;
 }
 
-th:nth-child(3),
-td:nth-child(3) {
+.main-content-table th:nth-child(3),
+.main-content-table td:nth-child(3) {
   position: sticky !important;
   left: 190px; /* Ghim cột đầu tiên */
   z-index: 1;
   background-color: #fff;
 }
 
-th:last-child,
-td:last-child {
+.main-content-table th:last-child,
+.main-content-table td:last-child {
   position: sticky !important;
   right: 0px; /* Ghim cột cuối */
   z-index: 1;
   background-color: #fff;
 }
 
-th:first-child,
-th:nth-child(2),
-th:nth-child(3),
-th:last-child {
+.main-content-table th:first-child,
+.main-content-table th:nth-child(2),
+.main-content-table th:nth-child(3),
+.main-content-table th:last-child {
   background-color: #efefef;
 }
 
@@ -252,10 +252,10 @@ th:last-child {
 
 /* Với phần tử gần cuối (trước cột chức năng) -> chuyển pop-up filter nhích sang để không bị đè
 đồng thời chuyển dấu tam giác sang sát bên góc phải */
-table th:nth-last-child(2) .filter-column-area {
+.main-content-table table th:nth-last-child(2) .filter-column-area {
   right: 0;
 }
-table th:nth-last-child(2) .filter-column-area::before {
+.main-content-table table th:nth-last-child(2) .filter-column-area::before {
   left: 94%;
 }
 
@@ -291,7 +291,7 @@ table th:nth-last-child(2) .filter-column-area::before {
   background-color: var(--background-color-default);
 }
 
-th:hover .filter-data-icon {
+.main-content-table th:hover .filter-data-icon {
   display: block;
 }
 

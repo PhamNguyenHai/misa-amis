@@ -50,7 +50,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
             // Kiểm tra xem tệp có tồn tại không
             if (!File.Exists(filePath))
             {
-                throw new ValidateException("File không tồn tại ! Vui lòng thử lại !");
+                throw new ValidateException(Core.Resources.AppResource.FileNotFoundError);
             }
 
             // Trả về tệp Excel cho client

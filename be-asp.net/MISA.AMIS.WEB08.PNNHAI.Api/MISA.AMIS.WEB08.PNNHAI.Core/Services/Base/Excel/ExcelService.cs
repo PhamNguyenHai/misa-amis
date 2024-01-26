@@ -73,7 +73,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         {
             var currentTableName = typeof(TEntity).Name;
             if (workingTable.ToLower().Trim() != currentTableName.ToLower())
-                throw new ValidateException("Đối tượng thực thi chưa phù hợp !");
+                throw new ValidateException(Core.Resources.AppResource.ExecuteObjectNotSuitable);
 
             switch (confirmType)
             {
@@ -83,7 +83,8 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
 
                     if (validData == null)
                     {
-                        throw new ValidateException("Dữ liệu nhập khẩu không có hoặc đã quá thời gian xử lý vui lòng nhập khẩu lại tệp để xử lý !");
+                        throw new ValidateException(Core.Resources.AppResource.ImportDataNotFountOrTimeout);
+                        
                     }
 
                     var entitiesToInsert = _mapper.Map<List<TEntity>>(validData);
@@ -97,7 +98,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                     var dataInCache = _excelRepository.GetListObjectByTableName(currentTableName);
                     if (dataInCache == null)
                     {
-                        throw new ValidateException("Dữ liệu nhập khẩu không có hoặc đã quá thời gian xử lý !");
+                        throw new ValidateException(Core.Resources.AppResource.ImportDataNotFountOrTimeout);
                     }
 
                     // Xóa cache
@@ -150,7 +151,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                     var worksheet = package.Workbook.Worksheets[sheetUsed];
                     if (worksheet == null)
                     {
-                        throw new ValidateException("Bạn đã gửi tệp với sheet không thỏa mãn lên !");
+                        throw new ValidateException(Core.Resources.AppResource.PostedWithWrongSheet);
                     }
 
                     // Lấy ra các cột trong template
@@ -196,7 +197,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             // Kiểm tra xem có cột/dòng nào trong file chưa 
             if (worksheet.Dimension == null)
             {
-                throw new ValidateException("Tệp nhập khẩu gửi lên không có dữ liệu !");
+                throw new ValidateException(Core.Resources.AppResource.PostedFileWithNoData);
             }
 
             var columnCount = worksheet.Dimension.End.Column;
@@ -206,7 +207,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             // Kiểm tra xem số lượng cột trong file và số lượng cột trong template có khớp không 
             if (templateColumns.Count > 0 && columnCount > 0 && templateColumns.Count != columnCount)
             {
-                throw new ValidateException("Tệp nhập khẩu không đúng mẫu! Số lượng cột trong tệp khác số lượng quản lý !");
+                throw new ValidateException(Core.Resources.AppResource.WrongColumnCountWithTemplateInFile);
             }
 
             // Lấy ra vùng header để thực hiện
@@ -229,14 +230,14 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                 // Nếu không tồn tại cột trong template -> exception -> break;
                 if (headerNameTemplate == null)
                 {
-                    throw new ValidateException("Tệp nhập khẩu không đúng mẫu! Tồn tại cột không thỏa mãn dữ liệu quản lý !");
+                    throw new ValidateException(Core.Resources.AppResource.ContainWrongColumnInFilePosted);
                 }
 
                 // Nếu thứ tự cột khác với thứ tự trong template quy định -> exception -> sau thứ tự cột
                 else
                 {
                     if(headerNameTemplate.ColumnIndex != i)
-                        throw new ValidateException("Tệp nhập khẩu không đúng mẫu! Thứ tự các cột không chính xác !");
+                        throw new ValidateException(Core.Resources.AppResource.WrongOrderOfColumnInFilePosted);
                 }
             }
         }
@@ -362,7 +363,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         {
             if (currentColumnTemplate.IsRequired == true && cellValue == null)
             {
-                rowObject.Errors.Add(currentColumnTemplate.ColumnTitle + " không được phép để trống !");
+                rowObject.Errors.Add(string.Format(Core.Resources.AppResource.FieldRequiredError, currentColumnTemplate.ColumnTitle));
             }
         }
 
@@ -394,17 +395,17 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                     {
                         // Validate và convert với những trường kiểu boolean đc định nghĩa trong db
                         case ColumnImportDataType.Boolean:
-                            if (cellValue.ToString()?.Trim().ToLower() == "có")
+                            if (cellValue.ToString()?.Trim().ToLower() == Core.AppConstValues.YES)
                             {
                                 createObjectProperty.SetValue(createObject, 1);
                             }
-                            else if (cellValue.ToString()?.Trim().ToLower() == "không")
+                            else if (cellValue.ToString()?.Trim().ToLower() == Core.AppConstValues.NO)
                             {
                                 createObjectProperty.SetValue(createObject, 0);
                             }
                             else
                             {
-                                rowObject.Errors.Add(currentColumnTemplate.ColumnTitle + " sai giá trị !");
+                                rowObject.Errors.Add(string.Format(Core.Resources.AppResource.WrongValueError, currentColumnTemplate.ColumnTitle));
                             }
                             rowObjectProperty.SetValue(rowObject, cellValue.ToString());
                             break;
@@ -425,7 +426,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                                 }
                                 else
                                 {
-                                    rowObject.Errors.Add(currentColumnTemplate.ColumnTitle + " có giá trị không tồn tại !");
+                                    rowObject.Errors.Add(string.Format(Core.Resources.AppResource.ValueNotFound, currentColumnTemplate.ColumnTitle));
                                 }
                                 rowObjectProperty.SetValue(rowObject, cellValue.ToString());
                             }
@@ -454,7 +455,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                                 }
                                 else
                                 {
-                                    rowObject.Errors.Add(currentColumnTemplate.ColumnTitle + " xung đột kiểu dữ liệu !");
+                                    rowObject.Errors.Add(string.Format(Core.Resources.AppResource.DataConflict, currentColumnTemplate.ColumnTitle));
                                 }
                             }
                             else if(propertyType == typeof(DateTime) || propertyType == typeof(DateTime?))
@@ -468,7 +469,8 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                                 }
                                 else
                                 {
-                                    rowObject.Errors.Add(currentColumnTemplate.ColumnTitle + " có giá trị không hợp lệ !");
+                                    rowObject.Errors.Add(string.Format(Core.Resources.AppResource.InvalidValueError, currentColumnTemplate.ColumnTitle));
+                                    
                                     rowObjectProperty.SetValue(rowObject, cellValue.ToString());
                                 }
                             }
@@ -508,7 +510,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
 
                         if (departmentCellValue == null)
                         {
-                            rowObject.Errors.Add(currentColumnTemplate.ColumnTitle + " có giá trị không tồn tại !");
+                            rowObject.Errors.Add(string.Format(Core.Resources.AppResource.ValueNotFound, currentColumnTemplate.ColumnTitle));
                             createObjectProperty.SetValue(createObject, null);
 
                         }

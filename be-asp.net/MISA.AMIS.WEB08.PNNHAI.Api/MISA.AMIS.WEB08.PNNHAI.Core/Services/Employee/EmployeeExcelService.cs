@@ -41,37 +41,37 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             // Kiểm tra email có hợp lệ không 
             if (!string.IsNullOrEmpty(employeeObject.Email) && !IsEmail(employeeObject.Email))
             {
-                rowObject.Errors.Add("Email sai định dạng !");
+                rowObject.Errors.Add(Core.Resources.AppResource.EmailWrongFormat);
             }
 
             // Kiểm tra ngày sinh có lớn hơn ngày hiện tại không 
             if (employeeObject.DateOfBirth.HasValue && IsDateGreaterThanToday(employeeObject.DateOfBirth.Value))
             {
-                rowObject.Errors.Add("Ngày sinh không được lớn hơn ngày hiện tại !");
+                rowObject.Errors.Add(Core.Resources.AppResource.DateOfBirthNoMoreThanCurrent);
             }
 
             // Kiểm tra ngày cấp có lớn hơn ngày hiện tại không 
             if (employeeObject.IdentityIssuedDate.HasValue && IsDateGreaterThanToday(employeeObject.IdentityIssuedDate.Value))
             {
-                rowObject.Errors.Add("Ngày cấp CCCD không được lớn hơn ngày hiện tại !");
+                rowObject.Errors.Add(Core.Resources.AppResource.IdentityIssuedDateNoMoreThanCurrent);
             }
 
             // Kiểm tra số điện thoại có hợp lệ không 
             if (!string.IsNullOrEmpty(employeeObject.PhoneNumber) && !IsPhoneNumber(employeeObject.PhoneNumber))
             {
-                rowObject.Errors.Add("Số điện thoại di động sai định dạng !");
+                rowObject.Errors.Add(Core.Resources.AppResource.PhoneNumberWrongFormat);
             }
 
             // Kiểm tra xem sdt cố định hợp lệ không
             if (!string.IsNullOrEmpty(employeeObject.LandlineNumber) && !IsPhoneNumber(employeeObject.LandlineNumber))
             {
-                rowObject.Errors.Add("Số điện thoại cố định sai định dạng !");
+                rowObject.Errors.Add(Core.Resources.AppResource.LandlineNumberWrongFormat);
             }
 
             // Kiểm tra xem thông tin mã nhập vào có thỏa mãn không
             if (!string.IsNullOrEmpty(employeeObject.EmployeeCode) && !IsEmployeeCode(employeeObject.EmployeeCode))
             {
-                rowObject.Errors.Add("Mã nhân viên sai định dạng ! (Dạng NV-...)");
+                rowObject.Errors.Add(Core.Resources.AppResource.EmployeeCodeWrongFormat);
             }
             // Nếu mã code thỏa mãn thì mới tiến hành kiểm tra tiếp
             else
@@ -80,7 +80,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                 var employee = await _employeeRepository.FindByCodeAsync(employeeObject.EmployeeCode);
                 if (employee != null)
                 {
-                    rowObject.Errors.Add("Mã nhân viên " + employeeObject.EmployeeCode + " đã tồn tại trong hệ thống !");
+                    rowObject.Errors.Add(string.Format(Core.Resources.AppResource.EmployeeCodeContainsInDB, employeeObject.EmployeeCode));
                 }
 
                 // Validate check mã trùng ở các dòng trước trong dữ liệu đã đọc từ file excel
@@ -100,7 +100,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                         {
                             foreach (int index in matchingIndexes)
                             {
-                                employeeExcelResults[index].Errors.Add("Mã nhân viên " + employeeObject.EmployeeCode + " đã bị trùng trong tệp nhập khẩu !");
+                                employeeExcelResults[index].Errors.Add(string.Format(Core.Resources.AppResource.EmployeeCodeContainsInImportFile, employeeObject.EmployeeCode));
                             }
 
                             var existEmployeeCodeObject = _validEntityToCreate.Where(
@@ -118,7 +118,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
 
                             foreach (int index in otherMatchingIndexs)
                             {
-                                employeeExcelResults[index].Errors.Add("Mã nhân viên " + employeeObject.EmployeeCode + " đã bị trùng trong tệp nhập khẩu !");
+                                employeeExcelResults[index].Errors.Add(string.Format(Core.Resources.AppResource.EmployeeCodeContainsInImportFile, employeeObject.EmployeeCode));
                             }
                         }
                     }

@@ -1,0 +1,29 @@
+.import-result-main {
+  padding-top: 8px;
+  box-sizing: border-box;
+}
+
+.import-result-title {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.import-result-title {
+  padding: 8px 0;
+  box-sizing: border-box;
+}
+
+.dowload-result-hyperlink {
+  color: blue;
+  cursor: pointer;
+}
+
+.dowload-result-hyperlink:hover {
+  text-decoration: underline;
+}
+
+.import-records-result {
+  padding: 8px 20px;
+  box-sizing: border-box;
+  line-height: 30px;
+}

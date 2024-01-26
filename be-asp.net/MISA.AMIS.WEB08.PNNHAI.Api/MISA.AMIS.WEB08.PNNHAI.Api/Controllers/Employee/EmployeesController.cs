@@ -52,7 +52,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
         public async Task<IActionResult> Confirm(string workingTable, ConfirmType confirmType)
         {
             await _employeeExcelService.ConfirmImport(workingTable, confirmType);
-            return StatusCode(StatusCodes.Status200OK, "Thực hiện thành công !");
+            return StatusCode(StatusCodes.Status200OK);
         }
 
         /// <summary>

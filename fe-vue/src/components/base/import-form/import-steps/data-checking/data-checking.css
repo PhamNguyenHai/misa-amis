@@ -1,14 +1,9 @@
-.form-import-current-content {
-  flex: 1;
-  height: 515px;
-  border: 1px solid rgb(219, 219, 219);
-  padding: 8px;
-  box-sizing: border-box;
-}
-
-.tb {
+.import-table {
   height: 442px;
-  border: 1px solid;
+  overflow: scroll;
+  font-size: 14px;
+  position: relative;
+  cursor: default;
 }
 
 .dowload-invalid-records {

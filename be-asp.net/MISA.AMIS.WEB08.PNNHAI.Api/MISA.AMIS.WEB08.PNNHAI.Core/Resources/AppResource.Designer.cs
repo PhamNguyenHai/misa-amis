@@ -70,6 +70,33 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tệp nhập khẩu không đúng mẫu! Tồn tại cột không thỏa mãn dữ liệu quản lý !.
+        /// </summary>
+        public static string ContainWrongColumnInFilePosted {
+            get {
+                return ResourceManager.GetString("ContainWrongColumnInFilePosted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} xung đột kiểu dữ liệu !.
+        /// </summary>
+        public static string DataConflict {
+            get {
+                return ResourceManager.GetString("DataConflict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ngày sinh không được lớn hơn ngày hiện tại !.
+        /// </summary>
+        public static string DateOfBirthNoMoreThanCurrent {
+            get {
+                return ResourceManager.GetString("DateOfBirthNoMoreThanCurrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Xóa thành công !.
         /// </summary>
         public static string DeleteSuccessful {
@@ -79,11 +106,74 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email sai định dạng !.
+        /// </summary>
+        public static string EmailWrongFormat {
+            get {
+                return ResourceManager.GetString("EmailWrongFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã nhân viên {0} tồn tại trong hệ thống !.
+        /// </summary>
+        public static string EmployeeCodeContainsInDB {
+            get {
+                return ResourceManager.GetString("EmployeeCodeContainsInDB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã nhân viên {0} tồn tại trong tệp nhập khẩu !.
+        /// </summary>
+        public static string EmployeeCodeContainsInImportFile {
+            get {
+                return ResourceManager.GetString("EmployeeCodeContainsInImportFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã nhân viên sai định dạng ! (Dạng NV-...).
+        /// </summary>
+        public static string EmployeeCodeWrongFormat {
+            get {
+                return ResourceManager.GetString("EmployeeCodeWrongFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đối tượng thực thi chưa phù hợp !.
+        /// </summary>
+        public static string ExecuteObjectNotSuitable {
+            get {
+                return ResourceManager.GetString("ExecuteObjectNotSuitable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mã nhân viên {0} đã tồn tại !.
         /// </summary>
         public static string ExistedEmployeeCode {
             get {
                 return ResourceManager.GetString("ExistedEmployeeCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} không được phép để trống !.
+        /// </summary>
+        public static string FieldRequiredError {
+            get {
+                return ResourceManager.GetString("FieldRequiredError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File không tồn tại ! Vui lòng thử lại !.
+        /// </summary>
+        public static string FileNotFoundError {
+            get {
+                return ResourceManager.GetString("FileNotFoundError", resourceCulture);
             }
         }
         
@@ -115,6 +205,24 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ngày cấp CCCD không được lớn hơn ngày hiện tại !.
+        /// </summary>
+        public static string IdentityIssuedDateNoMoreThanCurrent {
+            get {
+                return ResourceManager.GetString("IdentityIssuedDateNoMoreThanCurrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dữ liệu nhập khẩu không có hoặc đã quá thời gian xử lý!.
+        /// </summary>
+        public static string ImportDataNotFountOrTimeout {
+            get {
+                return ResourceManager.GetString("ImportDataNotFountOrTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Giá trị nhập vào không được lơn hơn ngày hiện tại !.
         /// </summary>
         public static string InputDateNoMoreThanCurrentDateDefault {
@@ -133,6 +241,24 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} có giá trị không hợp lệ !.
+        /// </summary>
+        public static string InvalidValueError {
+            get {
+                return ResourceManager.GetString("InvalidValueError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số điện thoại cố định sai định dạng !.
+        /// </summary>
+        public static string LandlineNumberWrongFormat {
+            get {
+                return ResourceManager.GetString("LandlineNumberWrongFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chỉ được phép thực hiện xóa tối đa {0} bản ghi !.
         /// </summary>
         public static string MoreRecordDeleteError {
@@ -147,6 +273,42 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         public static string NotFoundById {
             get {
                 return ResourceManager.GetString("NotFoundById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chưa có chức năng nhập khẩu với đối tượng này !.
+        /// </summary>
+        public static string NotImplementWithObjError {
+            get {
+                return ResourceManager.GetString("NotImplementWithObjError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số điện thoại di động sai định dạng !.
+        /// </summary>
+        public static string PhoneNumberWrongFormat {
+            get {
+                return ResourceManager.GetString("PhoneNumberWrongFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tệp nhập khẩu gửi lên không có dữ liệu !.
+        /// </summary>
+        public static string PostedFileWithNoData {
+            get {
+                return ResourceManager.GetString("PostedFileWithNoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bạn đã gửi tệp với sheet không thỏa mãn lên !.
+        /// </summary>
+        public static string PostedWithWrongSheet {
+            get {
+                return ResourceManager.GetString("PostedWithWrongSheet", resourceCulture);
             }
         }
         
@@ -187,6 +349,24 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} có giá trị không tồn tại !.
+        /// </summary>
+        public static string ValueNotFound {
+            get {
+                return ResourceManager.GetString("ValueNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tệp nhập khẩu không đúng mẫu! Số lượng cột trong tệp khác số lượng quản lý !.
+        /// </summary>
+        public static string WrongColumnCountWithTemplateInFile {
+            get {
+                return ResourceManager.GetString("WrongColumnCountWithTemplateInFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cột thực hiện lọc không tồn tại !.
         /// </summary>
         public static string WrongFilterColumn {
@@ -196,11 +376,29 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tệp nhập khẩu không đúng mẫu! Thứ tự các cột không chính xác !.
+        /// </summary>
+        public static string WrongOrderOfColumnInFilePosted {
+            get {
+                return ResourceManager.GetString("WrongOrderOfColumnInFilePosted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lựa chọn không phù hợp. Vui lòng thử lại !.
         /// </summary>
         public static string WrongSelectionError {
             get {
                 return ResourceManager.GetString("WrongSelectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} sai giá trị !.
+        /// </summary>
+        public static string WrongValueError {
+            get {
+                return ResourceManager.GetString("WrongValueError", resourceCulture);
             }
         }
     }

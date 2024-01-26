@@ -50,7 +50,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
             }
             else
             {
-                throw new ValidateException("Chưa có chức năng nhập khẩu với đối tượng này !");
+                throw new ValidateException(Core.Resources.AppResource.NotImplementWithObjError);
             }
         } 
         #endregion

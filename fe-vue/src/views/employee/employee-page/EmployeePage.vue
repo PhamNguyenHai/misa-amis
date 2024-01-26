@@ -47,8 +47,8 @@
             @click.stop="handleToggleExcelWorking"
           />
           <ul class="excel-option" v-if="isShowExcelWorking">
-            <li class="excel-item" @click="handleShowExcelImportForm">
-              Nhập khẩu bản ghi
+            <li class="excel-item" @click.stop="handleShowExcelImportForm">
+              {{ $_MisaResources.appText.excelImportTitle.import }}
             </li>
             <li class="excel-item" @click.stop="handleExportAll">
               {{ $_MisaResources.appText.excelExportTitle.exportAll }}
@@ -117,7 +117,12 @@
     @notifyHideForm="handleHideForm"
   />
 
-  <misa-import-form v-if="isShowExcelImportForm" />
+  <misa-import-form
+    v-if="isShowExcelImportForm"
+    :importObjectResources="tableImportObjColumns"
+    :importRecordsData="importTableData"
+    @notifyHideExcelImportForm="handleHideExcelImportForm"
+  />
 
   <misa-dialog
     v-if="dialog.isShow"
@@ -137,6 +142,8 @@ import employeeResources from "@/js/helpers/employeeResources";
 import employeeService from "@/js/services/EmployeeService";
 import { convertCamelCaseToPascelCase } from "@/js/common/common.js";
 
+import employeeImportResources from "@/js/helpers/employeeImportResources";
+
 export default {
   name: "EmployeePage",
   components: {
@@ -147,6 +154,9 @@ export default {
     return {
       // Column các cột của table. Đc gán vào từ employeeTableResources
       tableColumns: {},
+
+      // Object cho các cột để hiển thị kết quả sau khi đọc file
+      tableImportObjColumns: {},
 
       // Dữ liệu của bảng sẽ được đọc từ API về và gán vào
       tableData: [],
@@ -198,6 +208,54 @@ export default {
       },
 
       isShowExcelImportForm: false,
+      importTableData: [
+        {
+          employeeId: "6b9348f5-1362-7ba5-1235-60b3ebf808a9",
+          employeeCode: "NV-0001",
+          employeeName: "Lương Tiến Hoàng",
+          isCustomer: false,
+          isProvider: true,
+          gender: 0,
+          departmentId: "142cb08f-7c31-21fa-8e90-67245e8b283e",
+          departmentName: "Phòng Kỹ Thuật",
+          identityNumber: "3999388980",
+          phoneNumber: "0986231382",
+          landlineNumber: "0333727202",
+          bankNumber: "6852542809",
+          bankBranch: "Nguyễn Trãi - Thanh Xuân - Hà Nội",
+          errors: [
+            "Tài khoản ngân hàng đã tồn tại trong tệp nhập khẩu !",
+            "xyz",
+            "abc",
+            "xyz",
+            "abc",
+            "xyz",
+          ],
+        },
+        {
+          employeeId: "395826c8-15a0-31f9-5980-7ed9d1ea06ea",
+          employeeCode: "NV-0080",
+          employeeName: "Lương Nam Hoàng",
+          isCustomer: true,
+          isProvider: false,
+          dateOfBirth: "2002-02-27T00:00:00",
+          gender: 0,
+          departmentId: "4577565a-7e3e-493a-74dd-867949feb8b5",
+          departmentName: "Phòng Hành Chính",
+          positionName: "Trưởng phòng",
+          identityNumber: "3743674682",
+          identityIssuedDate: "1994-11-23T00:00:00",
+          identityIssuedPlace: "Sơn La",
+          address: "187 Nguyễn Trãi - Hoàng Mai - Hà Nội",
+          phoneNumber: "0986496491",
+          landlineNumber: "0333546308",
+          email: "xiao1562@gmail.com",
+          bankNumber: "0046839350",
+          bankName: " Ngân hàng Sacombank",
+          bankBranch: "Khuất Duy Tiến - Bắc Từ Liêm - Hà Nội",
+          errors: [],
+        },
+      ],
     };
   },
 
@@ -207,6 +265,8 @@ export default {
       // Bên trong $_EmployeeTableResources có : resources có title để hiển thị và columnKey là trường để gọi lên api
       // Đồng thời $_EmployeeTableResources có : objectKey là id để khi sử dụng v-for sẽ lấy id này để làm key
       this.tableColumns = employeeResources;
+
+      this.tableImportObjColumns = employeeImportResources;
 
       // Load toàn bộ employee từ API về
       // this.loadAllData();
@@ -852,8 +912,26 @@ export default {
      * Description: Hàm thực hiện show form import file excel
      */
     handleShowExcelImportForm() {
-      this.isShowExcelImportForm = true;
-      this.isShowExcelWorking = false;
+      try {
+        this.isShowExcelImportForm = true;
+        this.isShowExcelWorking = false;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện ẩn form import excel
+     *
+     */
+    handleHideExcelImportForm() {
+      try {
+        this.isShowExcelImportForm = false;
+      } catch (err) {
+        console.error(err);
+      }
     },
   },
 };
