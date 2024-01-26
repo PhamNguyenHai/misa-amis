@@ -112,7 +112,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                             }
                         }
 
-                        else if (matchingIndexes.Count() > 2)
+                        else if (matchingIndexes.Count() > 2) 
                         {
                             List<int> otherMatchingIndexs = matchingIndexes.Skip(2).ToList();
 

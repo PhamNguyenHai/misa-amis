@@ -122,6 +122,7 @@
     :importObjectResources="tableImportObjColumns"
     :importRecordsData="importTableData"
     @notifyHideExcelImportForm="handleHideExcelImportForm"
+    @notifyClickedDowloadTemplateFile="handleDowloadEmployeeTemplateFile"
   />
 
   <misa-dialog
@@ -484,6 +485,20 @@ export default {
     },
 
     /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện dowload file template cho employee
+     */
+    async dowloadTemplateFile() {
+      try {
+        const res = await employeeService.dowloadTemplateFile("employee");
+        return res;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
      * Author : PNNHai
      * Date :
      * Description : Hàm để refresher lại dữ liệu
@@ -802,6 +817,28 @@ export default {
     /**
      * Author: PNNHai
      * Date:
+     * @param {*} byteData : Mảng byte dữ liệu data
+     * @param {*} fileName : tên file muốn xuất
+     * Description: Hàm thực hiện xuất file excel
+     */
+    dowloadExcelFile(byteData, fileName) {
+      const blob = new Blob([byteData], {
+        type: "application/vnd.ms-excel",
+      });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", fileName);
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
      * Description: Hàm thực hiện export tất cả bản ghi ra file excel
      */
     async handleExportAll() {
@@ -819,23 +856,10 @@ export default {
           })
         );
 
-        console.log(this.excelExportData.columns);
         const res = await this.exportToExcelFile(this.excelExportData);
-        console.log(res);
-
         if (res.success) {
-          const blob = new Blob([res.data], {
-            type: "application/vnd.ms-excel",
-          });
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement("a");
-          link.href = url;
-          link.setAttribute("download", "DanhSachNhanVien.xlsx");
-          link.style.display = "none";
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(url);
+          // Xuất file
+          this.dowloadExcelFile(res.data, "DanhSachNhanVien.xlsx");
 
           this.$store.commit("addToast", {
             type: "success",
@@ -874,23 +898,10 @@ export default {
         this.excelExportData.searchString = this.filterParams.searchString;
         this.excelExportData.filterColumns = this.filterParams.filterColumns;
 
-        console.log(this.excelExportData.columns);
         const res = await this.exportToExcelFile(this.excelExportData);
-        console.log(res);
-
         if (res.success) {
-          const blob = new Blob([res.data], {
-            type: "application/vnd.ms-excel",
-          });
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement("a");
-          link.href = url;
-          link.setAttribute("download", "DanhSachNhanVien.xlsx");
-          link.style.display = "none";
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(url);
+          // Xuất file
+          this.dowloadExcelFile(res.data, "DanhSachNhanVien.xlsx");
 
           this.$store.commit("addToast", {
             type: "success",
@@ -898,8 +909,6 @@ export default {
               this.$_MisaResources.appText.employeePageText.successAction
                 .exportWithFilterConditionSuccess,
           });
-
-          console.log(res);
         }
       } catch (err) {
         console.error(err);
@@ -929,6 +938,25 @@ export default {
     handleHideExcelImportForm() {
       try {
         this.isShowExcelImportForm = false;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện dowload file template
+     */
+    async handleDowloadEmployeeTemplateFile() {
+      try {
+        console.log(1);
+        const res = await this.dowloadTemplateFile();
+        console.log(res);
+        if (res.success) {
+          // Xuất file mẫu
+          this.dowloadExcelFile(res.data, "Danh sach nhan vien.xlsx");
+        }
       } catch (err) {
         console.error(err);
       }

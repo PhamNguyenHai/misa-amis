@@ -5,6 +5,7 @@
     :class="buttonClass"
     :type="buttonType"
     :title="buttonTooltips"
+    :disabled="isDisable"
   >
     <div v-if="iconClass" :class="iconClass" class="icon-with-button"></div>
     {{ buttonName }}
@@ -21,6 +22,8 @@ export default {
     buttonType: { type: String, default: "button" },
     iconClass: { type: String, default: "" },
     buttonTooltips: { type: String, required: false },
+    iconDirection: { type: String, default: "left" },
+    isDisable: { type: Boolean, default: false },
   },
 
   data() {

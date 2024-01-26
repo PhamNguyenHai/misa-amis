@@ -59,9 +59,16 @@
 
 .form-import-footer {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 10px 0;
   box-sizing: border-box;
+}
+
+.form-import-footer-right {
+  display: flex;
+  align-items: flex-end;
+  column-gap: 8px;
 }
 
 .form-import-current-content {
@@ -73,60 +80,34 @@
   overflow: hidden;
 }
 
-/* Progress */
-/* .form-import-progress {
-  width: 150px;
+.next-step-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -320px -313px;
+  width: 16px;
+  height: 14px;
 }
 
-.import-progress-step {
-  list-style: none;
-  border: 1px solid rgb(219, 219, 219);
-  font-weight: 600;
-  padding: 5px;
-  box-sizing: border-box;
-  background-color: var(--background-color-default);
-  cursor: pointer;
+.previous-step-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -368px -313px;
+  width: 16px;
+  height: 14px;
 }
 
-.import-progress-step + .import-progress-step {
-  margin-top: 1px;
+.confirm-step-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -1211px -258px;
+  width: 19px;
+  height: 20px;
+  transform: scale(0.8);
 }
 
-.progress--current-step {
-  background-color: rgb(66, 194, 245);
-  border: 1px solid rgb(66, 194, 245);
-} */
-
-/* Main */
-
-/* .tb {
-  height: 442px;
-  border: 1px solid;
+.cancel-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -1031px -406px;
+  width: 17px;
+  height: 18px;
 }
 
-.dowload-invalid-records {
-  padding: 10px 20px;
-  box-sizing: border-box;
-  display: block;
+.helper-import-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -704px -312px;
+  width: 16px;
+  height: 16px;
+  transform: scale(1.1);
 }
-
-.records-valid-result {
-  display: flex;
-  justify-content: flex-start;
-  column-gap: 100px;
-  padding-bottom: 8px;
-  box-sizing: border-box;
-}
-
-.records-result {
-  font-weight: 600;
-}
-
-.dowload-invalid-hyperlink {
-  color: blue;
-  cursor: pointer;
-}
-
-.dowload-invalid-hyperlink:hover {
-  text-decoration: underline;
-} */

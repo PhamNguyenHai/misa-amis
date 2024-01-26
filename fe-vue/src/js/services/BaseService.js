@@ -61,5 +61,17 @@ class BaseService {
       console.error(err);
     }
   }
+
+  async dowloadTemplateFile(workingTable) {
+    try {
+      const res = await this.baseApiService.get(
+        this.endpoint(`/Dowload-File-Template?workingTable=${workingTable}`),
+        { responseType: "blob" } // Yêu cầu phản hồi dưới dạng Blob
+      );
+      return res;
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }
 export default BaseService;

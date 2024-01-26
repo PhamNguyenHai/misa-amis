@@ -60,7 +60,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
         /// </summary>
         /// <param name="excelResquest">Param truyền vào để xuất fil excel</param>
         /// <returns>File excel</returns>
-        [HttpPost("Dowload-File-Template")]
+        [HttpGet("Dowload-File-Template")]
         public async Task<IActionResult> DowloadFileTemplate(string workingTable)
         {
             var excelFile = await _employeeExcelService.DowloadTemplateFile(workingTable);

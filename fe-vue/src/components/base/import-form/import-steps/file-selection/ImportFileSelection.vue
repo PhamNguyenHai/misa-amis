@@ -26,7 +26,7 @@
 <script>
 export default {
   name: "ImportFileSelection",
-  emits: ["notifyChangeFile"],
+  emits: ["notifyChangeFile", "notifyClickedDowloadTemplateFile"],
   data() {
     return {
       selectedFile: null,
@@ -35,6 +35,11 @@ export default {
   },
 
   methods: {
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện xử lý chọn file
+     */
     selectFile() {
       try {
         this.$refs.inputFileRef.click();
@@ -43,6 +48,12 @@ export default {
       }
     },
 
+    /**
+     * Author: PNNHai
+     * Date:
+     * @param {*} event : event
+     * Description: Hàm thực hiện thông báo khi form thay đổi
+     */
     handleFileChange(event) {
       try {
         const file = event.target.files[0];
@@ -59,6 +70,11 @@ export default {
       }
     },
 
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện thông báo dowload file mẫu
+     */
     handleClickDowloadTemplateFile() {
       this.$emit("notifyClickedDowloadTemplateFile");
     },

@@ -21,6 +21,7 @@
             <import-file-selection
               v-if="currentStep === 1"
               @notifyChangeFile="handleChangeImportFile"
+              @notifyClickedDowloadTemplateFile="handleDowloadTemplateFile"
             />
             <import-data-checking
               v-else-if="currentStep === 2"
@@ -37,8 +38,42 @@
           </div>
         </div>
         <div class="form-import-footer">
-          <misa-button buttonName="Giúp" buttonClass="normal-button" />
-          <misa-button buttonName="Đóng" buttonClass="normal-button" />
+          <div class="form-import-footer-left">
+            <misa-button
+              buttonName="Giúp"
+              buttonClass="normal-button"
+              iconClass="helper-import-icon"
+            />
+          </div>
+          <div class="form-import-footer-right">
+            <misa-button
+              buttonName="Quay lại"
+              buttonClass="normal-button"
+              iconClass="previous-step-icon"
+              iconDirection="left"
+              :isDisable="currentStep === 1 ? true : false"
+              v-if="currentStep === 1 || currentStep === 2"
+              @click.stop="handleClickPreviousStep"
+            />
+            <misa-button
+              buttonName="Tiếp theo"
+              buttonClass="normal-button right-direction-button-icon"
+              iconClass="next-step-icon"
+              v-if="currentStep === 1"
+              @click.stop="handleClickNextStep"
+            />
+            <misa-button
+              buttonName="Thực hiện"
+              buttonClass="normal-button"
+              iconClass="confirm-step-icon"
+              v-else-if="currentStep === 2"
+            />
+            <misa-button
+              buttonName="Đóng"
+              buttonClass="normal-button"
+              iconClass="cancel-icon"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -58,7 +93,7 @@ export default {
     ImportResult,
   },
 
-  emits: ["notifyHideExcelImportForm"],
+  emits: ["notifyHideExcelImportForm", "notifyClickedDowloadTemplateFile"],
 
   props: {
     // Resources để hiển thị kết quả sau khi import file
@@ -70,7 +105,7 @@ export default {
 
   data() {
     return {
-      currentStep: 2,
+      currentStep: 1,
       importSteps: [
         {
           stepIndex: 1,
@@ -140,6 +175,22 @@ export default {
         console.log(file);
       } catch (err) {
         console.error(err);
+      }
+    },
+
+    handleDowloadTemplateFile() {
+      this.$emit("notifyClickedDowloadTemplateFile");
+    },
+
+    handleClickPreviousStep() {
+      if (this.currentStep === 2) {
+        this.currentStep--;
+      }
+    },
+
+    handleClickNextStep() {
+      if (this.currentStep === 1) {
+        this.currentStep++;
       }
     },
   },
