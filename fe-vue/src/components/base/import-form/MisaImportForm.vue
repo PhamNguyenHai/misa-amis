@@ -67,11 +67,13 @@
               buttonClass="normal-button"
               iconClass="confirm-step-icon"
               v-else-if="currentStep === 2"
+              @click.stop="handleClickConfirmImport"
             />
             <misa-button
               buttonName="Đóng"
               buttonClass="normal-button"
               iconClass="cancel-icon"
+              @click="handleHideImportForm"
             />
           </div>
         </div>
@@ -93,7 +95,11 @@ export default {
     ImportResult,
   },
 
-  emits: ["notifyHideExcelImportForm", "notifyClickedDowloadTemplateFile"],
+  emits: [
+    "notifyHideExcelImportForm",
+    "notifyClickedDowloadTemplateFile",
+    "notifyPostExcelImportFile",
+  ],
 
   props: {
     // Resources để hiển thị kết quả sau khi import file
@@ -172,7 +178,6 @@ export default {
     handleChangeImportFile(file) {
       try {
         this.importFile = file;
-        console.log(file);
       } catch (err) {
         console.error(err);
       }
@@ -191,7 +196,12 @@ export default {
     handleClickNextStep() {
       if (this.currentStep === 1) {
         this.currentStep++;
+        this.$emit("notifyPostExcelImportFile", this.importFile);
       }
+    },
+
+    handleClickConfirmImport() {
+      this.currentStep++;
     },
   },
 };

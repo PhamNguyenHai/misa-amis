@@ -53,6 +53,23 @@ class EmployeeService extends BaseService {
       console.error(err);
     }
   }
+
+  async importExcelFile(file) {
+    try {
+      const res = await this.baseApiService.post(
+        this.endpoint("/Import"),
+        file,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return res;
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }
 
 const employeeService = new EmployeeService();
