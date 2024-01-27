@@ -1,17 +1,32 @@
 <template lang="">
   <div class="import-result">
-    <h3 class="import-result-title">Kết quả nhập khẩu</h3>
+    <h3 class="import-result-title">
+      {{
+        $_MisaResources.appText.excelImportTitle.importResult.importResultTitle
+      }}
+    </h3>
     <div class="import-result-main">
       <div class="import-dowload-result">
-        Tải về tập tin chứa kết quả nhập khẩu
-        <span class="dowload-result-hyperlink">tại đây</span>
+        {{ $_MisaResources.appText.excelImportTitle.dowload.importResult }}
+
+        <span class="dowload-result-hyperlink">{{
+          $_MisaResources.appText.excelImportTitle.dowload.here
+        }}</span>
       </div>
       <div class="import-records-result">
         <div class="import-valid-records-count">
-          + Số dòng nhập khẩu thành công: 2
+          +
+          {{
+            $_MisaResources.appText.excelImportTitle.importResult
+              .validRecordsNumber
+          }}: {{ validRecordsCount }}
         </div>
         <div class="import-invalid-records-count">
-          + Số dòng nhập khẩu thành công: 10
+          +
+          {{
+            $_MisaResources.appText.excelImportTitle.importResult
+              .invalidRecordsNumber
+          }}: {{ invalidRecordsCount }}
         </div>
       </div>
     </div>

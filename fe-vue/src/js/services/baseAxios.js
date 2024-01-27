@@ -42,7 +42,7 @@ baseAxios.interceptors.response.use(
       // alert("Có lỗi xảy ra, vui lòng liên hệ Misa để được giúp đỡ");
       store.state.dialogNotify.isShow = true;
       store.state.dialogNotify.text =
-        "Có lỗi xảy ra, vui lòng liên hệ Misa để được giúp đỡ";
+        this.$_MisaResources.errorHandle.serveError;
     }
     return Promise.reject(error);
   }

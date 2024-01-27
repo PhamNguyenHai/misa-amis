@@ -70,6 +70,19 @@ class EmployeeService extends BaseService {
       console.error(err);
     }
   }
+
+  async confirmImport(workingImportTable, selectType) {
+    try {
+      const res = await this.baseApiService.post(
+        this.endpoint(
+          `/Confirm-Import-Excel?workingTable=${workingImportTable}&confirmType=${selectType}`
+        )
+      );
+      return res;
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }
 
 const employeeService = new EmployeeService();

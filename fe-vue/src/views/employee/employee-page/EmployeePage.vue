@@ -119,11 +119,8 @@
 
   <misa-import-form
     v-if="isShowExcelImportForm"
-    :importObjectResources="tableImportObjColumns"
-    :importRecordsData="importTableData"
     @notifyHideExcelImportForm="handleHideExcelImportForm"
-    @notifyClickedDowloadTemplateFile="handleDowloadEmployeeTemplateFile"
-    @notifyPostExcelImportFile="handleChangedExcelImportFile"
+    @notifyImportSuccess="filterData"
   />
 
   <misa-dialog
@@ -144,8 +141,6 @@ import employeeResources from "@/js/helpers/employeeResources";
 import employeeService from "@/js/services/EmployeeService";
 import { convertCamelCaseToPascelCase } from "@/js/common/common.js";
 
-import employeeImportResources from "@/js/helpers/employeeImportResources";
-
 export default {
   name: "EmployeePage",
   components: {
@@ -156,9 +151,6 @@ export default {
     return {
       // Column các cột của table. Đc gán vào từ employeeTableResources
       tableColumns: {},
-
-      // Object cho các cột để hiển thị kết quả sau khi đọc file
-      tableImportObjColumns: {},
 
       // Dữ liệu của bảng sẽ được đọc từ API về và gán vào
       tableData: [],
@@ -210,7 +202,6 @@ export default {
       },
 
       isShowExcelImportForm: false,
-      importTableData: [],
     };
   },
 
@@ -220,8 +211,6 @@ export default {
       // Bên trong $_EmployeeTableResources có : resources có title để hiển thị và columnKey là trường để gọi lên api
       // Đồng thời $_EmployeeTableResources có : objectKey là id để khi sử dụng v-for sẽ lấy id này để làm key
       this.tableColumns = employeeResources;
-
-      this.tableImportObjColumns = employeeImportResources;
 
       // Load toàn bộ employee từ API về
       // this.loadAllData();
@@ -432,20 +421,6 @@ export default {
     async exportToExcelFile(exportData) {
       try {
         const res = await employeeService.exportExcel(exportData);
-        return res;
-      } catch (err) {
-        console.error(err);
-      }
-    },
-
-    /**
-     * Author: PNNHai
-     * Date:
-     * Description: Hàm thực hiện dowload file template cho employee
-     */
-    async dowloadTemplateFile() {
-      try {
-        const res = await employeeService.dowloadTemplateFile("employee");
         return res;
       } catch (err) {
         console.error(err);
@@ -892,45 +867,6 @@ export default {
     handleHideExcelImportForm() {
       try {
         this.isShowExcelImportForm = false;
-      } catch (err) {
-        console.error(err);
-      }
-    },
-
-    /**
-     * Author: PNNHai
-     * Date:
-     * Description: Hàm thực hiện dowload file template
-     */
-    async handleDowloadEmployeeTemplateFile() {
-      try {
-        console.log(1);
-        const res = await this.dowloadTemplateFile();
-        console.log(res);
-        if (res.success) {
-          // Xuất file mẫu
-          this.dowloadExcelFile(res.data, "Danh sach nhan vien.xlsx");
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    },
-
-    /**
-     * Author: PNNHai
-     * Date:
-     * Description: Hàm thực hiện xử lý khi chang file gửi lên để import
-     */
-    async handleChangedExcelImportFile(file) {
-      try {
-        console.log(file);
-        const formData = new FormData();
-        formData.append("importFile", file);
-        console.log(formData);
-        const res = await employeeService.importExcelFile(formData);
-        if (res.success) {
-          this.importTableData = res.data;
-        }
       } catch (err) {
         console.error(err);
       }

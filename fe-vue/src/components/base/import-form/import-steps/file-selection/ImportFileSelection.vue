@@ -1,24 +1,25 @@
 <template lang="">
   <div class="import-current-step-content">
-    <div>Chọn dữ liệu đã chuẩn bị dữ liệu để nhập khẩu vào phần mềm</div>
+    <div>
+      {{ $_MisaResources.appText.excelImportTitle.importText.prepareFile }}
+    </div>
     <div class="file-selection">
       <div class="file-selected-name" :title="selectedFileName">
         {{ selectedFileName }}
       </div>
       <misa-button
         buttonClass="normal-button"
-        buttonName="Chọn"
+        :buttonName="$_MisaResources.appText.excelImportTitle.dowload.select"
         @click="selectFile"
       />
       <input type="file" ref="inputFileRef" @change="handleFileChange" hidden />
     </div>
     <div>
-      Chưa có tệp mẫu để chuẩn bị dữ liệu? Tải tệp excel mẫu mà phần mềm cung
-      cấp để chuẩn bị dữ liệu nhập khẩu
+      {{ $_MisaResources.appText.excelImportTitle.dowload.templateFile }}
       <span
         class="dowload-template-hyperlink"
         @click="handleClickDowloadTemplateFile"
-        >tại đây</span
+        >{{ $_MisaResources.appText.excelImportTitle.dowload.here }}</span
       >
     </div>
   </div>
@@ -27,11 +28,51 @@
 export default {
   name: "ImportFileSelection",
   emits: ["notifyChangeFile", "notifyClickedDowloadTemplateFile"],
+
+  props: {
+    postedFile: { required: false },
+  },
+
   data() {
     return {
       selectedFile: null,
-      selectedFileName: "Chưa có tệp nào được chọn !",
+      selectedFileName:
+        this.$_MisaResources.appText.excelImportTitle.importText.noFileSelected,
     };
+  },
+
+  watch: {
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Thực hiện gán lại file khi đã có file chọn trước
+     */
+    postedFile: function () {
+      try {
+        this.selectedFile = this.postedFile;
+        if (this.selectedFile) {
+          this.selectedFileName = this.selectedFile?.name;
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  },
+
+  /**
+   * Author: PNNHai
+   * Date:
+   * Description: Thực hiện gán lại file khi đã có file chọn trước
+   */
+  created() {
+    try {
+      this.selectedFile = this.postedFile;
+      if (this.selectedFile) {
+        this.selectedFileName = this.selectedFile?.name;
+      }
+    } catch (err) {
+      console.error(err);
+    }
   },
 
   methods: {
@@ -62,7 +103,8 @@ export default {
           this.selectedFileName = file.name;
         } else {
           this.selectedFile = null;
-          this.selectedFileName = "Chưa có tệp nào được chọn !";
+          this.selectedFileName =
+            this.$_MisaResources.appText.excelImportTitle.importText.noFileSelected;
         }
         this.$emit("notifyChangeFile", file);
       } catch (err) {
@@ -76,7 +118,11 @@ export default {
      * Description: Hàm thực hiện thông báo dowload file mẫu
      */
     handleClickDowloadTemplateFile() {
-      this.$emit("notifyClickedDowloadTemplateFile");
+      try {
+        this.$emit("notifyClickedDowloadTemplateFile");
+      } catch (err) {
+        console.error(err);
+      }
     },
   },
 };

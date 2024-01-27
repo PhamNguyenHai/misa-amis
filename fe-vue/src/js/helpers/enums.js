@@ -94,6 +94,11 @@ const MisaEnums = {
     EXPORT_ALL: 0,
     EXPORT_WITH_FILTER_CONDITION: 1,
   },
+
+  COMFIRM_TYPE: {
+    DISAGREE: 0,
+    AGREE: 1,
+  },
 };
 
 export default MisaEnums;

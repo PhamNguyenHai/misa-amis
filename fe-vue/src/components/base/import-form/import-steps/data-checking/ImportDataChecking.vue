@@ -2,10 +2,16 @@
   <div class="import-current-step-content">
     <div class="records-valid-result">
       <span class="records-result valid-records-result"
-        >{{ validRecordsCount }} dòng hợp lệ</span
+        >{{ validRecordsCount }}/{{ totalImportCount }}
+        {{
+          $_MisaResources.appText.excelImportTitle.importResult.validRecords
+        }}</span
       >
       <span class="records-result invalid-records-result"
-        >{{ invalidRecordsCount }} dòng không hợp lệ</span
+        >{{ invalidRecordsCount }}/{{ totalImportCount }}
+        {{
+          $_MisaResources.appText.excelImportTitle.importResult.invalidRecords
+        }}</span
       >
     </div>
     <misa-table-show-only
@@ -14,8 +20,10 @@
       :tableData="importRecordsData"
     />
     <span class="dowload-invalid-records"
-      >Tải về tập tin chứa những dòng dữ liệu không hợp lệ
-      <span class="dowload-invalid-hyperlink">tại đây</span></span
+      >{{ $_MisaResources.appText.excelImportTitle.dowload.invalidRecord }}
+      <span class="dowload-invalid-hyperlink">{{
+        $_MisaResources.appText.excelImportTitle.dowload.here
+      }}</span></span
     >
   </div>
 </template>
@@ -33,6 +41,9 @@ export default {
 
     // Số lượng bản ghi không hợp lệ
     invalidRecordsCount: { type: Number, required: true },
+
+    // Tổng số lượng bản ghi
+    totalImportCount: { type: Number, required: true },
 
     // Resources để hiển thị kết quả sau khi import file
     importObjectResources: { type: Object, required: true },

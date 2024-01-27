@@ -3,28 +3,34 @@
     <div class="sidebar-list">
       <router-link to="/" class="sidebar-item">
         <div class="sidebar-item-icon general-page"></div>
-        <div class="sidebar-item-name">Tổng quan</div>
+        <div class="sidebar-item-name">
+          {{ $_MisaResources.sidebar.home }}
+        </div>
       </router-link>
       <router-link to="/purchase" class="sidebar-item">
         <div class="sidebar-item-icon buy-page-icon"></div>
-        <div class="sidebar-item-name">Mua hàng</div>
+        <div class="sidebar-item-name">{{ $_MisaResources.sidebar.buy }}</div>
       </router-link>
       <router-link to="sale" class="sidebar-item">
         <div class="sidebar-item-icon sale-page-icon"></div>
-        <div class="sidebar-item-name">Bán hàng</div>
+        <div class="sidebar-item-name">{{ $_MisaResources.sidebar.sale }}</div>
       </router-link>
       <router-link to="management" class="sidebar-item">
         <div class="sidebar-item-icon management-icon"></div>
-        <div class="sidebar-item-name">Quản lý hóa đơn</div>
+        <div class="sidebar-item-name">
+          {{ $_MisaResources.sidebar.invoiceManagement }}
+        </div>
       </router-link>
       <router-link to="tax" class="sidebar-item">
         <div class="sidebar-item-icon tax-icon"></div>
-        <div class="sidebar-item-name">Thuế thu nhập</div>
+        <div class="sidebar-item-name">{{ $_MisaResources.sidebar.tax }}</div>
       </router-link>
     </div>
     <div class="sidebar-shrink" @click="onClickSidebarShrink">
       <div class="sidebar-shrink-icon"></div>
-      <span class="sidebar-shrink-title">Thu gọn</span>
+      <span class="sidebar-shrink-title">{{
+        $_MisaResources.appText.sidebarShrinkTitle
+      }}</span>
     </div>
   </div>
 </template>

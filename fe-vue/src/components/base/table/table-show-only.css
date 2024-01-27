@@ -57,6 +57,8 @@
 
 .show-only-table td li.item-error {
   color: red;
+  padding: 1px 0;
+  box-sizing: border-box;
 }
 
 .show-only-table td .item-valid {

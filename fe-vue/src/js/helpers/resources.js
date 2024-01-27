@@ -1,4 +1,11 @@
 const MisaResources = {
+  sidebar: {
+    home: "Tổng quan",
+    buy: "Mua hàng",
+    sale: "Bán hàng",
+    invoiceManagement: "Quản lý hóa đơn",
+    tax: "Thuế thu nhập",
+  },
   validateErrorMessages: {
     emptyValue: "không được phép để trống !",
     invalidValue: "không hợp lệ !",
@@ -11,6 +18,7 @@ const MisaResources = {
   errorHandle: {
     invalidPostData: "Dữ liệu gửi lên không hợp lệ.",
     notFoundError: "Không tìm thấy tài nguyên.",
+    noValidRecordsToImport: "Không có nhân viên nào hợp lệ để nhập khẩu !",
     serveError: "Có lỗi xảy ra, vui lòng liên hệ Misa để được giúp đỡ !",
   },
 
@@ -37,6 +45,44 @@ const MisaResources = {
 
     excelImportTitle: {
       import: "Nhập khẩu bản ghi",
+
+      importText: {
+        employeeImportTitle: "Nhập khẩu nhân viên",
+        prepareFile:
+          "Chọn dữ liệu đã chuẩn bị dữ liệu để nhập khẩu vào phần mềm",
+        noFileSelected: "Chưa có tệp nào được chọn !",
+        buttons: {
+          helper: "Giúp",
+          previous: "Quay lại",
+          next: "Tiếp Theo",
+          execute: "Thực hiện",
+          cancel: "Đóng",
+        },
+      },
+
+      importEmployeeSteps: {
+        step: "Bước",
+        chooseSourceFile: "Chọn tệp nguồn",
+        checkingData: "Kiểm tra dữ liệu",
+        importResult: "Kết quả nhập khẩu",
+      },
+
+      importResult: {
+        importResultTitle: "Kết quả nhập khẩu",
+        validRecordsNumber: "Số dòng nhập khẩu thành công",
+        invalidRecordsNumber: "Số dòng nhập khẩu không thành công",
+        validRecords: "dòng hợp lệ",
+        invalidRecords: "dòng không hợp lệ",
+      },
+
+      dowload: {
+        select: "Chọn",
+        here: "tại đây",
+        invalidRecord: "Tải về tập tin chứa những dòng dữ liệu không hợp lệ",
+        templateFile:
+          "Chưa có tệp mẫu để chuẩn bị dữ liệu? Tải tệp excel mẫu mà phần mềm cung cấp để chuẩn bị dữ liệu nhập khẩu",
+        importResult: "Tải về tập tin chứa kết quả nhập khẩu",
+      },
     },
 
     employeePageText: {
@@ -44,11 +90,14 @@ const MisaResources = {
       pageTitle: "Nhân viên",
       successAction: {
         exportAllSuccess: "Xuất thành công tất cả bản ghi ra file excel !",
+        dowloadTemplateExcelImportFileSuccess:
+          "Tải tệp mẫu nhập khẩu thành công !",
         exportWithFilterConditionSuccess:
           "Xuất thành công tất cả bản ghi đã lọc ra file excel !",
         deleteSucess: "Xóa thành công 1 bản ghi !",
         deleteManySucess: "Xóa thành công các bản ghi đã chọn!",
         saveDataSuccess: "Lưu thông tin thành công !",
+        importSuccess: "Nhập khẩu dữ liệu thành công !",
       },
       confirmTitle: {
         ConfirmToDeleteMany:
