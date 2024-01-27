@@ -511,8 +511,8 @@
 
 <script>
 import getFieldInvalidError from "@/js/helpers/validate.js";
-import employeeService from "@/js/services/EmployeeService";
-import departmentService from "@/js/services/DepartmentService";
+import employeeService from "@/js/services/employee-service";
+import departmentService from "@/js/services/department-service";
 
 export default {
   name: "EmployeeForm",

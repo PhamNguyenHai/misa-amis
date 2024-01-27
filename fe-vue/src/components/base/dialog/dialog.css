@@ -42,7 +42,7 @@
 .dialog__content {
   display: flex;
   align-items: center;
-  column-gap: 10px;
+  column-gap: 12px;
   /* border-bottom: 1px solid var(--border-color-default); */
   padding: 24px 0 22px 0;
   box-sizing: border-box;
@@ -71,7 +71,6 @@
 .dialog__list-message li {
   padding: 3px 0;
   box-sizing: border-box;
-  list-style: none;
 }
 
 .dialog__footer {

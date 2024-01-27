@@ -8,7 +8,7 @@
       :class="dateInputClass"
       :title="inputTitle"
       v-model="inputValue"
-      @change="onChangeData"
+      @change.stop="onChangeData"
     />
   </div>
 </template>
@@ -57,7 +57,10 @@ export default {
 
           const dateString = `${year}-${month}-${day}`;
 
-          this.inputValue = dateString;
+          if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+            // Kiểm tra định dạng trước khi gán giá trị
+            this.inputValue = dateString;
+          }
         }
       } catch (err) {
         console.error(err);
@@ -81,9 +84,10 @@ export default {
      */
     onChangeData() {
       try {
-        // EMIT CHO BINDING 2 CHIỀU CỦA COMPONENT ĐỂ UPDATE LẠI ModelValue
-        this.$emit("update:modelValue", this.inputValue);
-        this.$emit("notifyChangeDate");
+        if (/^\d{4}-\d{2}-\d{2}$/.test(this.inputValue)) {
+          this.$emit("update:modelValue", this.inputValue);
+          this.$emit("notifyChangeDate");
+        }
       } catch (err) {
         console.error(err);
       }

@@ -269,7 +269,7 @@
 <script>
 import { convertCamelCaseToPascelCase } from "@/js/common/common";
 import { convertDateForFE, convertGender } from "@/js/helpers/convert-data.js";
-import { filterColumnResources } from "@/js/helpers/filterColumnResources";
+import { filterColumnResources } from "@/js/helpers/filter-column-resources";
 
 export default {
   name: "MisaTable",

@@ -5,6 +5,8 @@
   box-sizing: border-box;
   outline: none;
   border: 1px solid #c0c0c0;
+  font-size: 13px;
+  font-family: GoogleSans;
 }
 
 input[type="date"].size-s {

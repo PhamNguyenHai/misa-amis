@@ -110,8 +110,8 @@ import ImportFileSelection from "./import-steps/file-selection/ImportFileSelecti
 import ImportDataChecking from "./import-steps/data-checking/ImportDataChecking.vue";
 import ImportResult from "./import-steps/import-result/ImportResult.vue";
 
-import employeeImportResources from "@/js/helpers/employeeImportResources";
-import employeeService from "@/js/services/EmployeeService";
+import employeeImportResources from "@/js/helpers/employee-import-resources.js";
+import employeeService from "@/js/services/employee-service";
 
 export default {
   name: "MisaImportForm",

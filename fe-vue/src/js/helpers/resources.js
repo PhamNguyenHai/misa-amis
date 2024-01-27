@@ -7,19 +7,19 @@ const MisaResources = {
     tax: "Thuế thu nhập",
   },
   validateErrorMessages: {
-    emptyValue: "không được phép để trống !",
-    invalidValue: "không hợp lệ !",
-    invalidFormat: "sai định dạng !",
-    numberOnly: "chỉ cho phép nhập số !",
-    notMoreThanCurrentDate: "không được lớn hơn ngày hiện tại !",
+    emptyValue: "không được phép để trống.",
+    invalidValue: "không hợp lệ.",
+    invalidFormat: "sai định dạng.",
+    numberOnly: "chỉ cho phép nhập số.",
+    notMoreThanCurrentDate: "không được lớn hơn ngày hiện tại.",
     maxLength: (max) => `chỉ được phép nhập tối đa ${max} kí tự`,
   },
 
   errorHandle: {
     invalidPostData: "Dữ liệu gửi lên không hợp lệ.",
     notFoundError: "Không tìm thấy tài nguyên.",
-    noValidRecordsToImport: "Không có nhân viên nào hợp lệ để nhập khẩu !",
-    serveError: "Có lỗi xảy ra, vui lòng liên hệ Misa để được giúp đỡ !",
+    noValidRecordsToImport: "Không có nhân viên nào hợp lệ để nhập khẩu.",
+    serveError: "Có lỗi xảy ra, vui lòng liên hệ Misa để được giúp đỡ.",
   },
 
   appText: {
@@ -50,7 +50,7 @@ const MisaResources = {
         employeeImportTitle: "Nhập khẩu nhân viên",
         prepareFile:
           "Chọn dữ liệu đã chuẩn bị dữ liệu để nhập khẩu vào phần mềm",
-        noFileSelected: "Chưa có tệp nào được chọn !",
+        noFileSelected: "Chưa có tệp nào được chọn.",
         buttons: {
           helper: "Giúp",
           previous: "Quay lại",
@@ -68,6 +68,7 @@ const MisaResources = {
       },
 
       importResult: {
+        valid: "Hợp lệ",
         importResultTitle: "Kết quả nhập khẩu",
         validRecordsNumber: "Số dòng nhập khẩu thành công",
         invalidRecordsNumber: "Số dòng nhập khẩu không thành công",
@@ -89,15 +90,15 @@ const MisaResources = {
       sidebarTitle: "Tổng quan",
       pageTitle: "Nhân viên",
       successAction: {
-        exportAllSuccess: "Xuất thành công tất cả bản ghi ra file excel !",
+        exportAllSuccess: "Xuất thành công tất cả bản ghi ra file excel.",
         dowloadTemplateExcelImportFileSuccess:
-          "Tải tệp mẫu nhập khẩu thành công !",
+          "Tải tệp mẫu nhập khẩu thành công.",
         exportWithFilterConditionSuccess:
-          "Xuất thành công tất cả bản ghi đã lọc ra file excel !",
-        deleteSucess: "Xóa thành công 1 bản ghi !",
-        deleteManySucess: "Xóa thành công các bản ghi đã chọn!",
-        saveDataSuccess: "Lưu thông tin thành công !",
-        importSuccess: "Nhập khẩu dữ liệu thành công !",
+          "Xuất thành công tất cả bản ghi đã lọc ra file excel.",
+        deleteSucess: "Xóa thành công 1 bản ghi.",
+        deleteManySucess: "Xóa thành công các bản ghi đã chọ.",
+        saveDataSuccess: "Lưu thông tin thành công.",
+        importSuccess: "Nhập khẩu dữ liệu thành công.",
       },
       confirmTitle: {
         ConfirmToDeleteMany:
@@ -108,7 +109,7 @@ const MisaResources = {
       },
       notifyTitle: {
         notifyNothingChange:
-          "Dữ liệu không có gì thay đổi. Không thể thực hiện cập nhật !",
+          "Dữ liệu không có gì thay đổi. Không thể thực hiện cập nhật.",
       },
     },
 
@@ -187,10 +188,9 @@ const MisaResources = {
   },
 
   filterPopupErrorMessage: {
-    accessFilterWithoutValue:
-      "Vui lòng nhập đầy đủ các giá trị thực hiện lọc !",
+    accessFilterWithoutValue: "Vui lòng nhập đầy đủ các giá trị thực hiện lọc.",
     removeAFilterColumnWasNotAccessed:
-      "Bạn chưa thực hiện lọc trường này nên không thể bỏ lọc !",
+      "Bạn chưa thực hiện lọc trường này nên không thể bỏ lọc.",
   },
 
   tableFunctions: {

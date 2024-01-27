@@ -10,7 +10,7 @@
 </template>
 <script>
 import MisaImportForm from "@/components/base/import-form/MisaImportForm.vue";
-import employeeService from "@/js/services/EmployeeService";
+import employeeService from "@/js/services/employee-service";
 import employeeImportResources from "@/js/helpers/employeeImportResources";
 
 export default {

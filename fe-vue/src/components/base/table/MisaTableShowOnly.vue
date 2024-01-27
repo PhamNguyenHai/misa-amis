@@ -41,11 +41,19 @@
                   {{ item }}
                 </li>
               </ul>
-              <span v-else class="item-valid">Hợp lệ </span>
+              <span v-else class="item-valid"
+                >{{
+                  $_MisaResources.appText.excelImportTitle.importResult.valid
+                }}
+              </span>
             </template>
 
             <template v-else>
-              {{ tableRow[column.columnKey] }}
+              {{
+                column?.formatType
+                  ? formatData(column.formatType, tableRow[column.columnKey])
+                  : tableRow[column.columnKey]
+              }}
             </template>
           </td>
         </tr>
@@ -60,6 +68,8 @@
   </div>
 </template>
 <script>
+import { convertDateForFE } from "@/js/helpers/convert-data.js";
+
 export default {
   name: "MisaTableShowOnly",
   props: {
@@ -94,6 +104,30 @@ export default {
         }
       },
       immediate: true,
+    },
+  },
+
+  methods: {
+    /**
+     * Author : PNNHai
+     * Date :
+     * Description : Hàm để format date khi hiển thị lên bảng với những trường cần format
+     */
+    formatData(formatType, value) {
+      try {
+        if (formatType === this.$_MisaEnums.FORMAT_TYPE.DATE_FOR_FE) {
+          // Nếu đúng định dạng mới convert còn không thì đá luôn
+          const regexCheckDatetime =
+            /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d{1,7})?)?$/;
+          if (regexCheckDatetime.test(value)) {
+            return convertDateForFE(value);
+          }
+          return value;
+        }
+        return value;
+      } catch (err) {
+        console.error(err);
+      }
     },
   },
 };

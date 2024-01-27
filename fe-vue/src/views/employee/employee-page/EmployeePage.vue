@@ -37,12 +37,12 @@
         />
         <misa-button
           @click.stop="onClickRefreshData"
-          buttonClass="refresh-function"
+          buttonClass="refresh-function button-icon-only"
           :buttonTooltips="$_MisaResources.appText.refreshTooltip"
         />
         <div class="excel-area">
           <misa-button
-            buttonClass="excel-function"
+            buttonClass="excel-function button-icon-only"
             :buttonTooltips="$_MisaResources.appText.excelWorkingTooltip"
             @click.stop="handleToggleExcelWorking"
           />
@@ -137,8 +137,8 @@
 </template>
 <script>
 import EmployeeForm from "../employee-form/EmployeeForm.vue";
-import employeeResources from "@/js/helpers/employeeResources";
-import employeeService from "@/js/services/EmployeeService";
+import employeeResources from "@/js/helpers/employee-resources";
+import employeeService from "@/js/services/employee-service";
 import { convertCamelCaseToPascelCase } from "@/js/common/common.js";
 
 export default {
