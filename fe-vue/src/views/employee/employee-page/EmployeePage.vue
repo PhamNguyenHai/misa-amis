@@ -303,7 +303,7 @@ export default {
 
         // Gọi lên api lấy data
         const res = await employeeService.get();
-        if (res.success) {
+        if (res?.success) {
           this.tableData = res.data;
 
           // Gán số lượng hiển thị
@@ -327,7 +327,7 @@ export default {
         // Gọi lên api lấy data
         const res = await employeeService.filter(this.filterParams);
         // Nếu dữ liệu trả về thành công thì loading thêm 1s
-        if (res.success) {
+        if (res?.success) {
           setTimeout(() => {
             // Gán số lượng hiển thị
             this.tableData = res.data.data;
@@ -420,10 +420,13 @@ export default {
      */
     async exportToExcelFile(exportData) {
       try {
+        this.$store.state.isLoading = true;
         const res = await employeeService.exportExcel(exportData);
         return res;
       } catch (err) {
         console.error(err);
+      } finally {
+        this.$store.state.isLoading = false;
       }
     },
 
@@ -650,7 +653,7 @@ export default {
         // Với trường hợp response = yes
         if (response === this.$_MisaEnums.DIALOG_RESPONSE.YES) {
           const res = await this.deleteEmployee(this.employeeIdToDelete);
-          if (res.success) {
+          if (res?.success) {
             this.$store.commit("addToast", {
               type: "success",
               message:
@@ -691,7 +694,7 @@ export default {
         if (response === this.$_MisaEnums.DIALOG_RESPONSE.YES) {
           const res = await this.deleteEmployees(this.selectedEmployeeIds);
 
-          if (res.success) {
+          if (res?.success) {
             this.$store.commit("addToast", {
               type: "success",
               message:
@@ -786,7 +789,7 @@ export default {
         );
 
         const res = await this.exportToExcelFile(this.excelExportData);
-        if (res.success) {
+        if (res?.success) {
           // Xuất file
           this.dowloadExcelFile(res.data, "DanhSachNhanVien.xlsx");
 
@@ -828,7 +831,7 @@ export default {
         this.excelExportData.filterColumns = this.filterParams.filterColumns;
 
         const res = await this.exportToExcelFile(this.excelExportData);
-        if (res.success) {
+        if (res?.success) {
           // Xuất file
           this.dowloadExcelFile(res.data, "DanhSachNhanVien.xlsx");
 

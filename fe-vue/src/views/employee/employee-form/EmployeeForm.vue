@@ -784,7 +784,7 @@ export default {
     async getDepartments() {
       try {
         const res = await departmentService.get();
-        if (res.success) {
+        if (res?.success) {
           return res.data;
         }
       } catch (err) {
@@ -800,7 +800,7 @@ export default {
     async getNewEmployeeCode() {
       try {
         const res = await employeeService.getNewCode();
-        if (res.success) {
+        if (res?.success) {
           return res.data;
         }
       } catch (err) {
@@ -816,7 +816,7 @@ export default {
     async getEmployeeById() {
       try {
         const res = await employeeService.getById(this.editEmployeeId);
-        if (res.success) {
+        if (res?.success) {
           return res.data;
         }
       } catch (err) {

@@ -69,8 +69,10 @@ builder.Services.AddScoped<IEmployeeManagement, EmployeeManagement>();
 builder.Services.AddScoped<IEmployeeExcelRepository, EmployeeExcelRepository>();
 builder.Services.AddScoped<IEmployeeExcelService, EmployeeExcelService>();
 
-builder.Services.AddScoped<IExcelImportTemplateSettingRepository, ExcelImportTemplateSettingRepository>();
+builder.Services.AddScoped<IEmployeeStatisticalRepository, EmployeeStatisticalRepository>();
+builder.Services.AddScoped<IEmployeeStatisticalService, EmployeeStatisticalService>();
 
+builder.Services.AddScoped<IExcelImportTemplateSettingRepository, ExcelImportTemplateSettingRepository>();
 builder.Services.AddMemoryCache();
 
 

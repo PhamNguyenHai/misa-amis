@@ -7,13 +7,15 @@
           {{ $_MisaResources.sidebar.home }}
         </div>
       </router-link>
+      <router-link to="employee-statistical" class="sidebar-item">
+        <div class="sidebar-item-icon sale-page-icon"></div>
+        <div class="sidebar-item-name">
+          {{ $_MisaResources.sidebar.employeeStatistical }}
+        </div>
+      </router-link>
       <router-link to="/purchase" class="sidebar-item">
         <div class="sidebar-item-icon buy-page-icon"></div>
         <div class="sidebar-item-name">{{ $_MisaResources.sidebar.buy }}</div>
-      </router-link>
-      <router-link to="sale" class="sidebar-item">
-        <div class="sidebar-item-icon sale-page-icon"></div>
-        <div class="sidebar-item-name">{{ $_MisaResources.sidebar.sale }}</div>
       </router-link>
       <router-link to="management" class="sidebar-item">
         <div class="sidebar-item-icon management-icon"></div>

@@ -120,17 +120,23 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
                 sheet.Cells[1, 1].Value = Title;
                 // Gộp các ô lại để hiển thị tiêu đề
                 sheet.Cells[1, 1, 1, totalColumns + 1].Merge = true;
-                sheet.Cells[1, 1, 1, totalColumns + 1].Style.Font.Size = 18;
+                sheet.Cells[1, 1, 1, totalColumns + 1].Style.Font.Size = 19;
                 sheet.Cells[1, 1, 1, totalColumns + 1].Style.Font.Bold = true;
                 sheet.Cells[1, 1, 1, totalColumns + 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                sheet.Cells[1, 1, 1, totalColumns + 1].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
 
                 // thiết lập các tên cột-------------------------------------------------------------------------------
                 sheet.Cells[startRow, 1].Value = "STT";
-                sheet.Cells[startRow, 1].Style.Fill.SetBackground(Color.Gray);
+                sheet.Cells[startRow, 1].Style.Font.Size = 12;
+                sheet.Cells[startRow, 1].Style.Font.Bold = true;
+                sheet.Cells[startRow, 1].Style.Fill.SetBackground(Color.Silver);
                 sheet.Cells[startRow, 1].Style.Border.Top.Style = ExcelBorderStyle.Thin;
                 sheet.Cells[startRow, 1].Style.Border.Left.Style = ExcelBorderStyle.Thin;
                 sheet.Cells[startRow, 1].Style.Border.Right.Style = ExcelBorderStyle.Thin;
                 sheet.Cells[startRow, 1].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                sheet.Cells[startRow, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                sheet.Cells[startRow, 1].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+
 
                 for (int i = 0; i < columnsToList.Count(); i++)
                 {
@@ -147,10 +153,13 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
                             break;
                     }
                     //sheet.Cells[startRow, i + 2].Style.WrapText = true;
-                    sheet.Row(startRow).Height = 25;
+                    sheet.Row(startRow).Height = 23;
+                    sheet.Cells[startRow, i + 2].Style.Font.Size = 12;
+                    sheet.Cells[startRow, i + 2].Style.Font.Bold = true;
                     sheet.Cells[startRow, i + 2].Value = columnsToList[i].Title;
                     sheet.Cells[startRow, i + 2].Style.HorizontalAlignment = horizontalAlign;
-                    sheet.Cells[startRow, i + 2].Style.Fill.SetBackground(Color.Gray);
+                    sheet.Cells[startRow, i + 2].Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                    sheet.Cells[startRow, i + 2].Style.Fill.SetBackground(Color.Silver);
                     sheet.Cells[startRow, i + 2].Style.Border.Top.Style = ExcelBorderStyle.Thin;
                     sheet.Cells[startRow, i + 2].Style.Border.Left.Style = ExcelBorderStyle.Thin;
                     sheet.Cells[startRow, i + 2].Style.Border.Right.Style = ExcelBorderStyle.Thin;
@@ -176,9 +185,9 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
                     rowBodyBorder.Left.Style = ExcelBorderStyle.Thin;
                     rowBodyBorder.Right.Style = ExcelBorderStyle.Thin;
                     //Đặt chiều cao cho ô
-                    sheet.Row(startRow + 1).Height = 25;
+                    sheet.Row(startRow + 1).Height = 22;
                     //căn giữa cột đầu tiên
-                    sheet.Cells[startRow + 1, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    sheet.Cells[startRow + 1, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
                     sheet.Cells[startRow + 1, 1].Style.VerticalAlignment = ExcelVerticalAlignment.Center; // Căn giữa dọc
 
                     //set giá trị cho các ô-------------------------------------------------------------

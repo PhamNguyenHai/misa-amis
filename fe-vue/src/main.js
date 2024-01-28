@@ -18,6 +18,7 @@ import MisaRadioField from "@/components/base/radio-field/MisaRadioField.vue";
 import MisaCheckboxField from "@/components/base/checkbox-field/MisaCheckboxField.vue";
 import MisaPagingNavigation from "@/components/base/paging-navigation/MisaPagingNavigation.vue";
 import MisaImportForm from "@/components/base/import-form/MisaImportForm.vue";
+import MisaChart from "@/components/base/chart/MisaChart.vue";
 
 const app = createApp(App);
 
@@ -33,6 +34,7 @@ app.component("MisaRadioField", MisaRadioField);
 app.component("MisaCheckboxField", MisaCheckboxField);
 app.component("MisaPagingNavigation", MisaPagingNavigation);
 app.component("MisaImportForm", MisaImportForm);
+app.component("MisaChart", MisaChart);
 
 // Sử dụng các thư viện
 app.use(router).use(store);

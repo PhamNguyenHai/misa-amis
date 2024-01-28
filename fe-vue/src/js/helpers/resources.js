@@ -1,8 +1,8 @@
 const MisaResources = {
   sidebar: {
     home: "Tổng quan",
+    employeeStatistical: "Thống kê",
     buy: "Mua hàng",
-    sale: "Bán hàng",
     invoiceManagement: "Quản lý hóa đơn",
     tax: "Thuế thu nhập",
   },
@@ -110,6 +110,11 @@ const MisaResources = {
       notifyTitle: {
         notifyNothingChange:
           "Dữ liệu không có gì thay đổi. Không thể thực hiện cập nhật.",
+      },
+      statisticalTitle: {
+        statisticalByGender: "Thống kê nhân viên theo giới tính",
+        statisticalByYearOlds: "Thống kê nhân viên theo độ tuổi",
+        statisticalByDepartment: "Thống kê nhân viên theo phòng ban",
       },
     },
 

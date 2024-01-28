@@ -20,7 +20,7 @@
 .button:disabled {
   /* CSS để làm mờ button */
   opacity: 0.5;
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .right-direction-button-icon {

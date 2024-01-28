@@ -1,0 +1,14 @@
+.chart-title {
+  padding-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.chart-area {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 30px;
+  box-sizing: border-box;
+  background-color: white;
+}

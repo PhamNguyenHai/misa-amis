@@ -76,7 +76,13 @@ const employeeImportResources = {
     {
       title: "SĐT cố định",
       tooltips: "Số điện thoại cố định",
-      columnKey: "LandlineNumber",
+      columnKey: "landlineNumber",
+      align: "left",
+      width: 150,
+    },
+    {
+      title: "Email",
+      columnKey: "email",
       align: "left",
       width: 150,
     },

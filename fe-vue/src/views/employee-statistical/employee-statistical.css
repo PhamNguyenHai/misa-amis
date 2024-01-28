@@ -1,0 +1,9 @@
+.employee-statistical {
+  padding: 10px 0 20px 0;
+  box-sizing: border-box;
+}
+
+.charts-wrapper {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import EmployeePage from "@/views/employee/employee-page/EmployeePage.vue";
 import PurchasePage from "@/views/purchase/PurchasePage.vue";
-import SalePage from "@/views/sale/SalePage.vue";
+import EmployeeStatistical from "@/views/employee-statistical/EmployeeStatistical.vue";
 import ManagementPage from "@/views/management/ManagementPage.vue";
 import TaxPage from "@/views/tax/TaxPage.vue";
 
@@ -17,9 +17,9 @@ const routers = [
     component: PurchasePage,
   },
   {
-    path: "/sale",
-    name: "SalePage",
-    component: SalePage,
+    path: "/employee-statistical",
+    name: "EmployeeStatistical",
+    component: EmployeeStatistical,
   },
   {
     path: "/management",

@@ -12,14 +12,17 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
         #region Fields
         private readonly IEmployeeService _employeeService;
         private readonly IEmployeeExcelService _employeeExcelService;
+        private readonly IEmployeeStatisticalService _employeeStatisticalService;
         #endregion
 
         #region Constructor
-        public EmployeesController(IEmployeeService employeeService, IEmployeeExcelService employeeExcelService)
+        public EmployeesController(IEmployeeService employeeService, 
+            IEmployeeExcelService employeeExcelService, IEmployeeStatisticalService employeeStatisticalService)
             : base(employeeService)
         {
             _employeeService = employeeService;
             _employeeExcelService = employeeExcelService;
+            _employeeStatisticalService = employeeStatisticalService;
         }
         #endregion
 
@@ -65,6 +68,18 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
         {
             var excelFile = await _employeeExcelService.DowloadTemplateFile(workingTable);
             return File(excelFile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "template.xlsx");
+        }
+
+        /// <summary>
+        /// Hàm thực hiện thống kê dữ liệu thông qua thuộc tính
+        /// </summary>
+        /// <param name="propertyKey">thuộc tính cần thống kê theo</param>
+        /// <returns>Danh sách dữ liệu thống kê</returns>
+        [HttpGet("Statistical")]
+        public async Task<IActionResult> StatisticalByPropetyKey(string propertyKey)
+        {
+            var statisticalResult = await _employeeStatisticalService.StatisticalByPropertyKey(propertyKey);
+            return StatusCode(StatusCodes.Status200OK, statisticalResult);
         }
         #endregion
     }

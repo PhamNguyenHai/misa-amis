@@ -132,6 +132,23 @@ class EmployeeService extends BaseService {
       console.error(err);
     }
   }
+
+  /**
+   * Author: PNNHai
+   * Date:
+   * @param {*} propertyKey : Key của thuộc tính cần thực hiện thống kê
+   * Description: Hàm thực hiện thống kê dữ liệu thông qua key thuộc tính
+   */
+  async statisticalByProperty(propertyKey) {
+    try {
+      const res = await this.baseApiService.get(
+        this.endpoint(`/Statistical?propertyKey=${propertyKey}`)
+      );
+      return res;
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }
 
 const employeeService = new EmployeeService();
