@@ -33,7 +33,12 @@
       </div>
       <div class="selected-results" v-if="isSelectedAll">
         <div class="selected-option">
-          <div class="selected-title" title="Tất cả">Tất cả giá trị</div>
+          <div
+            class="selected-title"
+            :title="$_MisaResources.combobox.selectAll"
+          >
+            {{ $_MisaResources.combobox.selectAll }}
+          </div>
           <div
             class="selected-remove"
             @click.stop="removeSelectedItemAndNotify(-1)"
@@ -45,6 +50,7 @@
         :id="comboboxId"
         class="combobox-many-input"
         :title="inputTitle"
+        :placeholder="comboboxInputplaceholder"
         type="text"
         @blur.stop="handleBlurSearchText"
         @input.stop="onInputSearchData"
@@ -68,7 +74,7 @@
           }"
         >
           <misa-checkbox-field
-            label="Tất cả giá trị"
+            :label="$_MisaResources.combobox.selectAll"
             checkboxId="combobox-many-checked-all"
             @change.stop="handleSelectItem('all')"
             v-model="isSelectedAll"
@@ -109,6 +115,9 @@ export default {
 
     // tooltips cho input
     inputTitle: { type: String, default: "" },
+
+    // placeholder cho
+    comboboxInputplaceholder: { type: String, required: false },
 
     // Label cho combobox field
     fieldClass: { required: false },

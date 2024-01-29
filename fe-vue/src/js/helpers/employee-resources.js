@@ -9,7 +9,7 @@ import departmentService from "../services/department-service";
 async function getDepartments() {
   try {
     const res = await departmentService.get();
-    if (res.success) {
+    if (res?.success) {
       return res.data;
     }
   } catch (err) {

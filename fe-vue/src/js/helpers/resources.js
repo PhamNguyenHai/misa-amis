@@ -96,7 +96,7 @@ const MisaResources = {
         exportWithFilterConditionSuccess:
           "Xuất thành công tất cả bản ghi đã lọc ra file excel.",
         deleteSucess: "Xóa thành công 1 bản ghi.",
-        deleteManySucess: "Xóa thành công các bản ghi đã chọ.",
+        deleteManySucess: "Xóa thành công các bản ghi đã chọn.",
         saveDataSuccess: "Lưu thông tin thành công.",
         importSuccess: "Nhập khẩu dữ liệu thành công.",
       },
@@ -182,6 +182,10 @@ const MisaResources = {
       equals: "Bằng",
       notEquals: "Không bằng (Khác)",
     },
+  },
+
+  combobox: {
+    selectAll: "Tất cả giá trị",
   },
 
   filterPopup: {

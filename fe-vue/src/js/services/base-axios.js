@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from "../store";
+import MisaResources from "../helpers/resources";
 
 const baseAxios = axios.create({
   baseURL: "https://localhost:7085/api/v1",
@@ -41,8 +42,7 @@ baseAxios.interceptors.response.use(
       // Xử lý lỗi khi không kết nối được đến server
       // alert("Có lỗi xảy ra, vui lòng liên hệ Misa để được giúp đỡ");
       store.state.dialogNotify.isShow = true;
-      store.state.dialogNotify.text =
-        this.$_MisaResources.errorHandle.serveError;
+      store.state.dialogNotify.text = MisaResources.errorHandle.serveError;
     }
     return Promise.reject(error);
   }

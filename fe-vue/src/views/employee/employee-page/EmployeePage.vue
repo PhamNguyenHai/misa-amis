@@ -68,6 +68,7 @@
     </div>
 
     <misa-table
+      class="table-main"
       :tableColumns="tableColumns"
       :tableData="tableData"
       ref="tableRef"
@@ -310,7 +311,7 @@ export default {
           this.totalRecords = this.tableData.length;
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       } finally {
         this.$store.state.isLoading = false;
       }
@@ -343,36 +344,6 @@ export default {
       } catch (error) {
         console.error(error);
         this.$store.state.isLoading = false;
-      }
-    },
-
-    /**
-     * Author: PNNHai
-     * Date:
-     * @param {*} sortParams : Giá trị sort được nhận về thông qua emit từ table
-     * Description: Hàm thực hiện xử lý khi giá trị sort ở các cột trong table thay đổi
-     */
-    handleSortColumn(sortParams) {
-      try {
-        this.filterParams.sortColumn = sortParams.sortColumn;
-        this.filterParams.isSortDesc = sortParams.isSortDesc;
-      } catch (err) {
-        console.error(err);
-      }
-    },
-
-    /**
-     * Author: PNNHai
-     * Date:
-     * @param {*} filterColumnParams : Giá trị filter của các cột trong table được nhận về từ emit
-     * Description: Hàm thực hiện xử lý filter dữ liệu trong table khi các filter params thay đổi
-     */
-    handleFilterColumn(filterColumnParams) {
-      try {
-        console.log(this.filterColumnParams);
-        this.filterParams.filterColumns = filterColumnParams;
-      } catch (err) {
-        console.error(err);
       }
     },
 
@@ -427,6 +398,35 @@ export default {
         console.error(err);
       } finally {
         this.$store.state.isLoading = false;
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * @param {*} sortParams : Giá trị sort được nhận về thông qua emit từ table
+     * Description: Hàm thực hiện xử lý khi giá trị sort ở các cột trong table thay đổi
+     */
+    handleSortColumn(sortParams) {
+      try {
+        this.filterParams.sortColumn = sortParams.sortColumn;
+        this.filterParams.isSortDesc = sortParams.isSortDesc;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * @param {*} filterColumnParams : Giá trị filter của các cột trong table được nhận về từ emit
+     * Description: Hàm thực hiện xử lý filter dữ liệu trong table khi các filter params thay đổi
+     */
+    handleFilterColumn(filterColumnParams) {
+      try {
+        this.filterParams.filterColumns = filterColumnParams;
+      } catch (err) {
+        console.error(err);
       }
     },
 
@@ -579,7 +579,6 @@ export default {
     handleChangedTableCheckbox(rowIdSelecteds) {
       try {
         this.selectedEmployeeIds = rowIdSelecteds;
-        console.log(this.selectedEmployeeIds);
       } catch (err) {
         console.error(err);
       }
@@ -799,8 +798,6 @@ export default {
               this.$_MisaResources.appText.employeePageText.successAction
                 .exportAllSuccess,
           });
-
-          console.log(res);
         }
       } catch (err) {
         console.error(err);

@@ -1,11 +1,16 @@
 .dialog-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: #d5d5d596;
+  width: 100%;
+  height: 100%;
+  background-color: #b0b0b07a;
   z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dialog {

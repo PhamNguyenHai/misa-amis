@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #e8e8e85c;
+  background: #e8e8e82f;
   transition: opacity 0.75s, visibility 0.75s;
   z-index: 100;
 }

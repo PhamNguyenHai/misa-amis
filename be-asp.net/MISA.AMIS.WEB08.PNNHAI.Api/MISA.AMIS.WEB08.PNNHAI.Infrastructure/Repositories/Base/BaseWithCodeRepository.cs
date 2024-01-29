@@ -52,10 +52,17 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
         /// Date: 
         public async Task<string> GetNewCodeAsync()
         {
-            string storedProcedureName = $"Proc_{EntityName}_GetNewCode";
+            //string storedProcedureName = $"Proc_{EntityName}_GetNewCode";
 
-            var result = await _uow.Connection.QueryFirstOrDefaultAsync<string>(storedProcedureName,
-                commandType: CommandType.StoredProcedure, transaction: _uow.Transaction);
+            //var result = await _uow.Connection.QueryFirstOrDefaultAsync<string>(storedProcedureName,
+            //    commandType: CommandType.StoredProcedure, transaction: _uow.Transaction);
+
+            //return result;
+
+            // Dùng function
+            string functionExecuteCommand = $"SELECT Func_{EntityName}_GetNewCode()";
+
+            var result = await _uow.Connection.QueryFirstOrDefaultAsync<string>(functionExecuteCommand, transaction: _uow.Transaction);
 
             return result;
         } 

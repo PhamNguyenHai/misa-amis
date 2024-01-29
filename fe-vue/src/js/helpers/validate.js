@@ -85,6 +85,7 @@ const getFieldValidateRuleFunctions = (fieldRules) => {
  * Date:
  * @param {Array} fieldRules : arr rules của trường tương ứng
  * @param {String} fieldData : dữ liệu nhập vào của trường đó
+ * @param {String} fieldLabel : label tương ứng của field đang xét
  * @returns error của trường tương ứng
  * (nếu có) | nếu không -> "" ứng với validateRulesObj đã định nghĩa trên
  */

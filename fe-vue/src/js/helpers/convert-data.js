@@ -1,6 +1,13 @@
 import MisaEnums from "./enums";
 import MisaResources from "./resources";
 
+/**
+ * Author: PNNHai
+ * Date:
+ * @param {*} inputDate : dữ liệu date truyền vào
+ * @returns date sau khi format định dạng dd/mm/yyyy
+ * Description: Hàm thực hiện format date cho FE
+ */
 export const convertDateForFE = (inputDate) => {
   try {
     if (inputDate) {
@@ -17,6 +24,13 @@ export const convertDateForFE = (inputDate) => {
   }
 };
 
+/**
+ * Author: PNNHai
+ * Date:
+ * @param {*} inputDate : dữ liệu date truyền vào
+ * @returns date sau khi format định dạng yyyy-mm-dd
+ * Description: Hàm thực hiện format date cho BE
+ */
 export const convertDateForBE = (inputDate) => {
   try {
     if (inputDate) {
@@ -33,6 +47,13 @@ export const convertDateForBE = (inputDate) => {
   }
 };
 
+/**
+ * Author: PNNHai
+ * Date:
+ * @param {*} genderValue : giá trị của gender (0: Nam, 1: Nữ, 2: Khác)
+ * @returns (0: Nam, 1: Nữ, 2: Khác)
+ * Description: Hàm thực hiện convert giới tính
+ */
 export const convertGender = (genderValue) => {
   try {
     if (genderValue == MisaEnums.GENDER.MALE)

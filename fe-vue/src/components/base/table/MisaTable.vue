@@ -55,6 +55,9 @@
                       "
                     >
                       <misa-combobox
+                        :comboboxInputplaceholder="
+                          $_MisaResources.filterPopup.filterPopupHeading
+                        "
                         :fieldClass="['combobox-l', 'filter-selector']"
                         :dataResources="filterResources.textFilter"
                         keyDisplayName="filterTypeName"
@@ -78,6 +81,9 @@
                       "
                     >
                       <misa-combobox
+                        :comboboxInputplaceholder="
+                          $_MisaResources.filterPopup.filterPopupHeading
+                        "
                         :fieldClass="['combobox-l', 'filter-selector']"
                         :dataResources="filterResources.comparisionFilter"
                         keyDisplayName="filterTypeName"
@@ -97,6 +103,9 @@
                     <!-- Ứng với vùng chọn lựa chọn-->
                     <div class="filter-condition-selection" v-else>
                       <misa-combobox
+                        :comboboxInputplaceholder="
+                          $_MisaResources.filterPopup.filterPopupHeading
+                        "
                         :fieldClass="['combobox-l', 'filter-selector']"
                         :dataResources="filterResources.selectionFilter"
                         keyDisplayName="filterTypeName"
@@ -104,6 +113,9 @@
                         v-model="filterColumns[index].filterType"
                       />
                       <misa-many-combobox
+                        :comboboxInputplaceholder="
+                          $_MisaResources.filterPopup.inputValue
+                        "
                         :fieldClass="['combobox-l', 'filter-selector']"
                         :dataResources="header?.filterOption"
                         keyDisplayName="keyDisplayName"
@@ -321,12 +333,6 @@ export default {
       // Data đang có hiện tại trong filter column tương ứng khi được chọn
       dataInFilterColumnPopupForChecking: {},
 
-      //-----------------------------
-      resizing: false,
-      resizingIndex: null,
-      initialMouseX: 0,
-      initialColumnWidth: 0,
-
       // filter resources
       filterResources: filterColumnResources,
 
@@ -376,22 +382,6 @@ export default {
         top: this.styleToolEdit.top + "px",
       };
     },
-
-    /**
-     * Author: PNNHai
-     * Date:
-     * Description: Thực hiện hứng dữ liệu từ prop tableColumns vào
-     * và thêm trường filterValue để thực hiện filter với từng trường
-     */
-    // tableColumns() {
-    //   return {
-    //     objectId: this.tableColumns.objectId,
-    //     resources: this.tableColumns.resources.map((column) => {
-    //       return { ...column, isAccessFilter: false, filterString: null };
-    //     }),
-    //   };
-    //   // console.log(this.tableColumns);
-    // },
   },
 
   created() {
@@ -659,7 +649,6 @@ export default {
     handleNotifyRowSelected() {
       try {
         // LẤY RA MẢNG CÁC RowIds và truyền qua emit sang EmployeePage
-        console.log(this.selectedRowIds);
         this.$emit("notifyTableCheckboxChanged", this.selectedRowIds);
       } catch (err) {
         console.error(err);
@@ -963,7 +952,6 @@ export default {
         }
       });
 
-      console.log(filterColumnParams);
       this.$emit("notifyFilterColumnParamsChanged", filterColumnParams);
     },
   },

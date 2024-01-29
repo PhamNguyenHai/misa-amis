@@ -61,7 +61,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tồn tại mã định danh không thỏa mãn ! .
+        ///   Looks up a localized string similar to Tồn tại mã định danh không thỏa mãn..
         /// </summary>
         public static string ContainsInvalidIdError {
             get {
@@ -70,7 +70,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tệp nhập khẩu không đúng mẫu! Tồn tại cột không thỏa mãn dữ liệu quản lý !.
+        ///   Looks up a localized string similar to Tệp nhập khẩu không đúng mẫu! Tồn tại cột không thỏa mãn dữ liệu quản lý..
         /// </summary>
         public static string ContainWrongColumnInFilePosted {
             get {
@@ -79,7 +79,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} xung đột kiểu dữ liệu !.
+        ///   Looks up a localized string similar to {0} xung đột kiểu dữ liệu..
         /// </summary>
         public static string DataConflict {
             get {
@@ -88,7 +88,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ngày sinh không được lớn hơn ngày hiện tại !.
+        ///   Looks up a localized string similar to Ngày sinh không được lớn hơn ngày hiện tại..
         /// </summary>
         public static string DateOfBirthNoMoreThanCurrent {
             get {
@@ -97,7 +97,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Xóa thành công !.
+        ///   Looks up a localized string similar to Xóa thành công..
         /// </summary>
         public static string DeleteSuccessful {
             get {
@@ -106,7 +106,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email sai định dạng !.
+        ///   Looks up a localized string similar to Email sai định dạng..
         /// </summary>
         public static string EmailWrongFormat {
             get {
@@ -115,7 +115,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã nhân viên {0} tồn tại trong hệ thống !.
+        ///   Looks up a localized string similar to Mã nhân viên {0} tồn tại trong hệ thống..
         /// </summary>
         public static string EmployeeCodeContainsInDB {
             get {
@@ -124,7 +124,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã nhân viên {0} tồn tại trong tệp nhập khẩu !.
+        ///   Looks up a localized string similar to Mã nhân viên {0} tồn tại trong tệp nhập khẩu..
         /// </summary>
         public static string EmployeeCodeContainsInImportFile {
             get {
@@ -133,7 +133,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã nhân viên sai định dạng ! (Dạng NV-...).
+        ///   Looks up a localized string similar to Mã nhân viên sai định dạng. (Dạng NV-...).
         /// </summary>
         public static string EmployeeCodeWrongFormat {
             get {
@@ -142,7 +142,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Đối tượng thực thi chưa phù hợp !.
+        ///   Looks up a localized string similar to Đối tượng thực thi chưa phù hợp..
         /// </summary>
         public static string ExecuteObjectNotSuitable {
             get {
@@ -151,7 +151,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã nhân viên {0} đã tồn tại !.
+        ///   Looks up a localized string similar to Mã nhân viên {0} đã tồn tại..
         /// </summary>
         public static string ExistedEmployeeCode {
             get {
@@ -160,7 +160,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} không được phép để trống !.
+        ///   Looks up a localized string similar to {0} không được phép để trống..
         /// </summary>
         public static string FieldRequiredError {
             get {
@@ -169,7 +169,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File không tồn tại ! Vui lòng thử lại !.
+        ///   Looks up a localized string similar to File không tồn tại ! Vui lòng thử lại..
         /// </summary>
         public static string FileNotFoundError {
             get {
@@ -205,7 +205,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ngày cấp CCCD không được lớn hơn ngày hiện tại !.
+        ///   Looks up a localized string similar to Ngày cấp CCCD không được lớn hơn ngày hiện tại..
         /// </summary>
         public static string IdentityIssuedDateNoMoreThanCurrent {
             get {
@@ -214,7 +214,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dữ liệu nhập khẩu không có hoặc đã quá thời gian xử lý!.
+        ///   Looks up a localized string similar to Dữ liệu nhập khẩu không có hoặc đã quá thời gian xử lý..
         /// </summary>
         public static string ImportDataNotFountOrTimeout {
             get {
@@ -223,7 +223,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Giá trị nhập vào không được lơn hơn ngày hiện tại !.
+        ///   Looks up a localized string similar to Giá trị nhập vào không được lơn hơn ngày hiện tại..
         /// </summary>
         public static string InputDateNoMoreThanCurrentDateDefault {
             get {
@@ -232,7 +232,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thêm mới thành công !.
+        ///   Looks up a localized string similar to Thêm mới thành công..
         /// </summary>
         public static string InsertSuccessful {
             get {
@@ -241,7 +241,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} có giá trị không hợp lệ !.
+        ///   Looks up a localized string similar to {0} có giá trị không hợp lệ..
         /// </summary>
         public static string InvalidValueError {
             get {
@@ -250,7 +250,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Số điện thoại cố định sai định dạng !.
+        ///   Looks up a localized string similar to Số điện thoại cố định sai định dạng..
         /// </summary>
         public static string LandlineNumberWrongFormat {
             get {
@@ -259,7 +259,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chỉ được phép thực hiện xóa tối đa {0} bản ghi !.
+        ///   Looks up a localized string similar to Chỉ được phép thực hiện xóa tối đa {0} bản ghi..
         /// </summary>
         public static string MoreRecordDeleteError {
             get {
@@ -268,7 +268,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Không tìm thấy thông tin theo Id !.
+        ///   Looks up a localized string similar to Không tìm thấy thông tin theo Id..
         /// </summary>
         public static string NotFoundById {
             get {
@@ -277,7 +277,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chưa có chức năng nhập khẩu với đối tượng này !.
+        ///   Looks up a localized string similar to Chưa có chức năng nhập khẩu với đối tượng này..
         /// </summary>
         public static string NotImplementWithObjError {
             get {
@@ -286,7 +286,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Số điện thoại di động sai định dạng !.
+        ///   Looks up a localized string similar to Số điện thoại di động sai định dạng..
         /// </summary>
         public static string PhoneNumberWrongFormat {
             get {
@@ -295,7 +295,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tệp nhập khẩu gửi lên không có dữ liệu !.
+        ///   Looks up a localized string similar to Tệp nhập khẩu gửi lên không có dữ liệu..
         /// </summary>
         public static string PostedFileWithNoData {
             get {
@@ -304,7 +304,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bạn đã gửi tệp với sheet không thỏa mãn lên !.
+        ///   Looks up a localized string similar to Bạn đã gửi tệp với sheet không thỏa mãn lên..
         /// </summary>
         public static string PostedWithWrongSheet {
             get {
@@ -313,7 +313,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chỉ chấp nhận tệp excel (.xlsx) !.
+        ///   Looks up a localized string similar to Chỉ chấp nhận tệp excel (.xlsx)..
         /// </summary>
         public static string SendWithoutExcelFileError {
             get {
@@ -322,7 +322,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chưa có file nào được gửi lên !.
+        ///   Looks up a localized string similar to Chưa có file nào được gửi lên..
         /// </summary>
         public static string SendWithoutFileError {
             get {
@@ -331,7 +331,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Có lỗi xảy ra. Vui lòng liên hệ Misa để được giúp đỡ !.
+        ///   Looks up a localized string similar to Có lỗi xảy ra. Vui lòng liên hệ Misa để được giúp đỡ..
         /// </summary>
         public static string SystemError {
             get {
@@ -340,7 +340,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cập nhật thành công !.
+        ///   Looks up a localized string similar to Cập nhật thành công..
         /// </summary>
         public static string UpdateSuccessful {
             get {
@@ -349,7 +349,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} có giá trị không tồn tại !.
+        ///   Looks up a localized string similar to {0} có giá trị không tồn tại..
         /// </summary>
         public static string ValueNotFound {
             get {
@@ -358,7 +358,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tệp nhập khẩu không đúng mẫu! Số lượng cột trong tệp khác số lượng quản lý !.
+        ///   Looks up a localized string similar to Tệp nhập khẩu không đúng mẫu! Số lượng cột trong tệp khác số lượng quản lý..
         /// </summary>
         public static string WrongColumnCountWithTemplateInFile {
             get {
@@ -367,7 +367,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cột thực hiện lọc không tồn tại !.
+        ///   Looks up a localized string similar to Cột thực hiện lọc không tồn tại..
         /// </summary>
         public static string WrongFilterColumn {
             get {
@@ -376,7 +376,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tệp nhập khẩu không đúng mẫu! Thứ tự các cột không chính xác !.
+        ///   Looks up a localized string similar to Tệp nhập khẩu không đúng mẫu! Thứ tự các cột không chính xác..
         /// </summary>
         public static string WrongOrderOfColumnInFilePosted {
             get {
@@ -385,7 +385,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lựa chọn không phù hợp. Vui lòng thử lại !.
+        ///   Looks up a localized string similar to Lựa chọn không phù hợp. Vui lòng thử lại..
         /// </summary>
         public static string WrongSelectionError {
             get {
@@ -394,7 +394,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} sai giá trị !.
+        ///   Looks up a localized string similar to {0} sai giá trị..
         /// </summary>
         public static string WrongValueError {
             get {

@@ -19,6 +19,13 @@ const storeData = {
     },
   },
   mutations: {
+    /**
+     * Author: PNNHai
+     * Date:
+     * @param {*} state : state của store
+     * @param {*} param1 : object chứa type: loại toast và message
+     * Description: Hàm thực hiện thêm mới toast
+     */
     addToast(state, { type, message }) {
       try {
         const id = generateGuid();
@@ -41,6 +48,13 @@ const storeData = {
       }
     },
 
+    /**
+     * Author: PNNHai
+     * Date:
+     * @param {*} state : state của store
+     * @param {*} toastId : Id của toast cần tắt
+     * Description: Hàm thực hiện tắt toast thông qua id
+     */
     closeToast(state, toastId) {
       try {
         const toastIndex = findArrayIndexByAttribute(

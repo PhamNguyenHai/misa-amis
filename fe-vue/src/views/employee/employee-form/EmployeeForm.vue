@@ -827,6 +827,45 @@ export default {
     /**
      * Author: PNNHai
      * Date:
+     * @param {Object} employee : Nhân viên muốn thêm mới
+     * Description: Hàm thêm mới nhân viên gọi API
+     */
+    async addNewEmployee(employee) {
+      try {
+        this.$store.state.isLoading = true;
+        const res = await employeeService.post(employee);
+
+        return res;
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.$store.state.isLoading = false;
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * @param {String(Guid)} id : Id của nhân viên muốn update
+     * @param {*} employee : Thông tin nhân viên để update
+     * Description: Hàm cập nhật thông tin nhân viên gọi API
+     */
+    async updateEmployee(id, employee) {
+      try {
+        this.$store.state.isLoading = true;
+        const res = await employeeService.put(id, employee);
+
+        return res;
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.$store.state.isLoading = false;
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
      * Description: Hàm để ẩn dialog
      */
     handleCloseDialog() {
@@ -1011,45 +1050,6 @@ export default {
         this.copyFormData = { ...this.formData };
       } catch (err) {
         console.error(err);
-      }
-    },
-
-    /**
-     * Author: PNNHai
-     * Date:
-     * @param {Object} employee : Nhân viên muốn thêm mới
-     * Description: Hàm thêm mới nhân viên gọi API
-     */
-    async addNewEmployee(employee) {
-      try {
-        this.$store.state.isLoading = true;
-        const res = await employeeService.post(employee);
-
-        return res;
-      } catch (error) {
-        console.error(error);
-      } finally {
-        this.$store.state.isLoading = false;
-      }
-    },
-
-    /**
-     * Author: PNNHai
-     * Date:
-     * @param {String(Guid)} id : Id của nhân viên muốn update
-     * @param {*} employee : Thông tin nhân viên để update
-     * Description: Hàm cập nhật thông tin nhân viên gọi API
-     */
-    async updateEmployee(id, employee) {
-      try {
-        this.$store.state.isLoading = true;
-        const res = await employeeService.put(id, employee);
-
-        return res;
-      } catch (error) {
-        console.error(error);
-      } finally {
-        this.$store.state.isLoading = false;
       }
     },
 

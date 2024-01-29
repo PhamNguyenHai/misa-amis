@@ -28,7 +28,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
         /// Date: 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] TEntityCreateDto entityCreateDto)
-        {
+         {
             await _baseService.CreateAsync(entityCreateDto);
             return StatusCode(StatusCodes.Status201Created, APISuccessNotify.INSERT_SUCCESSFULLY);
         }

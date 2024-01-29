@@ -39,7 +39,7 @@
 }
 
 .unselectd-all:hover {
-  text-decoration: underline;
+  opacity: 0.8;
 }
 
 .delete-button {
@@ -99,6 +99,10 @@
 
 .excel-item:hover {
   background-color: var(--background-color-default);
+}
+
+.table-main .main-content-table {
+  height: 465px;
 }
 
 .main-content-table {

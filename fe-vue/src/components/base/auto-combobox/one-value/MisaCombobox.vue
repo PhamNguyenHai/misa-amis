@@ -9,6 +9,7 @@
         class="combobox-input"
         :title="inputTitle"
         type="text"
+        :placeholder="comboboxInputplaceholder"
         @blur.stop="handleBlurSearchText"
         @input.stop="onInputSearchData"
         @keydown.stop="handleItemSelectByKeyboard"
@@ -53,6 +54,8 @@ export default {
 
     // tooltips cho input
     inputTitle: { type: String, default: "" },
+
+    comboboxInputplaceholder: { type: String, required: false },
 
     // Label cho combobox field
     fieldClass: { required: false },
