@@ -391,7 +391,7 @@ export default {
 
   // Gán các sự kiện cho việc nhấn ra các vùng ngoài ở document thì ẩn list function ở row và ẩn filter popup
   mounted() {
-    this.columnsResizable();
+    // this.columnsResizable();
     window.addEventListener("click", this.closeMenuListFunction);
     window.addEventListener("click", this.handleHideFilterColumnPopup);
   },

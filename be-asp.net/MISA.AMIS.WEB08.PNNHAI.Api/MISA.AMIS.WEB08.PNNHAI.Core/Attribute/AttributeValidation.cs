@@ -14,6 +14,14 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
     {
         public string ErrorMessage { get; set; } = Core.Resources.AppResource.InputDateNoMoreThanCurrentDateDefault;
 
+        /// <summary>
+        /// Hàm xử lý date có lớn hơn ngày hiện tại ko
+        /// </summary>
+        /// <param name="value">giá trị date</param>
+        /// <param name="validationContext"></param>
+        /// <returns>trạng thái success hoặc không</returns>
+        /// Author: PNNHai
+        /// Date:
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             DateTime currentDate = DateTime.Now.Date;

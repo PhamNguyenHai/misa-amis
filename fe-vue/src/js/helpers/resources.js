@@ -36,7 +36,7 @@ const MisaResources = {
     findInforTitle: "Tìm kiếm theo mã, tên nhân viên",
     refreshTooltip: "Nạp lại dữ liệu",
     excelWorkingTooltip: "Xuất, nhập khẩu excel",
-    recordsPerPage: "bản ghi/trang",
+    recordsPerPage: "bản ghi / trang",
 
     excelExportTitle: {
       exportAll: "Xuất khẩu tất cả bản ghi",

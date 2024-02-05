@@ -584,8 +584,6 @@ export default {
             this.selectedItemValues = [];
           }
         }
-
-        console.log(this.selectedItemValues);
       } catch (err) {
         console.error(err);
       }

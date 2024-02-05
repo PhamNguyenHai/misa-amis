@@ -61,6 +61,8 @@ export default {
             // Kiểm tra định dạng trước khi gán giá trị
             this.inputValue = dateString;
           }
+        } else {
+          this.inputValue = null;
         }
       } catch (err) {
         console.error(err);
@@ -70,7 +72,8 @@ export default {
 
   created() {
     try {
-      this.inputValue = this.modelValue; // gán prop modelValue cho inputValue để tương tác dữ liệu
+      if (!this.modelValue) this.inputValue = null;
+      else this.inputValue = this.modelValue; // gán prop modelValue cho inputValue để tương tác dữ liệu
     } catch (err) {
       console.error(err);
     }
@@ -84,10 +87,13 @@ export default {
      */
     onChangeData() {
       try {
-        if (/^\d{4}-\d{2}-\d{2}$/.test(this.inputValue)) {
-          this.$emit("update:modelValue", this.inputValue);
-          this.$emit("notifyChangeDate");
-        }
+        // if (/^\d{4}-\d{2}-\d{2}$/.test(this.inputValue)) {
+        //   this.$emit("update:modelValue", this.inputValue);
+        //   this.$emit("notifyChangeDate");
+        // }
+        if (!this.inputValue) this.inputValue = null;
+        this.$emit("update:modelValue", this.inputValue);
+        this.$emit("notifyChangeDate");
       } catch (err) {
         console.error(err);
       }
