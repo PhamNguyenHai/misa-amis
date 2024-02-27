@@ -19,6 +19,7 @@ import MisaCheckboxField from "@/components/base/checkbox-field/MisaCheckboxFiel
 import MisaPagingNavigation from "@/components/base/paging-navigation/MisaPagingNavigation.vue";
 import MisaImportForm from "@/components/base/import-form/MisaImportForm.vue";
 import MisaChart from "@/components/base/chart/MisaChart.vue";
+import MisaPasswordField from "@/components/base/password-field/MisaPasswordField.vue";
 
 const app = createApp(App);
 
@@ -35,6 +36,7 @@ app.component("MisaCheckboxField", MisaCheckboxField);
 app.component("MisaPagingNavigation", MisaPagingNavigation);
 app.component("MisaImportForm", MisaImportForm);
 app.component("MisaChart", MisaChart);
+app.component("MisaPasswordField", MisaPasswordField);
 
 // Sử dụng các thư viện
 app.use(router).use(store);

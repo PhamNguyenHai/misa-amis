@@ -1,7 +1,10 @@
 <template>
-  <the-header />
-  <the-sidebar />
-  <the-main />
+  <template v-if="!isLoginPage">
+    <the-header />
+    <the-sidebar />
+    <the-main />
+  </template>
+  <router-view v-else></router-view>
   <misa-loading v-if="$store.state.isLoading" />
 
   <div class="toast-wrapper">
@@ -44,7 +47,44 @@ export default {
     MisaToast,
   },
 
+  created() {
+    this.getCurrentUser();
+  },
+
+  computed: {
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Thực hiện kiểm tra xem có phải đang là trang login không
+     */
+    isLoginPage() {
+      return this.$route.path === "/login";
+    },
+  },
+
   methods: {
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện lấy ra người dùng hiện tại (nếu có trong local storage)
+     */
+    getCurrentUser() {
+      try {
+        const userRole = parseInt(localStorage.getItem("userRole"));
+        const userId = localStorage.getItem("userId");
+        const userName = localStorage.getItem("userName");
+
+        if (userRole !== null && userId !== null && userName !== null) {
+          this.$store.commit("updateLoginStatus", {
+            userRole,
+            userId,
+            userName,
+          });
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    },
     /**
      * Author: PNNHai
      * Date:

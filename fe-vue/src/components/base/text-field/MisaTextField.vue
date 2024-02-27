@@ -45,6 +45,8 @@ export default {
     modelValue: { type: String, default: "" },
   },
 
+  emits: ["update:modelValue", "notifyInputText", "notifyBlurInput"],
+
   data() {
     return {
       inputValue: "", // Dữ liệu đang được edit trong component

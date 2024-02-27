@@ -1,0 +1,115 @@
+.login-area {
+  background-image: url("/src/assets/img/nen-phong-canh-dang-nhap.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+.login-form {
+  width: 400px;
+  min-height: 340px;
+  background-color: var(--white-color);
+  border-radius: 4px;
+  padding: 40px 48px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Căn giữa cả theo chiều dọc và ngang */
+}
+
+.login-form-heading {
+  background: url("/src/assets/img/icon-amis-platform2.svg") center no-repeat;
+  width: 197px;
+  height: 36px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+
+.login-form-body {
+}
+
+.login-form-main {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  margin-bottom: 16px;
+}
+
+.width-100-percent {
+  width: 100%;
+}
+
+.login-password-forget {
+  display: inline-block;
+  color: var(--infor-color);
+  cursor: pointer;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.login-form-footer {
+  margin-top: 24px;
+}
+
+.login-other-header {
+  height: 28px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-line-throw {
+  height: 1px;
+  flex: 1;
+  background-color: #9ea1a5;
+}
+
+.login-other-heading {
+  padding: 0 10px;
+  box-sizing: border-box;
+  color: #9ea1a5;
+  font-size: 14px;
+}
+
+.login-other-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 8px;
+  margin-top: 16px;
+}
+
+.google-login-icon {
+  background: url("/src/assets/img/icon-google.svg") no-repeat 0 0;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.apple-login-icon {
+  background: url("/src/assets/img/icon-apple.svg") no-repeat 0 0;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.microsoft-login-icon {
+  background: url("/src/assets/img/icon-microsoft.svg") no-repeat 0 0;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.login-field-error {
+  font-size: 12px;
+  color: #ff1d1d;
+}
+
+.login-field.invalid input,
+.login-field.invalid .password-field {
+  border-color: var(--danger-color) !important;
+}

@@ -44,6 +44,11 @@ export default {
   },
 
   computed: {
+    /**
+     * Author : PNNHai
+     * Date :
+     * Description : Tính toán số lượng pages hiển thị
+     */
     pages() {
       const pages = [];
       for (let i = 1; i <= this.totalPage; i++) {
@@ -66,6 +71,11 @@ export default {
   },
 
   methods: {
+    /**
+     * Author : PNNHai
+     * Date :
+     * Description : Hàm thực hiện xử lý khi chuyển page
+     */
     onClickChangePage(pageType, page) {
       try {
         // Trường hợp click vào nút Trước

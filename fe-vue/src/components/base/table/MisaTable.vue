@@ -242,7 +242,7 @@
           />
         </div>
       </table>
-      <teleport to="#main-content">
+      <teleport to="#app">
         <div
           class="drop-list-function"
           v-if="functionalRowId"

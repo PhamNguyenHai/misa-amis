@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using MISA.AMIS.WEB08.PNNHAI.Core.Managements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +11,14 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         : BaseWithCodeService<Employee, EmployeeModel, EmployeeDto, EmployeeCreateDto, EmployeeUpdateDto>, IEmployeeService
     {
         #region Fields
-        protected readonly IEmployeeManagement _employeeManagement;
+        protected readonly IEmployeeRepository _employeeRepository;
         #endregion
 
         #region Constructor
-        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper, IEmployeeManagement employeeManagement)
+        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper)
             : base(employeeRepository, mapper)
         {
-            _employeeManagement = employeeManagement;
+            _employeeRepository = employeeRepository;
         }
         #endregion
 
@@ -28,7 +27,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         {
             //                  Validate nghiệp vụ
             // Kiểm tra mã nhân viên có tồn tại chưa (nếu chưa thì ok nếu rồi thì throw exception)
-            await _employeeManagement.CheckEmployeeExistByCode(entityCreateDto.EmployeeCode);
+            await _employeeRepository.CheckEmployeeExistByCode(entityCreateDto.EmployeeCode);
         }
 
         public override async Task ValidateForUpdating(Guid id, EmployeeUpdateDto entityUpdateDto)
@@ -36,7 +35,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             //                  Validate nghiệp vụ
             // Kiểm tra mã nhân viên muốn cập nhật có thay đổi so với ban đầu không. Nếu có kiểm tra
             // xem nó có được cập nhật sang mã chưa tồn tại không (nếu không throw exception)
-            await _employeeManagement.CheckEmployeeCodeUpdateToExistedCode(id, entityUpdateDto.EmployeeCode);
+            await _employeeRepository.CheckEmployeeCodeUpdateToExistedCode(id, entityUpdateDto.EmployeeCode);
         }
         #endregion
     }

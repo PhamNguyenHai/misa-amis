@@ -178,6 +178,15 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bạn không có quyền truy cập.
+        /// </summary>
+        public static string ForbiddenError {
+            get {
+                return ResourceManager.GetString("ForbiddenError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nữ.
         /// </summary>
         public static string Gender_Female {
@@ -336,6 +345,15 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         public static string SystemError {
             get {
                 return ResourceManager.GetString("SystemError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xác thực người dùng không thành công.
+        /// </summary>
+        public static string UnauthorizeError {
+            get {
+                return ResourceManager.GetString("UnauthorizeError", resourceCulture);
             }
         }
         

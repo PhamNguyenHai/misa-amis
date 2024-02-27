@@ -156,6 +156,9 @@
   <data name="FileNotFoundError" xml:space="preserve">
     <value>File không tồn tại ! Vui lòng thử lại.</value>
   </data>
+  <data name="ForbiddenError" xml:space="preserve">
+    <value>Bạn không có quyền truy cập</value>
+  </data>
   <data name="Gender_Female" xml:space="preserve">
     <value>Nữ</value>
   </data>
@@ -209,6 +212,9 @@
   </data>
   <data name="SystemError" xml:space="preserve">
     <value>Có lỗi xảy ra. Vui lòng liên hệ Misa để được giúp đỡ.</value>
+  </data>
+  <data name="UnauthorizeError" xml:space="preserve">
+    <value>Xác thực người dùng không thành công</value>
   </data>
   <data name="UpdateSuccessful" xml:space="preserve">
     <value>Cập nhật thành công.</value>

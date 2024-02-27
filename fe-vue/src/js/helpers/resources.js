@@ -211,6 +211,16 @@ const MisaResources = {
   },
 
   formText: {
+    loginForm: {
+      username: {
+        title: "Số điện thoại / email",
+        tooltip: "Số điện thoại hoặc email đăng nhập",
+      },
+      password: {
+        title: "Mật khẩu",
+        tooltip: "Mật khẩu đăng nhập",
+      },
+    },
     employeeForm: {
       addFormTitle: "Thêm mới nhân viên",
       editFormTitle: "Sửa thông tin nhân viên",

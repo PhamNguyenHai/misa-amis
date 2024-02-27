@@ -74,7 +74,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
         {
             await _baseService.DeleteMultipalAsync(ids);
             return StatusCode(StatusCodes.Status200OK, APISuccessNotify.DELETE_SUCCESSFULLY);
-        } 
+        }
         #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MISA.AMIS.WEB08.PNNHAI.Core;
 
@@ -6,6 +7,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize]
     public class EmployeesController
         : BaseWithCodeController<Employee, EmployeeDto, EmployeeCreateDto, EmployeeUpdateDto>
     {

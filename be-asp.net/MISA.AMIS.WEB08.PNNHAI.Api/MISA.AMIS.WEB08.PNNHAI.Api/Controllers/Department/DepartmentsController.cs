@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MISA.AMIS.WEB08.PNNHAI.Core;
 
 namespace MISA.AMIS.WEB08.PNNHAI.Api
 {
-    [Route("api/v1/[controller]")]
     [ApiController]
+    [Route("api/v1/[controller]")]
+    [Authorize]
     public class DepartmentsController : ReadOnlyController<DepartmentDto>
     {
         #region Fields

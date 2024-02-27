@@ -101,3 +101,12 @@ D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.
 D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Api\obj\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Api.genruntimeconfig.cache
 D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Api\obj\Debug\net6.0\ref\MISA.AMIS.WEB08.PNNHAI.Api.dll
 D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Api\bin\Debug\net6.0\MISA.AMIS.WEB08.PNNHAI.Api.staticwebassets.runtime.json
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Api\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Api\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Api\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Api\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Api\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Api\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Api\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Save VS Code\misa-amis\be-asp.net\MISA.AMIS.WEB08.PNNHAI.Api\MISA.AMIS.WEB08.PNNHAI.Api\bin\Debug\net6.0\UAParser.dll

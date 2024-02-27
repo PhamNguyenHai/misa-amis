@@ -71,6 +71,34 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                     );
                     break;
 
+                case UnauthorizeException:
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    await context.Response.WriteAsync(
+                        text: new BaseNotifyException()
+                        {
+                            ErrorCode = ((ValidateException)exception).ErrorCode,
+                            UserMessage = $"{Core.Resources.AppResource.UnauthorizeError}",
+                            DevMessage = exception.Message,
+                            TraceId = context.TraceIdentifier,
+                            MoreInfo = exception.HelpLink,
+                        }.ToString() ?? ""
+                    );
+                    break;
+
+                case ForbiddenException:
+                    context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                    await context.Response.WriteAsync(
+                        text: new BaseNotifyException()
+                        {
+                            ErrorCode = ((ValidateException)exception).ErrorCode,
+                            UserMessage = $"{Core.Resources.AppResource.ForbiddenError}",
+                            DevMessage = exception.Message,
+                            TraceId = context.TraceIdentifier,
+                            MoreInfo = exception.HelpLink,
+                        }.ToString() ?? ""
+                    );
+                    break;
+
                 default:
                     context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                     await context.Response.WriteAsync(

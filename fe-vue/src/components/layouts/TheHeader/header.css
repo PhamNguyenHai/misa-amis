@@ -84,6 +84,14 @@
   cursor: pointer;
 }
 
+.header-login {
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: bolder;
+  color: var(--infor-color);
+  text-decoration: none;
+}
+
 .header-user {
   margin-left: 25px;
   display: flex;
@@ -107,6 +115,29 @@
   background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -1129px -365px;
   width: 14px;
   height: 8px;
+  position: relative;
+}
+
+.user-functions {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 13px);
+  width: 150px;
+  background-color: var(--background-color-default);
+  border: 1px solid var(--border-color-default);
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.user-option {
+  height: 36px;
+  list-style: none;
+  padding-left: 10px;
+  line-height: 36px;
+}
+
+.user-option:hover {
+  background-color: var(--border-color-default);
 }
 
 /* sidebar mini */

@@ -99,6 +99,11 @@ const MisaEnums = {
     DISAGREE: 0,
     AGREE: 1,
   },
+
+  LOGIN_ROLE: {
+    ADMIN: 0,
+    USER: 1,
+  },
 };
 
 export default MisaEnums;

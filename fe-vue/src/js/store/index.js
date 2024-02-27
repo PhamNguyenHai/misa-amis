@@ -3,8 +3,15 @@ import { findArrayIndexByAttribute, generateGuid } from "@/js/common/common.js";
 
 const storeData = {
   state: {
+    // Trạng thái đăng nhập
+    loginStatus: {
+      loginedUserRole: null,
+      loginedUserName: null,
+      loginedUsertId: null,
+    },
+
     // state loading
-    isLoading: true,
+    isLoading: false,
 
     // state cho sidebar có phải mini không
     isSidebarMini: false,
@@ -18,7 +25,33 @@ const storeData = {
       text: "",
     },
   },
+
   mutations: {
+    /**
+     * Author: PNNHai
+     * Date:
+     * @param {*} state
+     * @param {*} param1 : Thông tin đăng nhập
+     * Description: Hàm thực hiện cập nhật trạng thái đăng nhập
+     */
+    updateLoginStatus(state, { userRole, userId, userName }) {
+      state.loginStatus.loginedUserRole = userRole;
+      state.loginStatus.loginedUsertId = userId;
+      state.loginStatus.loginedUserName = userName;
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * @param {*} state
+     * Description: Hàm thực hiện đăng xuất tài khoản khỏi hệ thống
+     */
+    logout(state) {
+      state.loginStatus.loginedUserRole = null;
+      state.loginStatus.loginedUsertId = null;
+      state.loginStatus.loginedUserName = null;
+    },
+
     /**
      * Author: PNNHai
      * Date:
