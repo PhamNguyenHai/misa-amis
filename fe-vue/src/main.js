@@ -1,10 +1,10 @@
 import { createApp } from "vue";
 import App from "./App.vue";
+import store from "./js/store";
 import router from "@/router/router.js";
 import emitter from "tiny-emitter/instance";
 import MisaEnums from "./js/helpers/enums.js";
 import MisaResources from "./js/helpers/resources.js";
-import store from "./js/store";
 
 // import các component
 import MisaTable from "@/components/base/table/MisaTable.vue";

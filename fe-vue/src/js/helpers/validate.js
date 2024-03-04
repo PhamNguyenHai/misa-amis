@@ -10,7 +10,9 @@ let textLength = 0;
  */
 const validateRulesObj = {
   required: (value) => {
-    return value ? "" : MisaResources.validateErrorMessages.emptyValue;
+    return value != null && value !== ""
+      ? ""
+      : MisaResources.validateErrorMessages.emptyValue;
   },
 
   numberOnly: (value) => {

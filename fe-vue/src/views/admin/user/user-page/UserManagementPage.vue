@@ -1,0 +1,676 @@
+<template lang="">
+  <div class="main-content-header" id="main-content">
+    <h3 class="main-content-heading">
+      {{ $_MisaResources.appText.userPageText.pageTitle }}
+    </h3>
+    <misa-button
+      :buttonName="$_MisaResources.buttons.addUser.name"
+      :buttonTooltips="$_MisaResources.buttons.addUser.tooltip"
+      buttonClass="add-button primary-button"
+      @click.stop="onClickAddEmployee"
+    />
+  </div>
+  <div class="main-content-center">
+    <div class="main-content-functions">
+      <div class="content-left-functions" v-if="isAtLeastOneRowSelected">
+        <span>
+          {{ $_MisaResources.appText.selectedCount }}
+          <b class="selected-row-number">
+            {{ selectedEmployeeIds.length }}
+          </b>
+        </span>
+        <span class="unselectd-all" @click.stop="handleUnselecAll">{{
+          $_MisaResources.buttons.unselectedAll
+        }}</span>
+        <misa-button
+          :buttonName="$_MisaResources.buttons.delete"
+          buttonClass="delete-button primary-button"
+          @click.stop="onClickDeleteMany"
+        />
+      </div>
+
+      <div class="content-right-functions">
+        <misa-text-field
+          textFieldClass="searching-function size-l"
+          :placeholder="$_MisaResources.appText.findInforTitle"
+          v-model="filterParams.searchString"
+        />
+        <misa-button
+          @click.stop="onClickRefreshData"
+          buttonClass="refresh-function button-icon-only"
+          :buttonTooltips="$_MisaResources.appText.refreshTooltip"
+        />
+      </div>
+    </div>
+
+    <misa-table
+      ref="tableRef"
+      class="table-main"
+      :tableData="tableData"
+      :tableColumns="tableColumns"
+      :rowFunctions="rowFunctions"
+      @notifyWorkWithRecord="handleWorkWithRow"
+      @notifyTableCheckboxChanged="handleChangedTableCheckbox"
+      @notifySortColumnClicked="handleSortColumn"
+      @notifyFilterColumnParamsChanged="handleFilterColumn"
+    />
+  </div>
+
+  <div class="main-content-footer">
+    <span class="record-display-number"
+      >{{ $_MisaResources.appText.totalCount }}
+      <b class="records-number">{{ totalRecords }}</b>
+      {{ $_MisaResources.appText.records }}
+    </span>
+
+    <div class="paging-navigation-area">
+      <select class="record-number-chooser" v-model="filterParams.pageSize">
+        <option :value="10">
+          10 {{ $_MisaResources.appText.recordsPerPage }}
+        </option>
+        <option :value="20">
+          20 {{ $_MisaResources.appText.recordsPerPage }}
+        </option>
+        <option :value="60">
+          60 {{ $_MisaResources.appText.recordsPerPage }}
+        </option>
+        <option :value="80">
+          80 {{ $_MisaResources.appText.recordsPerPage }}
+        </option>
+      </select>
+
+      <misa-paging-navigation
+        v-model:currentPage="filterParams.currentPage"
+        :pageSize="filterParams.pageSize"
+        :totalPage="totalPage"
+      />
+    </div>
+  </div>
+
+  <user-management-form
+    v-if="form.isShow"
+    :formDataType="form.formMode"
+    :editUserId="form.userId"
+    @notifySubmittedForm="handleSubmittedForm"
+    @notifyHideForm="handleHideForm"
+  />
+
+  <misa-dialog
+    v-if="dialog.isShow"
+    :dialogType="dialog.type"
+    :numberOfButton="dialog.numberOfButton"
+    @notifyCloseDialog="handleCloseDialog"
+    @notifyDialogResponded="handleDialogResponded"
+  >
+    <template v-slot:dialog-content>
+      <p class="dialog__message">{{ dialog.text }}</p>
+    </template>
+  </misa-dialog>
+</template>
+<script>
+import userService from "@/js/services/user-service";
+import userResources from "@/js/helpers/user-resources.js";
+import UserManagementForm from "../user-form/UserManagementForm.vue";
+
+export default {
+  name: "UserManagementPage",
+
+  components: { UserManagementForm },
+
+  data() {
+    return {
+      // Column các cột của table. Đc gán vào từ employeeTableResources
+      tableColumns: {},
+
+      // Dữ liệu của bảng sẽ được đọc từ API về và gán vào
+      tableData: [],
+
+      // Danh sách dòng trong bảng được chọn
+      selectedEmployeeIds: [],
+
+      form: {
+        isShow: false,
+        formMode: null,
+        userId: "",
+      },
+
+      dialog: {
+        isShow: false,
+        type: null,
+        text: null,
+        numberOfButton: null,
+      },
+
+      employeeIdToDelete: null,
+
+      filterParams: {
+        currentPage: 1,
+        pageSize: 10,
+        searchString: "",
+        sortColumn: "",
+        isSortDesc: null,
+        filterColumns: [],
+      },
+
+      // Tổng số bản ghi đang hiển thị trên bảng
+      totalRecords: 0,
+
+      totalPage: 0,
+
+      confirmAction: null,
+
+      // Danh sách các chức năng có trong table
+      rowFunctions: [
+        {
+          rowMode: this.$_MisaEnums.ROW_MODE.EDIT,
+          functionName: this.$_MisaResources.tableFunctions.edit,
+        },
+        {
+          rowMode: this.$_MisaEnums.ROW_MODE.DELETE,
+          functionName: this.$_MisaResources.tableFunctions.delete,
+        },
+        {
+          rowMode: this.$_MisaEnums.ROW_MODE.RESET_PASSWORD,
+          functionName: this.$_MisaResources.tableFunctions.resetPassword,
+        },
+      ],
+    };
+  },
+
+  created() {
+    try {
+      // Sử dụng userResources để gán các heading để hiển thị và key để gọi api
+      // Bên trong userResources có : resources có title để hiển thị và columnKey là trường để gọi lên api
+      // Đồng thời userResources có : objectKey là id để khi sử dụng v-for sẽ lấy id này để làm key
+      this.tableColumns = userResources;
+
+      // Load toàn bộ employee từ API về
+      // this.loadAllData();
+
+      // Load employee kết hợp phân trang từ API về
+      this.filterData();
+    } catch (err) {
+      console.error(err);
+    }
+  },
+
+  mounted() {
+    // Gán sự kiện keydown
+    window.addEventListener("keydown", this.handleShortHandKeyDown);
+  },
+
+  unmounted() {
+    window.removeEventListener("keydown", this.handleShortHandKeyDown);
+  },
+
+  computed: {
+    /**
+     * Author : PNNHai
+     * Date :
+     * Description : Kiểm tra có ít nhất một bản ghi được chọn không
+     * Nếu có thì hiển thị thao tác hàng loạt còn không thì bị ẩn
+     */
+    isAtLeastOneRowSelected() {
+      return this.selectedEmployeeIds.length >= 1;
+    },
+  },
+
+  watch: {
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Theo dõi filterParams nếu có thay đổi thì gọi lại hàm filterData()
+     */
+    filterParams: {
+      handler: function () {
+        try {
+          this.filterData();
+          // Khi thực hiện chuyển trang
+          this.handleUnselecAll();
+        } catch (err) {
+          console.error(err);
+        }
+      },
+      deep: true,
+    },
+  },
+
+  methods: {
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện bắt sự kiện nhanh với key
+     * +/ insert -> mở form thêm
+     */
+    handleShortHandKeyDown() {
+      try {
+        event.stopPropagation();
+        // Chỉ bắt sự kiện keydown nhanh với form khi không có dialog và form hiển thị
+        if (
+          !this.dialog.isShow &&
+          !this.$store.state.dialogNotify.isShow &&
+          !this.form.isShow
+        ) {
+          // Khi nhấn phím insert -> show form thêm mới
+          if (event.key === "Insert") {
+            event.preventDefault();
+            this.onClickAddEmployee();
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author : PNNHai
+     * Date :
+     * Description : Hàm để get danh sách người dùng từ api về
+     */
+    async loadAllData() {
+      try {
+        this.$store.state.isLoading = true;
+
+        // Gọi lên api lấy data
+        const res = await userService.get();
+        if (res?.success) {
+          this.tableData = res.data;
+
+          // Gán số lượng hiển thị
+          this.totalRecords = this.tableData.length;
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.$store.state.isLoading = false;
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm để filter người dùng. Kết hợp phân trang và tìm kiếm
+     */
+    async filterData() {
+      try {
+        this.$store.state.isLoading = true;
+        // Gọi lên api lấy data
+        const res = await userService.filter(this.filterParams);
+        // Nếu dữ liệu trả về thành công thì loading thêm 1s
+        if (res?.success) {
+          setTimeout(() => {
+            // Gán số lượng hiển thị
+            this.tableData = res.data.data;
+            this.totalRecords = res.data.totalRecords;
+            this.totalPage = res.data.totalPage;
+            this.$store.state.isLoading = false;
+          }, 1000); // Thời gian chờ là 5 giây
+        }
+        // Nếu lỗi thì dừng loading luôn
+        else {
+          this.$store.state.isLoading = false;
+        }
+      } catch (error) {
+        console.error(error);
+        this.$store.state.isLoading = false;
+      }
+    },
+
+    /**
+     * Author: PNHai
+     * Date:
+     * @param {String(Guid)} deleteId : Id thực hiện xóa
+     * Description: Hàm xóa người dùng theo Id
+     */
+    async deleteEmployee(deleteId) {
+      try {
+        this.$store.state.isLoading = true;
+        const res = await userService.delete(deleteId);
+        return res;
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.$store.state.isLoading = false;
+      }
+    },
+
+    /**
+     * Author: PNHai
+     * Date:
+     * @param {Array[String(Guid)]} ids : Array id thực hiện xóa nhiều
+     * Description: Hàm xóa nhiều người dùng theo list id
+     */
+    async deleteEmployees(ids) {
+      try {
+        this.$store.state.isLoading = true;
+        const res = await userService.deleteMany(ids);
+        return res;
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.$store.state.isLoading = false;
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * @param {*} sortParams : Giá trị sort được nhận về thông qua emit từ table
+     * Description: Hàm thực hiện xử lý khi giá trị sort ở các cột trong table thay đổi
+     */
+    handleSortColumn(sortParams) {
+      try {
+        this.filterParams.sortColumn = sortParams.sortColumn;
+        this.filterParams.isSortDesc = sortParams.isSortDesc;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * @param {*} filterColumnParams : Giá trị filter của các cột trong table được nhận về từ emit
+     * Description: Hàm thực hiện xử lý filter dữ liệu trong table khi các filter params thay đổi
+     */
+    handleFilterColumn(filterColumnParams) {
+      try {
+        this.filterParams.filterColumns = filterColumnParams;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author : PNNHai
+     * Date :
+     * Description : Hàm để refresher lại dữ liệu
+     */
+    async onClickRefreshData() {
+      try {
+        // await this.loadAllData();
+        await this.filterData();
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author : PNNHai
+     * Date :
+     * @param {String(Guid)} editUserId : Id của người dùng đang muốn tương tác
+     * Description : Hàm để hiện hiển thị form, sẽ ứng với các trường hợp edit/ add/ duplicate
+     */
+    handleShowForm(editUserId) {
+      try {
+        this.form.userId = editUserId;
+        this.form.isShow = true;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm xử lý khi click vào nút thêm mới nhân viên.
+     * Thực hiện gán formMode = ADD + Show form tham số truyền vào là "" => ko có id
+     */
+    onClickAddEmployee() {
+      try {
+        this.form.formMode = this.$_MisaEnums.FORM_MODE.ADD;
+        this.handleShowForm(null);
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author : PNNHai
+     * Date:
+     * @param {Number} rowFunctionType : loại chức năng muốn thực hiện
+     * +/ rowFunctionType = EDIT => gán formMode = EDIT + showForm với id là rowId
+     * +/ rowFunctionType = DUPLICATE => gán formMode = DUPLICATE + showForm
+     * +/ rowFunctionType = DELETE => thực hiện xóa với id là id của dòng đang tương tác
+     *
+     * @param {String(Guid)} rowId : Id của dòng đang thực hiện
+     *
+     * Description: Hàm để xử lý làm việc với bản ghi (edit, duplicate, delete)
+     */
+    async handleWorkWithRow(rowFunctionType, rowId) {
+      try {
+        // Trường hợp cập nhật bản ghi
+        switch (rowFunctionType) {
+          case this.$_MisaEnums.ROW_MODE.EDIT:
+            this.form.formMode = this.$_MisaEnums.FORM_MODE.EDIT;
+            this.handleShowForm(rowId);
+            break;
+          case this.$_MisaEnums.ROW_MODE.DELETE:
+            this.employeeIdToDelete = rowId;
+            this.confirmAction = this.$_MisaEnums.CONFIRM_ACTION.DELETE;
+
+            this.dialog.isShow = true;
+            this.dialog.type = "warning";
+            this.dialog.numberOfButton =
+              this.$_MisaEnums.DIALOG_TYPE_BUTTON.TWO_BUTTONS;
+            this.dialog.text =
+              this.$_MisaResources.appText.employeePageText.confirmTitle.ConfirmToDelete;
+
+            break;
+          case this.$_MisaEnums.ROW_MODE.RESET_PASSWORD: {
+            alert(1);
+            break;
+          }
+          default:
+            break;
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện hiển thị thông báo xác nhận xóa nhiều
+     */
+    onClickDeleteMany() {
+      try {
+        this.confirmAction = this.$_MisaEnums.CONFIRM_ACTION.DELETE_MANY;
+
+        this.dialog.isShow = true;
+        this.dialog.type = "warning";
+        this.dialog.numberOfButton =
+          this.$_MisaEnums.DIALOG_TYPE_BUTTON.TWO_BUTTONS;
+        this.dialog.text =
+          this.$_MisaResources.appText.employeePageText.confirmTitle.ConfirmToDeleteMany;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author : PNNHai
+     * Date :
+     * Description : Hàm để ẩn form khi nhận emit từ component EmployeeForm khi click vào nút tắt
+     */
+    handleHideForm() {
+      try {
+        this.form.isShow = false;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện bỏ chọn tất cả các checkbox ở table
+     */
+    handleUnselecAll() {
+      try {
+        if (this.isAtLeastOneRowSelected) {
+          // Gọi ref của table
+          const tableComponent = this.$refs.tableRef;
+          // Gọi phương thực bỏ chọn tất cả row của table
+          tableComponent.handleUnselecAllRow();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author : PNNHai
+     * Date :
+     * @param {Array[String(Guid)]} rowIdSelecteds : arr các id của phần tử đang được checked trong bảng
+     * Description :Hàm xử lý khi nhận tín hiệu từ component table khi checkbox trong table thay đổi
+     */
+    handleChangedTableCheckbox(rowIdSelecteds) {
+      try {
+        this.selectedEmployeeIds = rowIdSelecteds;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * @param {Number} submitMode : type truyền sang
+     * submitMode = SAVE => Load lại bảng
+     * submitForm = SAVE_ADD -> Load lại bảng + ẩn form đi
+     * Description: Hàm xử lý khi tín hiệu submitted từ form truyền sang
+     */
+    async handleSubmittedForm(submitMode) {
+      try {
+        await this.filterData();
+        if (submitMode === this.$_MisaEnums.FORM_SUBMIT_MODE.SAVE) {
+          this.form.isShow = false;
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm ẩn dialog
+     */
+    handleCloseDialog() {
+      try {
+        this.dialog.isShow = false;
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * @param {*} responseStatus : Trạng thái phản hồi của dialog ( NO(0) / YES(1) )
+     * Description: Hàm xử lý khi nhận tín hiệu dialog đã được phản hồi
+     * +/ Nếu dialog phản hồi với trường hợp xóa nhiều -> chuyển sang thực hiện với xóa nhiều
+     * +/ Nếu dialog phản hồi với trường hợp xóa 1 -> chuyển sang thực hiện với xóa 1
+     */
+    async handleDialogResponded(responseStatus) {
+      try {
+        if (this.confirmAction === this.$_MisaEnums.CONFIRM_ACTION.DELETE) {
+          await this.handleConfirmDelete(responseStatus);
+        } else if (
+          this.confirmAction === this.$_MisaEnums.CONFIRM_ACTION.DELETE_MANY
+        ) {
+          await this.handleConfirmDeleteMany(responseStatus);
+        }
+
+        this.handleCloseDialog();
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * @param {*} response : Trạng thái phản hồi của dialog ( NO(0) / YES(1) )
+     * Description: Hàm xử lý xác nhận xóa 1
+     * Nếu response = YES -> Xóa + load lại dl + addToast
+     */
+    async handleConfirmDelete(response) {
+      try {
+        // Với trường hợp response = yes
+        if (response === this.$_MisaEnums.DIALOG_RESPONSE.YES) {
+          const res = await this.deleteEmployee(this.employeeIdToDelete);
+          if (res?.success) {
+            this.$store.commit("addToast", {
+              type: "success",
+              message:
+                this.$_MisaResources.appText.employeePageText.successAction
+                  .deleteSucess,
+            });
+
+            // load lại table
+            this.filterData();
+            // Sau khi xóa xong thì reset lại danh sách id
+            this.handleUnselecAll();
+            // Close dialog
+            this.handleCloseDialog();
+          }
+          // dù xóa được hay không đều reset id to delete = null
+          this.employeeIdToDelete = null;
+        }
+        // Với trường hợp response = no
+        else {
+          // Close dialog
+          this.handleCloseDialog();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * @param {*} response : Trạng thái phản hồi của dialog ( NO(0) / YES(1) )
+     * Description: Hàm xử lý xác nhận xóa nhiều
+     * Nếu response = YES -> Xóa nhiều + load lại dl + addToast
+     */
+    async handleConfirmDeleteMany(response) {
+      try {
+        // Với trường hợp response = yes
+        if (response === this.$_MisaEnums.DIALOG_RESPONSE.YES) {
+          const res = await this.deleteEmployees(this.selectedEmployeeIds);
+
+          if (res?.success) {
+            this.$store.commit("addToast", {
+              type: "success",
+              message:
+                this.$_MisaResources.appText.employeePageText.successAction
+                  .deleteManySucess,
+            });
+
+            // load lại table
+            this.filterData();
+            // Sau khi xóa xong thì reset lại danh sách id
+            this.handleUnselecAll();
+            // Close dialog
+            this.handleCloseDialog();
+          }
+        }
+        // Với trường hợp response = no
+        else {
+          // Close dialog
+          this.handleCloseDialog();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  },
+};
+</script>
+<style lang="css" scoped>
+@import "./user-page.css";
+</style>

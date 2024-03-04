@@ -9,8 +9,7 @@
         to="/admin"
         class="header-login"
         v-if="
-          $store.state.loginStatus.loginedUserRole ===
-          $_MisaEnums.LOGIN_ROLE.ADMIN
+          $store.state.loginStatus.userRole === $_MisaEnums.LOGIN_ROLE.ADMIN
         "
       >
         <div class="header-software-area">
@@ -22,8 +21,7 @@
         to="/user"
         class="header-login"
         v-else-if="
-          $store.state.loginStatus.loginedUserRole ===
-          $_MisaEnums.LOGIN_ROLE.USER
+          $store.state.loginStatus.userRole === $_MisaEnums.LOGIN_ROLE.USER
         "
       >
         <div class="header-software-area">
@@ -51,29 +49,43 @@
       <div class="header-infor">
         <div
           class="header-unlogin"
-          v-if="$store.state.loginStatus.loginedUserName === null"
+          v-if="$store.state.loginStatus.userRole === null"
         >
           <router-link to="/login" class="header-login">Đăng nhập</router-link>
         </div>
-        <div class="header-user" v-else>
+        <div class="header-user" v-else @click.stop="toggleUserFunction">
           <div class="user-avatar"></div>
           <h3 class="user-name">
-            {{ $store.state.loginStatus.loginedUserName }}
+            {{ $store.state.loginStatus.fullName }}
           </h3>
-          <div class="user-name-arrow" @click.stop="toggleUserFunction">
-            <ul class="user-functions" v-if="isShowUserOption">
-              <li
-                class="user-option"
-                @click.stop="handleShowPersonalInfor"
-                v-if="
-                  $store.state.loginStatus.loginedAccountRole !==
-                  $_MisaEnums.LOGIN_ROLE.ADMIN
-                "
-              >
-                Thông tin cá nhân
-              </li>
-              <li class="user-option" @click.stop="handleLogout">Đăng xuất</li>
-            </ul>
+          <div class="user-name-arrow">
+            <div class="user-option-items" v-if="isShowUserOption">
+              <div class="user-option-infor">
+                <div class="user-option-avatar"></div>
+                <div class="user-title-infor">
+                  <div class="user-option-name">
+                    {{ $store.state.loginStatus.fullName }}
+                  </div>
+                  <div class="user-option-email">
+                    {{ $store.state.loginStatus.email }}
+                  </div>
+                </div>
+              </div>
+              <ul class="user-functions">
+                <li class="user-option">
+                  <div class="account-change-password-icon"></div>
+                  Đổi mật khẩu
+                </li>
+                <li class="user-option">
+                  <div class="account-setting-icon"></div>
+                  Thiết lập tài khoản
+                </li>
+              </ul>
+              <div class="user-logout-area" @click.stop="handleLogout">
+                <div class="logout-icon"></div>
+                Đăng xuất
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -81,10 +93,9 @@
   </header>
 </template>
 <script>
-import userService from "@/js/services/user-service";
+// import userService from "@/js/services/user-service";
 export default {
   name: "TheHeader",
-
   data() {
     return {
       isShowUserOption: false,
@@ -92,39 +103,22 @@ export default {
   },
 
   methods: {
+    /**
+     * Author : PNNHai
+     * Date :
+     * Description : Hàm thực hiện toggle bảng chọn chức năng với user
+     */
     toggleUserFunction() {
       this.isShowUserOption = !this.isShowUserOption;
     },
 
-    handleShowPersonalInfor() {
-      alert("Show infor");
-      this.isShowUserOption = false;
-    },
-
-    async handleLogout() {
-      try {
-        this.$store.state.isLoading = true;
-        const res = await userService.logout();
-        if (res?.success) {
-          this.$store.commit("addToast", {
-            type: "success",
-            message: "Đăng xuất thành công",
-          });
-          localStorage.removeItem("accessToken");
-          localStorage.removeItem("userRole");
-          localStorage.removeItem("userId");
-          localStorage.removeItem("userName");
-
-          this.isShowUserOption = false;
-          this.$store.commit("logout");
-
-          this.$router.push("/");
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-        this.$store.state.isLoading = false;
-      }
+    /**
+     * Author : PNNHai
+     * Date :
+     * Description : Hàm thực hiện gửi thông báo đăng xuất khỏi hệ thống
+     */
+    handleLogout() {
+      this.$emit("notifyLogout");
     },
   },
 };

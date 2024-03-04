@@ -44,21 +44,17 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         Task ChangePasswordAsync(UserPasswordChangeDto userPasswordChange);
 
         /// <summary>
-        /// Thực hiện đăng kí tài khoản người dùng
+        /// Thực hiện reset mật khẩu người dùng
         /// </summary>
-        /// <param name="registerInfor">Thông tin đăng kí tài khoản</param>
+        /// <param name="id">Id tài khoản cần reset</param>
         /// <returns></returns>
-        /// Author: PNNHai
-        /// Date:
-        //Task RegisterUserAccountAsync(UserRegisterDto registerInfor);
+        Task ResetPassword(Guid id);
 
         /// <summary>
-        /// Thực hiện đăng kí tài khoản quản trị
+        /// Thực hiện lấy nhật kí đăng nhập, đăng xuất thông qua của người dùng id
         /// </summary>
-        /// <param name="registerInfor">Thông tin đăng kí tài khoản</param>
+        /// <param name="userId">Id người dùng</param>
         /// <returns></returns>
-        /// Author: PNNHai
-        /// Date:
-        //Task RegisterAdministratorAccountAsync(UserRegisterDto registerInfor);
+        Task<IEnumerable<LoginLogDto>> GetUserLoginLogsById(Guid userId);
     }
 }

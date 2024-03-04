@@ -68,10 +68,11 @@
     </div>
 
     <misa-table
-      class="table-main"
-      :tableColumns="tableColumns"
-      :tableData="tableData"
       ref="tableRef"
+      class="table-main"
+      :tableData="tableData"
+      :tableColumns="tableColumns"
+      :rowFunctions="rowFunctions"
       @notifyWorkWithRecord="handleWorkWithRow"
       @notifyTableCheckboxChanged="handleChangedTableCheckbox"
       @notifySortColumnClicked="handleSortColumn"
@@ -203,6 +204,22 @@ export default {
       },
 
       isShowExcelImportForm: false,
+
+      // Danh sách các chức năng có trong table
+      rowFunctions: [
+        {
+          rowMode: this.$_MisaEnums.ROW_MODE.EDIT,
+          functionName: this.$_MisaResources.tableFunctions.edit,
+        },
+        {
+          rowMode: this.$_MisaEnums.ROW_MODE.DUPLICATE,
+          functionName: this.$_MisaResources.tableFunctions.duplicate,
+        },
+        {
+          rowMode: this.$_MisaEnums.ROW_MODE.DELETE,
+          functionName: this.$_MisaResources.tableFunctions.delete,
+        },
+      ],
     };
   },
 

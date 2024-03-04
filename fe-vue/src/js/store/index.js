@@ -3,11 +3,13 @@ import { findArrayIndexByAttribute, generateGuid } from "@/js/common/common.js";
 
 const storeData = {
   state: {
-    // Trạng thái đăng nhập
+    // Trạng thái đăng nhập người dùng
     loginStatus: {
-      loginedUserRole: null,
-      loginedUserName: null,
-      loginedUsertId: null,
+      accessToken: null,
+      userId: null,
+      userRole: null,
+      fullName: null,
+      email: null,
     },
 
     // state loading
@@ -31,13 +33,22 @@ const storeData = {
      * Author: PNNHai
      * Date:
      * @param {*} state
-     * @param {*} param1 : Thông tin đăng nhập
+     * @param {*} user : Thông tin đăng nhập người dùng
      * Description: Hàm thực hiện cập nhật trạng thái đăng nhập
      */
-    updateLoginStatus(state, { userRole, userId, userName }) {
-      state.loginStatus.loginedUserRole = userRole;
-      state.loginStatus.loginedUsertId = userId;
-      state.loginStatus.loginedUserName = userName;
+    updateLoginStatus(
+      state,
+      { accessToken, userId, fullName, userRole, email }
+    ) {
+      try {
+        state.loginStatus.accessToken = accessToken;
+        state.loginStatus.userId = userId;
+        state.loginStatus.fullName = fullName;
+        state.loginStatus.userRole = userRole;
+        state.loginStatus.email = email;
+      } catch (err) {
+        console.error(err);
+      }
     },
 
     /**
@@ -46,10 +57,16 @@ const storeData = {
      * @param {*} state
      * Description: Hàm thực hiện đăng xuất tài khoản khỏi hệ thống
      */
-    logout(state) {
-      state.loginStatus.loginedUserRole = null;
-      state.loginStatus.loginedUsertId = null;
-      state.loginStatus.loginedUserName = null;
+    resetLoginStatus(state) {
+      try {
+        state.loginStatus.accessToken = null;
+        state.loginStatus.userId = null;
+        state.loginStatus.fullName = null;
+        state.loginStatus.userRole = null;
+        state.loginStatus.email = null;
+      } catch (err) {
+        console.error(err);
+      }
     },
 
     /**
@@ -101,6 +118,14 @@ const storeData = {
       } catch (err) {
         console.error(err);
       }
+    },
+  },
+
+  actions: {
+    logout({ commit }) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("userId");
+      commit("resetLoginStatus");
     },
   },
 };

@@ -42,6 +42,11 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
         {
             string storedProcedureName = "Proc_token_Insert";
 
+            tokenToInsert.CreatedDate = DateTime.Now;
+            tokenToInsert.CreatedBy = "admin";
+            tokenToInsert.ModifiedDate = DateTime.Now;
+            tokenToInsert.ModifiedBy = "admin";
+
             // Chuyển entity sang parametters để truyền vào procedure
             var parametters = CreateParamettersFromEntity(tokenToInsert);
 

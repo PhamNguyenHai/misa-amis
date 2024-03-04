@@ -8,6 +8,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsersController : BaseController<UserDto, UserCreateDto, UserUpdateDto>
     {
         private readonly IUserService _userService;
@@ -17,6 +18,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
             _userService = userService;
         }
 
+        [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userLogin)
         {
@@ -24,6 +26,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpPost("Refresh-Token")]
         public async Task<IActionResult> RefreshToken()
         {
@@ -32,16 +35,36 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
         }
 
         [HttpPost("Logout")]
-        [Authorize]
         public async Task<IActionResult> Loutout()
         {
             await _userService.LogoutAsync();
             return Ok("Đăng xuất thành công");
         }
 
-        public async override Task<IActionResult> FilterPaging(FilterInput filterInput)
+        [HttpPut("Change-Password/{userId}")]
+        public async Task<IActionResult> ChangPassword(Guid userId, [FromBody]string password)
         {
-            return Ok("Tính năng chưa được khai thác");
+            var userPasswordChange = new UserPasswordChangeDto()
+            {
+                UserId = userId,
+                ChangePassword = password
+            };
+            await _userService.ChangePasswordAsync(userPasswordChange);
+            return Ok("Đổi mật khẩu thành công");
+        }
+
+        [HttpPut("Reset-Password/{userId}")]
+        public async Task<IActionResult> ResetPassword(Guid userId)
+        {
+            await _userService.ResetPassword(userId);
+            return Ok("Reset mật khẩu thành công");
+        }
+
+        [HttpGet("Login-Log/{userId}")]
+        public async Task<IActionResult> GetUserLoginLogs(Guid userId)
+        {
+            var loginLogs = await _userService.GetUserLoginLogsById(userId);
+            return Ok(loginLogs);
         }
     }
 }

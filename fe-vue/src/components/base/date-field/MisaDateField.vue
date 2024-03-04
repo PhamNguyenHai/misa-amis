@@ -2,6 +2,7 @@
   <div :class="fieldClass">
     <label :for="dateInputId" :title="title" v-if="label">{{ label }}</label>
     <input
+      ref="dateFieldInput"
       :id="dateInputId"
       type="date"
       class="date-field"
@@ -80,6 +81,17 @@ export default {
   },
 
   methods: {
+    /**
+     * Hàm thực hiện focus vào ô input
+     */
+    focus() {
+      try {
+        this.$refs.dateFieldInput.focus();
+      } catch (err) {
+        console.error(err);
+      }
+    },
+
     /**
      * Author: PNNHai
      * Date:

@@ -1,490 +1,475 @@
 <template lang="">
-  <div class="form-overlay">
-    <form class="form">
-      <div class="form-header">
-        <div class="form-header-left">
-          <h3 class="form-title">
-            {{ formTitle }}
-          </h3>
+  <base-form :formWidth="1025" :formMinHeight="600">
+    <template v-slot:form-header-content>
+      <div class="form-header-left">
+        <h3 class="form-title">
+          {{ formTitle }}
+        </h3>
 
-          <misa-checkbox-field
-            :label="$_MisaResources.formText.employeeForm.isCustomer"
-            checkboxId="customer"
-            checkboxClass=""
-            v-model="formData.isCustomer"
+        <misa-checkbox-field
+          :label="$_MisaResources.formText.employeeForm.isCustomer"
+          checkboxId="customer"
+          checkboxClass=""
+          v-model="formData.isCustomer"
+        />
+
+        <misa-checkbox-field
+          :label="$_MisaResources.formText.employeeForm.isProvider"
+          checkboxId="provider"
+          checkboxClass=""
+          v-model="formData.isProvider"
+        />
+      </div>
+      <div class="form-header-right">
+        <div class="form-support-icon"></div>
+        <div class="form-close-icon" @click.stop="onClickHideFormButton"></div>
+      </div>
+    </template>
+
+    <template v-slot:form-main-content>
+      <misa-text-field
+        ref="employeeCode"
+        :label="$_MisaResources.formText.employeeForm.employeeCode.title"
+        :title="$_MisaResources.formText.employeeForm.employeeCode.tooltip"
+        :fieldClass="[
+          { invalid: errorMessages.employeeCode },
+          'form-field-area',
+          'required',
+        ]"
+        :inputTitle="errorMessages.employeeCode"
+        textFieldId="employeeCode"
+        textFieldClass="size-s"
+        v-model="formData.employeeCode"
+        @notifyInputText="
+          validateField(
+            'employeeCode',
+            $_MisaResources.formText.employeeForm.employeeCode.title
+          )
+        "
+        @notifyBlurInput="
+          validateField(
+            'employeeCode',
+            $_MisaResources.formText.employeeForm.employeeCode.title
+          )
+        "
+      />
+
+      <misa-text-field
+        ref="employeeName"
+        :label="$_MisaResources.formText.employeeForm.employeeName.title"
+        :title="$_MisaResources.formText.employeeForm.employeeName.tooltip"
+        :fieldClass="[
+          { invalid: errorMessages.employeeName },
+          'form-field-area',
+          'required',
+        ]"
+        :inputTitle="errorMessages.employeeName"
+        textFieldId="employeeName"
+        textFieldClass="size-l"
+        v-model="formData.employeeName"
+        @notifyInputText="
+          validateField(
+            'employeeName',
+            $_MisaResources.formText.employeeForm.employeeName.title
+          )
+        "
+        @notifyBlurInput="
+          validateField(
+            'employeeName',
+            $_MisaResources.formText.employeeForm.employeeName.title
+          )
+        "
+      />
+
+      <misa-date-field
+        ref="dateOfBirth"
+        :label="$_MisaResources.formText.employeeForm.dateOfBirth.title"
+        :title="$_MisaResources.formText.employeeForm.dateOfBirth.tooltip"
+        :fieldClass="[
+          { invalid: errorMessages.dateOfBirth },
+          'form-field-area',
+          'margin-left-16',
+        ]"
+        :inputTitle="errorMessages.dateOfBirth"
+        dateInputId="dateOfBirth"
+        dateInputClass="size-s"
+        v-model="formData.dateOfBirth"
+        @notifyChangeDate="
+          validateField(
+            'dateOfBirth',
+            $_MisaResources.formText.employeeForm.dateOfBirth.title
+          )
+        "
+      />
+
+      <div class="form-field-area gender-field-area">
+        <label>
+          {{ $_MisaResources.formText.employeeForm.gender.genderTitle }}
+        </label>
+
+        <div class="gender-group">
+          <misa-radio-field
+            :label="$_MisaResources.formText.employeeForm.gender.male"
+            fieldClass="gender-field"
+            radioId="male"
+            radioFieldGroup="gender"
+            radioClass=""
+            :value="$_MisaEnums.GENDER.MALE"
+            v-model="formData.gender"
           />
 
-          <misa-checkbox-field
-            :label="$_MisaResources.formText.employeeForm.isProvider"
-            checkboxId="provider"
-            checkboxClass=""
-            v-model="formData.isProvider"
+          <misa-radio-field
+            :label="$_MisaResources.formText.employeeForm.gender.female"
+            fieldClass="gender-field"
+            radioId="female"
+            radioFieldGroup="gender"
+            radioClass=""
+            :value="$_MisaEnums.GENDER.FEMALE"
+            v-model="formData.gender"
           />
-        </div>
-        <div class="form-header-right">
-          <div class="form-support-icon"></div>
-          <div
-            class="form-close-icon"
-            @click.stop="onClickHideFormButton"
-          ></div>
+
+          <misa-radio-field
+            :label="$_MisaResources.formText.employeeForm.gender.other"
+            fieldClass="gender-field"
+            radioId="orther"
+            radioFieldGroup="gender"
+            radioClass=""
+            :value="$_MisaEnums.GENDER.ORTHER"
+            v-model="formData.gender"
+          />
         </div>
       </div>
 
-      <div class="form-main">
-        <misa-text-field
-          ref="employeeCode"
-          :label="$_MisaResources.formText.employeeForm.employeeCode.title"
-          :title="$_MisaResources.formText.employeeForm.employeeCode.tooltip"
-          :fieldClass="[
-            { invalid: errorMessages.employeeCode },
-            'form-field-area',
-            'required',
-          ]"
-          :inputTitle="errorMessages.employeeCode"
-          textFieldId="employeeCode"
-          textFieldClass="size-s"
-          v-model="formData.employeeCode"
-          @notifyInputText="
-            validateField(
-              'employeeCode',
-              $_MisaResources.formText.employeeForm.employeeCode.title
-            )
-          "
-          @notifyBlurInput="
-            validateField(
-              'employeeCode',
-              $_MisaResources.formText.employeeForm.employeeCode.title
-            )
-          "
-        />
+      <misa-combobox
+        ref="departmentId"
+        :label="$_MisaResources.formText.employeeForm.departmentId.title"
+        :title="$_MisaResources.formText.employeeForm.departmentId.tooltip"
+        :fieldClass="[
+          { invalid: errorMessages.departmentId },
+          'form-field-area',
+          'required',
+          'combobox-xl',
+        ]"
+        :inputTitle="errorMessages.departmentId"
+        comboboxId="department"
+        :dataResources="departments"
+        keyDisplayName="departmentName"
+        keyValue="departmentId"
+        v-model="formData.departmentId"
+        @notifyComboboxSearchTextBlur="
+          validateField(
+            'departmentId',
+            $_MisaResources.formText.employeeForm.departmentId.title
+          )
+        "
+        @notifyItemSelected="
+          validateField(
+            'departmentId',
+            $_MisaResources.formText.employeeForm.departmentId.title
+          )
+        "
+      />
 
-        <misa-text-field
-          ref="employeeName"
-          :label="$_MisaResources.formText.employeeForm.employeeName.title"
-          :title="$_MisaResources.formText.employeeForm.employeeName.tooltip"
-          :fieldClass="[
-            { invalid: errorMessages.employeeName },
-            'form-field-area',
-            'required',
-          ]"
-          :inputTitle="errorMessages.employeeName"
-          textFieldId="employeeName"
-          textFieldClass="size-l"
-          v-model="formData.employeeName"
-          @notifyInputText="
-            validateField(
-              'employeeName',
-              $_MisaResources.formText.employeeForm.employeeName.title
-            )
-          "
-          @notifyBlurInput="
-            validateField(
-              'employeeName',
-              $_MisaResources.formText.employeeForm.employeeName.title
-            )
-          "
-        />
+      <misa-text-field
+        ref="identityNumber"
+        :label="$_MisaResources.formText.employeeForm.identityNumber.title"
+        :title="$_MisaResources.formText.employeeForm.identityNumber.tooltip"
+        :fieldClass="[
+          { invalid: errorMessages.identityNumber },
+          'form-field-area',
+          'margin-left-16',
+        ]"
+        textFieldId="identityNumber"
+        textFieldClass="size-l"
+        :inputTitle="errorMessages.identityNumber"
+        v-model="formData.identityNumber"
+        @notifyInputText="
+          validateField(
+            'identityNumber',
+            $_MisaResources.formText.employeeForm.identityNumber.title
+          )
+        "
+        @notifyBlurInput="
+          validateField(
+            'identityNumber',
+            $_MisaResources.formText.employeeForm.identityNumber.title
+          )
+        "
+      />
 
-        <misa-date-field
-          ref="dateOfBirth"
-          :label="$_MisaResources.formText.employeeForm.dateOfBirth.title"
-          :title="$_MisaResources.formText.employeeForm.dateOfBirth.tooltip"
-          :fieldClass="[
-            { invalid: errorMessages.dateOfBirth },
-            'form-field-area',
-            'margin-left-16',
-          ]"
-          :inputTitle="errorMessages.dateOfBirth"
-          dateInputId="dateOfBirth"
-          dateInputClass="size-s"
-          v-model="formData.dateOfBirth"
-          @notifyChangeDate="
-            validateField(
-              'dateOfBirth',
-              $_MisaResources.formText.employeeForm.dateOfBirth.title
-            )
-          "
-        />
-
-        <div class="form-field-area gender-field-area">
-          <label>
-            {{ $_MisaResources.formText.employeeForm.gender.genderTitle }}
-          </label>
-
-          <div class="gender-group">
-            <misa-radio-field
-              :label="$_MisaResources.formText.employeeForm.gender.male"
-              fieldClass="gender-field"
-              radioId="male"
-              radioFieldGroup="gender"
-              radioClass=""
-              :value="$_MisaEnums.GENDER.MALE"
-              v-model="formData.gender"
-            />
-
-            <misa-radio-field
-              :label="$_MisaResources.formText.employeeForm.gender.female"
-              fieldClass="gender-field"
-              radioId="female"
-              radioFieldGroup="gender"
-              radioClass=""
-              :value="$_MisaEnums.GENDER.FEMALE"
-              v-model="formData.gender"
-            />
-
-            <misa-radio-field
-              :label="$_MisaResources.formText.employeeForm.gender.other"
-              fieldClass="gender-field"
-              radioId="orther"
-              radioFieldGroup="gender"
-              radioClass=""
-              :value="$_MisaEnums.GENDER.ORTHER"
-              v-model="formData.gender"
-            />
-          </div>
-        </div>
-
-        <misa-combobox
-          ref="departmentId"
-          :label="$_MisaResources.formText.employeeForm.departmentId.title"
-          :title="$_MisaResources.formText.employeeForm.departmentId.tooltip"
-          :fieldClass="[
-            { invalid: errorMessages.departmentId },
-            'form-field-area',
-            'required',
-            'combobox-xl',
-          ]"
-          :inputTitle="errorMessages.departmentId"
-          comboboxId="department"
-          :dataResources="departments"
-          keyDisplayName="departmentName"
-          keyValue="departmentId"
-          v-model="formData.departmentId"
-          @notifyComboboxSearchTextBlur="
-            validateField(
-              'departmentId',
-              $_MisaResources.formText.employeeForm.departmentId.title
-            )
-          "
-          @notifyItemSelected="
-            validateField(
-              'departmentId',
-              $_MisaResources.formText.employeeForm.departmentId.title
-            )
-          "
-        />
-
-        <misa-text-field
-          ref="identityNumber"
-          :label="$_MisaResources.formText.employeeForm.identityNumber.title"
-          :title="$_MisaResources.formText.employeeForm.identityNumber.tooltip"
-          :fieldClass="[
-            { invalid: errorMessages.identityNumber },
-            'form-field-area',
-            'margin-left-16',
-          ]"
-          textFieldId="identityNumber"
-          textFieldClass="size-l"
-          :inputTitle="errorMessages.identityNumber"
-          v-model="formData.identityNumber"
-          @notifyInputText="
-            validateField(
-              'identityNumber',
-              $_MisaResources.formText.employeeForm.identityNumber.title
-            )
-          "
-          @notifyBlurInput="
-            validateField(
-              'identityNumber',
-              $_MisaResources.formText.employeeForm.identityNumber.title
-            )
-          "
-        />
-
-        <misa-date-field
-          ref="identityIssuedDate"
-          :label="
+      <misa-date-field
+        ref="identityIssuedDate"
+        :label="$_MisaResources.formText.employeeForm.identityIssuedDate.title"
+        :title="
+          $_MisaResources.formText.employeeForm.identityIssuedDate.tooltip
+        "
+        :fieldClass="[
+          { invalid: errorMessages.identityIssuedDate },
+          'form-field-area',
+        ]"
+        dateInputId="identityIssuedDate"
+        dateInputClass="size-s"
+        :inputTitle="errorMessages.identityIssuedDate"
+        v-model="formData.identityIssuedDate"
+        @notifyChangeDate="
+          validateField(
+            'identityIssuedDate',
             $_MisaResources.formText.employeeForm.identityIssuedDate.title
-          "
-          :title="
-            $_MisaResources.formText.employeeForm.identityIssuedDate.tooltip
-          "
-          :fieldClass="[
-            { invalid: errorMessages.identityIssuedDate },
-            'form-field-area',
-          ]"
-          dateInputId="identityIssuedDate"
-          dateInputClass="size-s"
-          :inputTitle="errorMessages.identityIssuedDate"
-          v-model="formData.identityIssuedDate"
-          @notifyChangeDate="
-            validateField(
-              'identityIssuedDate',
-              $_MisaResources.formText.employeeForm.identityIssuedDate.title
-            )
-          "
-        />
+          )
+        "
+      />
 
-        <misa-text-field
-          ref="positionName"
-          :label="$_MisaResources.formText.employeeForm.positionName.title"
-          :title="$_MisaResources.formText.employeeForm.positionName.tooltip"
-          :fieldClass="[
-            { invalid: errorMessages.positionName },
-            'form-field-area',
-          ]"
-          textFieldId="positionName"
-          textFieldClass="size-xl"
-          :inputTitle="errorMessages.positionName"
-          v-model="formData.positionName"
-          @notifyInputText="
-            validateField(
-              'positionName',
-              $_MisaResources.formText.employeeForm.positionName.title
-            )
-          "
-          @notifyBlurInput="
-            validateField(
-              'positionName',
-              $_MisaResources.formText.employeeForm.positionName.title
-            )
-          "
-        />
+      <misa-text-field
+        ref="positionName"
+        :label="$_MisaResources.formText.employeeForm.positionName.title"
+        :title="$_MisaResources.formText.employeeForm.positionName.tooltip"
+        :fieldClass="[
+          { invalid: errorMessages.positionName },
+          'form-field-area',
+        ]"
+        textFieldId="positionName"
+        textFieldClass="size-xl"
+        :inputTitle="errorMessages.positionName"
+        v-model="formData.positionName"
+        @notifyInputText="
+          validateField(
+            'positionName',
+            $_MisaResources.formText.employeeForm.positionName.title
+          )
+        "
+        @notifyBlurInput="
+          validateField(
+            'positionName',
+            $_MisaResources.formText.employeeForm.positionName.title
+          )
+        "
+      />
 
-        <misa-text-field
-          ref="identityIssuedPlace"
-          :label="
+      <misa-text-field
+        ref="identityIssuedPlace"
+        :label="$_MisaResources.formText.employeeForm.identityIssuedPlace.title"
+        :title="
+          $_MisaResources.formText.employeeForm.identityIssuedPlace.tooltip
+        "
+        :fieldClass="[
+          { invalid: errorMessages.identityIssuedPlace },
+          'form-field-area',
+          'margin-left-16',
+        ]"
+        textFieldId="identityIssuedPlace"
+        textFieldClass="size-xl"
+        :inputTitle="errorMessages.identityIssuedPlace"
+        v-model="formData.identityIssuedPlace"
+        @notifyInputText="
+          validateField(
+            'identityIssuedPlace',
             $_MisaResources.formText.employeeForm.identityIssuedPlace.title
-          "
-          :title="
-            $_MisaResources.formText.employeeForm.identityIssuedPlace.tooltip
-          "
-          :fieldClass="[
-            { invalid: errorMessages.identityIssuedPlace },
-            'form-field-area',
-            'margin-left-16',
-          ]"
-          textFieldId="identityIssuedPlace"
-          textFieldClass="size-xl"
-          :inputTitle="errorMessages.identityIssuedPlace"
-          v-model="formData.identityIssuedPlace"
-          @notifyInputText="
-            validateField(
-              'identityIssuedPlace',
-              $_MisaResources.formText.employeeForm.identityIssuedPlace.title
-            )
-          "
-          @notifyBlurInput="
-            validateField(
-              'identityIssuedPlace',
-              $_MisaResources.formText.employeeForm.identityIssuedPlace.title
-            )
-          "
-        />
+          )
+        "
+        @notifyBlurInput="
+          validateField(
+            'identityIssuedPlace',
+            $_MisaResources.formText.employeeForm.identityIssuedPlace.title
+          )
+        "
+      />
 
-        <misa-text-field
-          ref="address"
-          :label="$_MisaResources.formText.employeeForm.address.title"
-          :title="$_MisaResources.formText.employeeForm.address.tooltip"
-          :fieldClass="[
-            { invalid: errorMessages.address },
-            'form-field-area',
-            'margin-top-20',
-          ]"
-          textFieldId="address"
-          textFieldClass="size-xxl"
-          :inputTitle="errorMessages.address"
-          v-model="formData.address"
-          @notifyInputText="
-            validateField(
-              'address',
-              $_MisaResources.formText.employeeForm.address.title
-            )
-          "
-          @notifyBlurInput="
-            validateField(
-              'address',
-              $_MisaResources.formText.employeeForm.address.title
-            )
-          "
-        />
+      <misa-text-field
+        ref="address"
+        :label="$_MisaResources.formText.employeeForm.address.title"
+        :title="$_MisaResources.formText.employeeForm.address.tooltip"
+        :fieldClass="[
+          { invalid: errorMessages.address },
+          'form-field-area',
+          'margin-top-20',
+        ]"
+        textFieldId="address"
+        textFieldClass="size-xxl"
+        :inputTitle="errorMessages.address"
+        v-model="formData.address"
+        @notifyInputText="
+          validateField(
+            'address',
+            $_MisaResources.formText.employeeForm.address.title
+          )
+        "
+        @notifyBlurInput="
+          validateField(
+            'address',
+            $_MisaResources.formText.employeeForm.address.title
+          )
+        "
+      />
 
-        <misa-text-field
-          ref="phoneNumber"
-          :label="$_MisaResources.formText.employeeForm.phoneNumber.title"
-          :title="$_MisaResources.formText.employeeForm.phoneNumber.tooltip"
-          :fieldClass="[
-            { invalid: errorMessages.phoneNumber },
-            'form-field-area',
-          ]"
-          textFieldId="phoneNumber"
-          textFieldClass="size-m"
-          :inputTitle="errorMessages.phoneNumber"
-          v-model="formData.phoneNumber"
-          @notifyInputText="
-            validateField(
-              'phoneNumber',
-              $_MisaResources.formText.employeeForm.phoneNumber.title
-            )
-          "
-          @notifyBlurInput="
-            validateField(
-              'phoneNumber',
-              $_MisaResources.formText.employeeForm.phoneNumber.title
-            )
-          "
-        />
+      <misa-text-field
+        ref="phoneNumber"
+        :label="$_MisaResources.formText.employeeForm.phoneNumber.title"
+        :title="$_MisaResources.formText.employeeForm.phoneNumber.tooltip"
+        :fieldClass="[
+          { invalid: errorMessages.phoneNumber },
+          'form-field-area',
+        ]"
+        textFieldId="phoneNumber"
+        textFieldClass="size-m"
+        :inputTitle="errorMessages.phoneNumber"
+        v-model="formData.phoneNumber"
+        @notifyInputText="
+          validateField(
+            'phoneNumber',
+            $_MisaResources.formText.employeeForm.phoneNumber.title
+          )
+        "
+        @notifyBlurInput="
+          validateField(
+            'phoneNumber',
+            $_MisaResources.formText.employeeForm.phoneNumber.title
+          )
+        "
+      />
 
-        <misa-text-field
-          ref="landlineNumber"
-          :label="$_MisaResources.formText.employeeForm.landlineNumber.title"
-          :title="$_MisaResources.formText.employeeForm.landlineNumber.tooltip"
-          :fieldClass="[
-            { invalid: errorMessages.landlineNumber },
-            'form-field-area',
-          ]"
-          textFieldId="landlineNumber"
-          textFieldClass="size-m"
-          :inputTitle="errorMessages.landlineNumber"
-          v-model="formData.landlineNumber"
-          @notifyInputText="
-            validateField(
-              'landlineNumber',
-              $_MisaResources.formText.employeeForm.landlineNumber.title
-            )
-          "
-          @notifyBlurInput="
-            validateField(
-              'landlineNumber',
-              $_MisaResources.formText.employeeForm.landlineNumber.title
-            )
-          "
-        />
+      <misa-text-field
+        ref="landlineNumber"
+        :label="$_MisaResources.formText.employeeForm.landlineNumber.title"
+        :title="$_MisaResources.formText.employeeForm.landlineNumber.tooltip"
+        :fieldClass="[
+          { invalid: errorMessages.landlineNumber },
+          'form-field-area',
+        ]"
+        textFieldId="landlineNumber"
+        textFieldClass="size-m"
+        :inputTitle="errorMessages.landlineNumber"
+        v-model="formData.landlineNumber"
+        @notifyInputText="
+          validateField(
+            'landlineNumber',
+            $_MisaResources.formText.employeeForm.landlineNumber.title
+          )
+        "
+        @notifyBlurInput="
+          validateField(
+            'landlineNumber',
+            $_MisaResources.formText.employeeForm.landlineNumber.title
+          )
+        "
+      />
 
-        <misa-text-field
-          ref="email"
-          :label="$_MisaResources.formText.employeeForm.email.title"
-          :title="$_MisaResources.formText.employeeForm.email.tooltip"
-          :fieldClass="[{ invalid: errorMessages.email }, 'form-field-area']"
-          textFieldId="email"
-          textFieldClass="size-m"
-          :inputTitle="errorMessages.email"
-          v-model="formData.email"
-          @notifyInputText="
-            validateField(
-              'email',
-              $_MisaResources.formText.employeeForm.email.title
-            )
-          "
-          @notifyBlurInput="
-            validateField(
-              'email',
-              $_MisaResources.formText.employeeForm.email.title
-            )
-          "
-        />
+      <misa-text-field
+        ref="email"
+        :label="$_MisaResources.formText.employeeForm.email.title"
+        :title="$_MisaResources.formText.employeeForm.email.tooltip"
+        :fieldClass="[{ invalid: errorMessages.email }, 'form-field-area']"
+        textFieldId="email"
+        textFieldClass="size-m"
+        :inputTitle="errorMessages.email"
+        v-model="formData.email"
+        @notifyInputText="
+          validateField(
+            'email',
+            $_MisaResources.formText.employeeForm.email.title
+          )
+        "
+        @notifyBlurInput="
+          validateField(
+            'email',
+            $_MisaResources.formText.employeeForm.email.title
+          )
+        "
+      />
 
-        <misa-text-field
-          ref="bankNumber"
-          :label="$_MisaResources.formText.employeeForm.bankNumber.title"
-          :title="$_MisaResources.formText.employeeForm.bankNumber.tooltip"
-          :fieldClass="[
-            { invalid: errorMessages.bankNumber },
-            'form-field-area',
-          ]"
-          textFieldId="bankNumber"
-          textFieldClass="size-m"
-          :inputTitle="errorMessages.bankNumber"
-          v-model="formData.bankNumber"
-          @notifyInputText="
-            validateField(
-              'bankNumber',
-              $_MisaResources.formText.employeeForm.bankNumber.title
-            )
-          "
-          @notifyBlurInput="
-            validateField(
-              'bankNumber',
-              $_MisaResources.formText.employeeForm.bankNumber.title
-            )
-          "
-        />
+      <misa-text-field
+        ref="bankNumber"
+        :label="$_MisaResources.formText.employeeForm.bankNumber.title"
+        :title="$_MisaResources.formText.employeeForm.bankNumber.tooltip"
+        :fieldClass="[{ invalid: errorMessages.bankNumber }, 'form-field-area']"
+        textFieldId="bankNumber"
+        textFieldClass="size-m"
+        :inputTitle="errorMessages.bankNumber"
+        v-model="formData.bankNumber"
+        @notifyInputText="
+          validateField(
+            'bankNumber',
+            $_MisaResources.formText.employeeForm.bankNumber.title
+          )
+        "
+        @notifyBlurInput="
+          validateField(
+            'bankNumber',
+            $_MisaResources.formText.employeeForm.bankNumber.title
+          )
+        "
+      />
 
-        <misa-text-field
-          ref="bankName"
-          :label="$_MisaResources.formText.employeeForm.bankName.title"
-          :title="$_MisaResources.formText.employeeForm.bankName.tooltip"
-          :fieldClass="[{ invalid: errorMessages.bankName }, 'form-field-area']"
-          textFieldId="bankName"
-          textFieldClass="size-m"
-          :inputTitle="errorMessages.bankName"
-          v-model="formData.bankName"
-          @notifyInputText="
-            validateField(
-              'bankName',
-              $_MisaResources.formText.employeeForm.bankName.title
-            )
-          "
-          @notifyBlurInput="
-            validateField(
-              'bankName',
-              $_MisaResources.formText.employeeForm.bankName.title
-            )
-          "
-        />
+      <misa-text-field
+        ref="bankName"
+        :label="$_MisaResources.formText.employeeForm.bankName.title"
+        :title="$_MisaResources.formText.employeeForm.bankName.tooltip"
+        :fieldClass="[{ invalid: errorMessages.bankName }, 'form-field-area']"
+        textFieldId="bankName"
+        textFieldClass="size-m"
+        :inputTitle="errorMessages.bankName"
+        v-model="formData.bankName"
+        @notifyInputText="
+          validateField(
+            'bankName',
+            $_MisaResources.formText.employeeForm.bankName.title
+          )
+        "
+        @notifyBlurInput="
+          validateField(
+            'bankName',
+            $_MisaResources.formText.employeeForm.bankName.title
+          )
+        "
+      />
 
-        <misa-text-field
-          ref="bankBranch"
-          :label="$_MisaResources.formText.employeeForm.bankBranch.title"
-          :title="$_MisaResources.formText.employeeForm.bankBranch.tooltip"
-          :fieldClass="[
-            { invalid: errorMessages.bankBranch },
-            'form-field-area',
-          ]"
-          textFieldId="bankBranch"
-          textFieldClass="size-m"
-          :inputTitle="errorMessages.bankBranch"
-          v-model="formData.bankBranch"
-          @notifyInputText="
-            validateField(
-              'bankBranch',
-              $_MisaResources.formText.employeeForm.bankBranch.title
-            )
-          "
-          @notifyBlurInput="
-            validateField(
-              'bankBranch',
-              $_MisaResources.formText.employeeForm.bankBranch.title
-            )
-          "
+      <misa-text-field
+        ref="bankBranch"
+        :label="$_MisaResources.formText.employeeForm.bankBranch.title"
+        :title="$_MisaResources.formText.employeeForm.bankBranch.tooltip"
+        :fieldClass="[{ invalid: errorMessages.bankBranch }, 'form-field-area']"
+        textFieldId="bankBranch"
+        textFieldClass="size-m"
+        :inputTitle="errorMessages.bankBranch"
+        v-model="formData.bankBranch"
+        @notifyInputText="
+          validateField(
+            'bankBranch',
+            $_MisaResources.formText.employeeForm.bankBranch.title
+          )
+        "
+        @notifyBlurInput="
+          validateField(
+            'bankBranch',
+            $_MisaResources.formText.employeeForm.bankBranch.title
+          )
+        "
+      />
+    </template>
+
+    <template v-slot:form-footer-content>
+      <div class="form-footer--left">
+        <misa-button
+          :buttonName="$_MisaResources.buttons.cancel"
+          buttonClass="button normal-button"
+          @click.stop="onClickHideFormButton"
         />
       </div>
-
-      <div class="form-footer">
-        <div class="form-footer--left">
-          <misa-button
-            :buttonName="$_MisaResources.buttons.cancel"
-            buttonClass="button normal-button"
-            @click.stop="onClickHideFormButton"
-          />
-        </div>
-        <div class="form-footer--right">
-          <misa-button
-            :buttonName="$_MisaResources.buttons.save.name"
-            :buttonTooltips="$_MisaResources.buttons.save.tooltip"
-            buttonClass="button normal-button"
-            @click.stop="onClickSaveButton"
-          />
-          <misa-button
-            :buttonName="$_MisaResources.buttons.saveAndAdd.name"
-            :buttonTooltips="$_MisaResources.buttons.saveAndAdd.tooltip"
-            buttonClass="button primary-button"
-            @click.stop="onClickSaveAndAddButton"
-          />
-        </div>
+      <div class="form-footer--right">
+        <misa-button
+          :buttonName="$_MisaResources.buttons.save.name"
+          :buttonTooltips="$_MisaResources.buttons.save.tooltip"
+          buttonClass="button normal-button"
+          @click.stop="onClickSaveButton"
+        />
+        <misa-button
+          :buttonName="$_MisaResources.buttons.saveAndAdd.name"
+          :buttonTooltips="$_MisaResources.buttons.saveAndAdd.tooltip"
+          buttonClass="button primary-button"
+          @click.stop="onClickSaveAndAddButton"
+        />
       </div>
-    </form>
-  </div>
+    </template>
+  </base-form>
 
   <misa-dialog
     v-if="dialog.isShow"
@@ -513,11 +498,12 @@
 import getFieldInvalidError from "@/js/helpers/validate.js";
 import employeeService from "@/js/services/employee-service";
 import departmentService from "@/js/services/department-service";
+import BaseForm from "@/components/base/base-form/BaseForm.vue";
 
 export default {
   name: "EmployeeForm",
   props: {
-    //Id của nhân viên cần sửa nếu ko có thì là xóa
+    //Id của nhân viên cần sửa nếu ko có thì là thêm
     editEmployeeId: { type: String, default: null },
 
     // type của form (update/insert)
@@ -525,6 +511,10 @@ export default {
   },
 
   emits: ["notifyHideForm", "notifySubmittedForm"],
+
+  components: {
+    BaseForm,
+  },
 
   data() {
     return {
@@ -811,7 +801,7 @@ export default {
     /**
      * Author : PNNHai
      * Date:
-     * Description: Hàm để lấy mã nhân viên mới từ api về
+     * Description: Hàm để lấy nhân viên từ api về
      */
     async getEmployeeById() {
       try {

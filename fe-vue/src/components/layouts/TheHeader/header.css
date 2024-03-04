@@ -1,6 +1,7 @@
 .header {
   height: 56px;
   display: flex;
+  background-color: var(--background-color-default);
 }
 
 .header-left {
@@ -118,26 +119,95 @@
   position: relative;
 }
 
-.user-functions {
+.user-option-items {
   position: absolute;
   right: 0;
   top: calc(100% + 13px);
-  width: 150px;
-  background-color: var(--background-color-default);
-  border: 1px solid var(--border-color-default);
+  width: 302px;
+  background-color: var(--white-color);
+  box-shadow: 0 3px 16px var(--border-color-default);
   border-radius: 4px;
-  z-index: 2;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.user-option-infor {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.user-option-avatar {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -608px -1140px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.user-title-infor {
+  margin: 16px 0;
+  text-align: center;
+  width: 100%;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+.user-option-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Ngăn văn bản xuống dòng */
+  overflow: hidden; /* Ẩn phần văn bản vượt quá kích thước của container */
+}
+
+.user-option-email {
+  font-size: 13px;
+  color: #666;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Ngăn văn bản xuống dòng */
+  overflow: hidden; /* Ẩn phần văn bản vượt quá kích thước của container */
+}
+
+.user-functions {
+  width: 100%;
+}
+
+.user-functions::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 90%;
+  transform: translateX(-50%) rotate(180deg);
+  border-width: 8px 8px 0 8px;
+  border-style: solid;
+  border-color: var(--white-color) transparent transparent transparent;
 }
 
 .user-option {
-  height: 36px;
+  height: 40px;
+  font-size: 14px;
   list-style: none;
-  padding-left: 10px;
-  line-height: 36px;
+  line-height: 40px;
+  display: block;
+  margin: 0 16px;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  padding-left: 8px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  color: #6a6666;
 }
 
 .user-option:hover {
-  background-color: var(--border-color-default);
+  background-color: var(--background-color-default);
+  border-radius: 4px;
 }
 
 /* sidebar mini */
@@ -155,4 +225,43 @@
 .header.logo-header-mini .header-toggle,
 .header.logo-header-mini .header-software-name {
   display: none;
+}
+
+.logout-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -147px -202px;
+  width: 19px;
+  height: 19px;
+}
+
+.account-change-password-icon {
+  background: url("/src/assets/img/change-password-icon.svg") no-repeat -3px -3px;
+  width: 18px;
+  height: 17px;
+}
+
+.account-setting-icon {
+  background: url("/src/assets/img/account-setting-icon.svg") no-repeat -2px -2px;
+  width: 20px;
+  height: 21px;
+}
+
+.user-logout-area {
+  height: 44px;
+  line-height: 44px;
+  border-top: 1px solid #e0e0e0;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 8px;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #6a6666;
+}
+
+.user-logout-area:hover {
+  background-color: var(--background-color-default);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }

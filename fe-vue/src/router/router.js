@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import MisaEnums from "@/js/helpers/enums";
-import store from "@/js/store";
+import userService from "@/js/services/user-service";
 
 // Anonymous
 import MisaLogin from "@/views/anonymous/login/MisaLogin.vue";
@@ -10,7 +10,7 @@ import MisaHome from "@/views/anonymous/home/MisaHome.vue";
 import AdminHomePage from "@/views/admin/home/AdminHome.vue";
 import EmployeeAdminPage from "@/views/admin/employee/employee-page/EmployeePage.vue";
 import EmployeeStatisticalAdminPage from "@/views/admin/employee-statistical/EmployeeStatistical.vue";
-import PurchasePage from "@/views/admin/purchase/PurchasePage.vue";
+import UserManagementPage from "@/views/admin/user/user-page/UserManagementPage.vue";
 import ManagementPage from "@/views/admin/management/ManagementPage.vue";
 import TaxPage from "@/views/admin/tax/TaxPage.vue";
 
@@ -52,9 +52,9 @@ const routers = [
     meta: { requiresAuth: true, adminOnly: true },
   },
   {
-    path: "/admin/purchase",
-    name: "PurchasePage",
-    component: PurchasePage,
+    path: "/admin/user-management",
+    name: "UserManagementPage",
+    component: UserManagementPage,
     meta: { requiresAuth: true, adminOnly: true },
   },
   {
@@ -90,23 +90,52 @@ const router = createRouter({
   routes: routers,
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.matched.some((route) => route.meta.requiresAuth)) {
-    const roleType = store.state.loginStatus.loginedUserRole;
+router.beforeEach(async (to, from, next) => {
+  const userId = localStorage.getItem("userId");
+  let roleType = null;
+  if (userId) {
+    const res = await userService.getById(userId);
+    if (res?.success) {
+      roleType = res.data.role;
+    }
+  }
+
+  if (to.name === "MisaLogin" && roleType != null) {
+    // Nếu người dùng đã đăng nhập và truy cập vào trang đăng nhập,
+    // chuyển hướng tới trang phù hợp dựa trên vai trò của người dùng
     if (roleType === MisaEnums.LOGIN_ROLE.ADMIN) {
-      if (to.matched.some((route) => route.meta.adminOnly)) {
-        next();
-      } else {
-        next("/admin"); // Chuyển hướng đến trang user nếu admin cố gắng truy cập vào trang user
-      }
+      next("/admin");
     } else if (roleType === MisaEnums.LOGIN_ROLE.USER) {
-      if (to.matched.some((route) => route.meta.userOnly)) {
+      next("/user");
+    } else {
+      next(); // Trường hợp khác, không có vai trò xác định, cho phép truy cập vào trang đăng nhập
+    }
+  } else if (to.matched.some((route) => route.meta.requiresAuth)) {
+    // Kiểm tra xem trang yêu cầu xác thực và người dùng đã đăng nhập hay chưa
+    if (roleType != null) {
+      // Người dùng đã đăng nhập, tiếp tục kiểm tra vai trò và chuyển hướng tới trang phù hợp
+      if (
+        roleType === MisaEnums.LOGIN_ROLE.ADMIN &&
+        to.matched.some((route) => route.meta.adminOnly)
+      ) {
+        next();
+      } else if (
+        roleType === MisaEnums.LOGIN_ROLE.USER &&
+        to.matched.some((route) => route.meta.userOnly)
+      ) {
         next();
       } else {
-        next("/user"); // Chuyển hướng đến trang admin nếu user cố gắng truy cập vào trang admin
+        // Người dùng đã đăng nhập nhưng không có quyền truy cập vào trang yêu cầu,
+        // chuyển hướng tới trang phù hợp dựa trên vai trò
+        if (roleType === MisaEnums.LOGIN_ROLE.ADMIN) {
+          next("/admin");
+        } else if (roleType === MisaEnums.LOGIN_ROLE.USER) {
+          next("/user");
+        }
       }
     } else {
-      next("/login"); // Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
+      // Người dùng chưa đăng nhập, chuyển hướng tới trang đăng nhập
+      next("/login");
     }
   } else {
     next();

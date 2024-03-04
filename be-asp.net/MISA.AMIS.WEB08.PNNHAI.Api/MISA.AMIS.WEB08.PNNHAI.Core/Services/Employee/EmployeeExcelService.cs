@@ -44,7 +44,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                 rowObject.Errors.Add(Core.Resources.AppResource.EmailWrongFormat);
             }
 
-            // Kiểm tra ngày sinh có lớn hơn ngày hiện tại không 
+            // Kiểm tra ngày sinh có lớn hơn ngày hiện tại không
             if (employeeObject.DateOfBirth.HasValue && IsDateGreaterThanToday(employeeObject.DateOfBirth.Value))
             {
                 rowObject.Errors.Add(Core.Resources.AppResource.DateOfBirthNoMoreThanCurrent);

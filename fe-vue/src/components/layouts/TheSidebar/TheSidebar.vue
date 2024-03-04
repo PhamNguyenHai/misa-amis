@@ -2,10 +2,7 @@
   <div class="sidebar" :class="{ 'sidebar-mini': $store.state.isSidebarMini }">
     <div
       class="sidebar-list"
-      v-if="
-        $store.state.loginStatus.loginedUserRole ===
-        $_MisaEnums.LOGIN_ROLE.ADMIN
-      "
+      v-if="$store.state.loginStatus.userRole === $_MisaEnums.LOGIN_ROLE.ADMIN"
     >
       <router-link to="/admin" class="sidebar-item">
         <div class="sidebar-item-icon general-page"></div>
@@ -13,19 +10,19 @@
           {{ $_MisaResources.sidebar.home }}
         </div>
       </router-link>
+      <router-link to="/admin/user-management" class="sidebar-item">
+        <div class="sidebar-item-icon user-icon"></div>
+        <div class="sidebar-item-name">Quản lý người dùng</div>
+      </router-link>
       <router-link to="/admin/employee" class="sidebar-item">
-        <div class="sidebar-item-icon sale-page-icon"></div>
+        <div class="sidebar-item-icon employee-page-icon"></div>
         <div class="sidebar-item-name">Quản lý nhân viên</div>
       </router-link>
       <router-link to="/admin/employee-statistical" class="sidebar-item">
-        <div class="sidebar-item-icon sale-page-icon"></div>
+        <div class="sidebar-item-icon statistical-icon"></div>
         <div class="sidebar-item-name">
           {{ $_MisaResources.sidebar.employeeStatistical }}
         </div>
-      </router-link>
-      <router-link to="/admin/purchase" class="sidebar-item">
-        <div class="sidebar-item-icon buy-page-icon"></div>
-        <div class="sidebar-item-name">{{ $_MisaResources.sidebar.buy }}</div>
       </router-link>
       <router-link to="/admin/management" class="sidebar-item">
         <div class="sidebar-item-icon management-icon"></div>
@@ -42,7 +39,7 @@
     <div
       class="sidebar-list"
       v-else-if="
-        $store.state.loginStatus.loginedUserRole === $_MisaEnums.LOGIN_ROLE.USER
+        $store.state.loginStatus.userRole === $_MisaEnums.LOGIN_ROLE.USER
       "
     >
       <router-link to="/user" class="sidebar-item">

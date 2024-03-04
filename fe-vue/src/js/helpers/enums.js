@@ -7,6 +7,7 @@ const MisaEnums = {
     ADD: 0,
     EDIT: 1,
     DUPLICATE: 2,
+    RESET_PASSWORD: 3,
   },
   FORM_SUBMIT_MODE: {
     SAVE: 0,
@@ -30,6 +31,8 @@ const MisaEnums = {
   FORMAT_TYPE: {
     GENDER: 0,
     DATE_FOR_FE: 1,
+    USER_ROLE: 2,
+    PHONE_NUMBER: 3,
   },
   DIALOG_TYPE_BUTTON: {
     NOTIFY: 0,

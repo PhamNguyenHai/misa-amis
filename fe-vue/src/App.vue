@@ -1,12 +1,13 @@
 <template>
   <template v-if="!isLoginPage">
-    <the-header />
+    <the-header @notifyLogout="handleLogout" />
     <the-sidebar />
     <the-main />
   </template>
   <router-view v-else></router-view>
   <misa-loading v-if="$store.state.isLoading" />
 
+  <!-- Toast -->
   <div class="toast-wrapper">
     <misa-toast
       v-for="toast in $store.state.toast"
@@ -18,6 +19,7 @@
     </misa-toast>
   </div>
 
+  <!-- Dialog -->
   <misa-dialog
     v-if="$store.state.dialogNotify.isShow"
     :dialogType="$store.state.dialogNotify.type"
@@ -36,6 +38,7 @@ import TheSidebar from "@/components/layouts/TheSidebar/TheSidebar.vue";
 import TheMain from "@/components/layouts/TheMain/TheMain.vue";
 import MisaLoading from "./components/base/loading/MisaLoading.vue";
 import MisaToast from "@/components/base/toast/MisaToast.vue";
+import userService from "./js/services/user-service";
 
 export default {
   name: "App",
@@ -48,6 +51,7 @@ export default {
   },
 
   created() {
+    // Lấy trạng thái người dùng đăng nhập
     this.getCurrentUser();
   },
 
@@ -68,23 +72,51 @@ export default {
      * Date:
      * Description: Hàm thực hiện lấy ra người dùng hiện tại (nếu có trong local storage)
      */
-    getCurrentUser() {
+    async getCurrentUser() {
       try {
-        const userRole = parseInt(localStorage.getItem("userRole"));
+        const accessToken = localStorage.getItem("accessToken");
         const userId = localStorage.getItem("userId");
-        const userName = localStorage.getItem("userName");
 
-        if (userRole !== null && userId !== null && userName !== null) {
-          this.$store.commit("updateLoginStatus", {
-            userRole,
-            userId,
-            userName,
-          });
+        if (accessToken && userId) {
+          const res = await userService.getById(userId);
+          if (res?.success) {
+            const user = res.data;
+            this.$store.commit("updateLoginStatus", {
+              accessToken,
+              userId,
+              fullName: user.fullName,
+              userRole: user.role,
+              email: user.email,
+            });
+          }
         }
       } catch (err) {
         console.error(err);
       }
     },
+
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện đăng xuất khỏi hệ thống
+     */
+    async handleLogout() {
+      try {
+        this.$store.state.isLoading = true;
+        const res = await userService.logout();
+        if (res?.success) {
+          this.$store.dispatch("logout");
+
+          this.isShowUserOption = false;
+          this.$router.push("/");
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        this.$store.state.isLoading = false;
+      }
+    },
+
     /**
      * Author: PNNHai
      * Date:

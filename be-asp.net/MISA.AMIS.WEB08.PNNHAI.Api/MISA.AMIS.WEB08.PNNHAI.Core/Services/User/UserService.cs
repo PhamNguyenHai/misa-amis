@@ -62,8 +62,8 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                 int jwtExpireTime = int.Parse(_configuration["AppSettings:JWTExpireHours"]);
                 int refreshTokenExpireTime = int.Parse(_configuration["AppSettings:RefreshTokenExpireDays"]);
 
-                DateTime jwtExpirationTime = DateTime.UtcNow.AddMinutes(jwtExpireTime);
-                DateTime refreshExpirationTime = DateTime.UtcNow.AddMinutes(refreshTokenExpireTime);
+                DateTime jwtExpirationTime = DateTime.UtcNow.AddHours(jwtExpireTime);
+                DateTime refreshExpirationTime = DateTime.UtcNow.AddDays(refreshTokenExpireTime);
 
                 // Thời gian hết hạn cho access token (Thời gian tính theo UTC)
                 var accessToken = GenerateJwtToken(userToLogin, jwtExpirationTime);
@@ -292,9 +292,9 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             int newRefreshTokenExpireTime = int.Parse(_configuration["AppSettings:RefreshTokenExpireDays"]);
 
             // Thời gian hết hạn của access token
-            DateTime newJwtExpirationTime = DateTime.UtcNow.AddMinutes(newJwtExpireTime);
+            DateTime newJwtExpirationTime = DateTime.UtcNow.AddHours(newJwtExpireTime);
             // Thời gian hết hạn cho refresh token mới (Thời gian tính theo UTC)
-            DateTime newRefreshExpirationTime = DateTime.UtcNow.AddMinutes(newRefreshTokenExpireTime);
+            DateTime newRefreshExpirationTime = DateTime.UtcNow.AddDays(newRefreshTokenExpireTime);
             var newAccessToken = GenerateJwtToken(userToRefreshToken, newJwtExpirationTime);
             var newRefreshToken = GenerateRefreshToken();
 
@@ -336,19 +336,44 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             return newAccessToken;
         }
 
-        public Task RegisterAdministratorAccountAsync(UserCreateDto registerInfor)
+        public async Task ChangePasswordAsync(UserPasswordChangeDto userPasswordChange)
         {
-            throw new NotImplementedException();
+            // Check id có tồn tại không nếu ko -> exception
+            await _userRepository.GetByIdAsync(userPasswordChange.UserId);
+
+            // Nếu có
+            await _userRepository.ChangePasswordAsync(userPasswordChange);
         }
 
-        public Task RegisterUserAccountAsync(UserCreateDto registerInfor)
+        public async Task ResetPassword(Guid id)
         {
-            throw new NotImplementedException();
+            // Check id có tồn tại không nếu ko -> exception
+            await _userRepository.GetByIdAsync(id);
+
+            // Nếu có tồn tại
+            // Pass mặc định: Abc@123
+            var passwordDefault = _configuration["AppSettings:ResetedPasswordDefault"];
+            var userChangePassword = new UserPasswordChangeDto
+            {
+                UserId = id,
+                ChangePassword = passwordDefault
+            };
+            await _userRepository.ChangePasswordAsync(userChangePassword);
         }
 
-        public Task ChangePasswordAsync(UserPasswordChangeDto userPasswordChange)
+        /// <summary>
+        /// Hàm để lấy thông tin nhật kí đăng nhập, đăng xuất của người dùng
+        /// </summary>
+        /// <param name="userId">Id người dùng cần lấy thông tin</param>
+        /// <returns>Chuỗi token sinh ra</returns>
+        /// Author: PNNHai
+        /// Date:
+        public async Task<IEnumerable<LoginLogDto>> GetUserLoginLogsById(Guid userId)
         {
-            throw new NotImplementedException();
+            var loginLogs = await _loginLogRepository.GetUserLoginLogsById(userId);
+
+            var loginLogDtos = _mapper.Map<IEnumerable<LoginLogDto>>(loginLogs);
+            return loginLogDtos;
         }
 
         /// <summary>
@@ -538,14 +563,22 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             
         }
 
+        // ============================================ VALIDATE NGHIỆP VỤ =================================================
         public override async Task ValidateForInserting(UserCreateDto entityCreateDto)
         {
-            await Task.CompletedTask;
+            // Check trùng email
+            await _userRepository.CheckUserExistByEmail(entityCreateDto.Email);
+            // Check trùng sđt
+            await _userRepository.CheckUserExistByPhoneNumber(entityCreateDto.PhoneNumber);
         }
 
         public override async Task ValidateForUpdating(Guid id, UserUpdateDto entityUpdateDto)
         {
-            await Task.CompletedTask;
+            // Validate cập nhật email
+            await _userRepository.CheckUserEmailUpdateToExistedEmail(id, entityUpdateDto.Email);
+
+            // Validate cập nhật sđt
+            await _userRepository.CheckUserPhoneNumberUpdateToExistedPhoneNumber(id, entityUpdateDto.PhoneNumber);
         }
         #endregion
     }

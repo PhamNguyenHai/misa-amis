@@ -178,24 +178,29 @@ export default {
 
           const accountInfor = res.data;
           if (accountInfor) {
-            this.$store.commit("updateLoginStatus", {
-              userRole: accountInfor.userRole,
-              userId: accountInfor.userId,
-              userName: accountInfor.userName,
-            });
-
             // set accessToken vào localStorage
             localStorage.setItem("accessToken", accountInfor.accessToken);
-            localStorage.setItem("userRole", accountInfor.userRole);
             localStorage.setItem("userId", accountInfor.userId);
-            localStorage.setItem("userName", accountInfor.userName);
+
+            // Lấy thông tin chi tiết người dùng
+            const respon = await userService.getById(accountInfor.userId);
+            if (respon?.success) {
+              const user = respon.data;
+              this.$store.commit("updateLoginStatus", {
+                accessToken: accountInfor.accessToken,
+                userId: user.userId,
+                fullName: user.fullName,
+                userRole: user.role,
+                email: user.email,
+              });
+            }
 
             if (accountInfor.userRole === this.$_MisaEnums.LOGIN_ROLE.ADMIN) {
               // Chuyển sang trang admin
-              this.$router.push("/admin/employee");
+              this.$router.push("/admin");
             } else {
               // Chuyển sang trang user
-              this.$router.push("/user/employee");
+              this.$router.push("/user");
             }
           }
         }
@@ -213,15 +218,12 @@ export default {
      */
     onClickLoginButton() {
       try {
-        this.$store.state.isLoading = true;
         const isLogined = this.validateForm();
         if (isLogined) {
           this.handleLogin();
         }
       } catch (err) {
         console.error(err);
-      } finally {
-        this.$store.state.isLoading = false;
       }
     },
   },

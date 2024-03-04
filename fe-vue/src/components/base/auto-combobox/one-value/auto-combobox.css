@@ -6,6 +6,7 @@
   padding-left: 8px;
   box-sizing: border-box;
   border: 1px solid #c0c0c0;
+  width: 100%;
 }
 
 .combobox-s {

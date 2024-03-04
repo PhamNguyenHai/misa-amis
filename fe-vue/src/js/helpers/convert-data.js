@@ -65,3 +65,31 @@ export const convertGender = (genderValue) => {
     console.error(err);
   }
 };
+
+/**
+ * Author: PNNHai
+ * Date:
+ * @param {*} userRoleValue : giá trị của vai trò người dùng (0: admin, 1: user)
+ * @returns (0: Nam, 1: Nữ, 2: Khác)
+ * Description: Hàm thực hiện convert vai trò người dùng
+ */
+export const convertUserRole = (userRoleValue) => {
+  try {
+    if (userRoleValue == MisaEnums.LOGIN_ROLE.ADMIN) return "Quản trị viên";
+    else if (userRoleValue == MisaEnums.LOGIN_ROLE.USER) return "Người sử dụng";
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+/**
+ * Author: PNNHai
+ * Date:
+ * @param {*} phoneNumber
+ * @returns : Số điện thoại cách nhau bởi dấu .
+ * Description: Hàm thực hiện format số điện thoại 3 số cách nhau bởi dấu .
+ */
+export const formatPhoneNumber = (phoneNumber) => {
+  const cleaned = phoneNumber.replace(/\D/g, ""); // Xóa tất cả các ký tự không phải là số trong số điện thoại
+  return cleaned.replace(/(\d{4})(\d{3})(\d{3})/, "$1.$2.$3"); // Định dạng số điện thoại với dấu chấm
+};

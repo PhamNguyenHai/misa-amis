@@ -40,7 +40,7 @@
 }
 
 .sidebar-item-icon.general-page {
-  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -27px -1630px;
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -26px -1630px;
   transform: scale(1.1);
 }
 
@@ -49,18 +49,28 @@
   transform: scale(1.1);
 }
 
-.sidebar-item-icon.sale-page-icon {
-  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -70px -1631px;
+.sidebar-item-icon.employee-page-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -287px -1588px;
   transform: scale(1.1);
 }
 
 .sidebar-item-icon.management-icon {
-  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -247px -1632px;
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -244px -1630px;
   transform: scale(1.1);
 }
 
 .sidebar-item-icon.tax-icon {
-  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -421px -1634px;
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -418px -1632px;
+  transform: scale(1.1);
+}
+
+.sidebar-item-icon.user-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -157px -1662px;
+  transform: scale(1.1);
+}
+
+.sidebar-item-icon.statistical-icon {
+  background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -542px -1590px;
   transform: scale(1.1);
 }
 

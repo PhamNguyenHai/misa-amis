@@ -239,22 +239,22 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
                         if (column.FilterString.Contains(","))
                         {
                             string filterStringSqlCommand = String.Empty;
-                            filterStringSqlCommand = column.FilterString.Replace(",", $"' OR e.{column.ColumnName} = '");
+                            filterStringSqlCommand = column.FilterString.Replace(",", $"' OR {column.ColumnName} = '");
                             //return $" e.{column.ColumnName} = '{column.FilterString}'";
-                            return $" AND (e.{column.ColumnName} = '{filterStringSqlCommand}')";
+                            return $" AND ({column.ColumnName} = '{filterStringSqlCommand}')";
                         }
-                        return $" AND e.{column.ColumnName} = '{column.FilterString}'";
+                        return $" AND {column.ColumnName} = '{column.FilterString}'";
                     }
                 case SelectionFilterTye.NotEqual:
                     {
                         if (column.FilterString.Contains(","))
                         {
                             string filterStringSqlCommand = String.Empty;
-                            filterStringSqlCommand = column.FilterString.Replace(",", $"' AND e.{column.ColumnName} <> '");
+                            filterStringSqlCommand = column.FilterString.Replace(",", $"' AND {column.ColumnName} <> '");
                             //return $" e.{column.ColumnName} = '{column.FilterString}'";
-                            return $" AND (e.{column.ColumnName} <> '{filterStringSqlCommand}')";
+                            return $" AND ({column.ColumnName} <> '{filterStringSqlCommand}')";
                         }
-                        return $" AND e.{column.ColumnName} <> '{column.FilterString}'";
+                        return $" AND {column.ColumnName} <> '{column.FilterString}'";
                     }
                 default:
                     throw new ValidateException(Core.Resources.AppResource.WrongSelectionError);

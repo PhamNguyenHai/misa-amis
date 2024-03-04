@@ -39,33 +39,95 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
             return user;
         }
 
-        public Task RevokeTokenAsync(Guid tokenId)
+        public async Task ChangePasswordAsync(UserPasswordChangeDto userPasswordChange)
         {
-            throw new NotImplementedException();
+            string storedProcedureName = "Proc_user_ChangePassword";
+
+            var parametters = new DynamicParameters();
+            parametters.Add("i_UserId", userPasswordChange.UserId);
+            parametters.Add("i_ChangedPassword", userPasswordChange.ChangePassword);
+
+            await _uow.Connection.ExecuteAsync(storedProcedureName, parametters,
+                commandType: CommandType.StoredProcedure, transaction: _uow.Transaction);
         }
 
-        public Task ChangePasswordAsync(UserPasswordChangeDto userPasswordChange)
+        /// <summary>
+        /// Hàm thực hiện tìm kiếm người dùng thông qua email
+        /// </summary>
+        /// <param name="email">email của người dùng cần tìm</param>
+        /// <returns>User</returns>
+        /// Author: PNNHai
+        /// Date:
+        private async Task<User> FindUserByEmail(string email)
         {
-            throw new NotImplementedException();
+            string sqlCommand = "SELECT * FROM view_user WHERE Email = @email";
+
+            var parametters = new DynamicParameters();
+            parametters.Add("@email", email);
+
+            var existedUser = await _uow.Connection.QueryFirstOrDefaultAsync<User>(sqlCommand, parametters, transaction: _uow.Transaction);
+            return existedUser;
         }
 
-        //public Task RegisterAccountAsync(UserRegisterDto registerInfor, UserRole role)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        /// <summary>
+        /// Hàm thực hiện tìm kiếm người dùng thông qua sdt
+        /// </summary>
+        /// <param name="phoneNumber">sđt của người dùng cần tìm</param>
+        /// <returns>User</returns>
+        /// Author: PNNHai
+        /// Date:
+        private async Task<User> FindUserByPhoneNumber(string phoneNumber)
+        {
+            string sqlCommand = "SELECT * FROM view_user WHERE PhoneNumber = @phoneNumber";
 
-        //public async Task<User?> FindByIdAsync(Guid userId)
-        //{
-        //    string storedProcedureName = "Proc_user_GetById";
+            var parametters = new DynamicParameters();
+            parametters.Add("@phoneNumber", phoneNumber);
 
-        //    var param = new DynamicParameters();
-        //    param.Add("i_UserId", userId);
+            var existedUser = await _uow.Connection.QueryFirstOrDefaultAsync<User>(sqlCommand, parametters, transaction: _uow.Transaction);
+            return existedUser;
+        }
 
-        //    var user = await _uow.Connection.QueryFirstOrDefaultAsync<User>(storedProcedureName, param,
-        //        commandType: CommandType.StoredProcedure, transaction: _uow.Transaction);
+        public async Task CheckUserExistByEmail(string email)
+        {
+            var existedUser = await FindUserByEmail(email);
+            if(existedUser != null)
+            {
+                throw new ValidateException("Email đã tồn tại trong hệ thống");
+            }
+        }
 
-        //    return user;
-        //}
+        public async Task CheckUserExistByPhoneNumber(string phoneNumber)
+        {
+            var existedUser = await FindUserByPhoneNumber(phoneNumber);
+            if (existedUser != null)
+            {
+                throw new ValidateException("Số điện thoại đã tồn tại trong hệ thống");
+            }
+        }
+
+        public async Task CheckUserEmailUpdateToExistedEmail(Guid id, string email)
+        {
+            // Kiểm tra xem id truyền vào có tồn tại không (Nếu không throw exception ko tìm thấy)
+            var userExist = await GetByIdAsync(id);
+
+            // Nếu cập nhật sang email khác -> kiểm tra xem email muốn cập nhật tồn tại chưa
+            if (userExist.Email != email)
+            {
+                await CheckUserExistByEmail(email);
+            }
+        }
+
+        public async Task CheckUserPhoneNumberUpdateToExistedPhoneNumber(Guid id, string phoneNumber)
+        {
+            // Kiểm tra xem id truyền vào có tồn tại không (Nếu không throw exception ko tìm thấy)
+            var userExist = await GetByIdAsync(id);
+
+            // Nếu cập nhật sang sdt khác -> kiểm tra xem sdt muốn cập nhật tồn tại chưa
+            if (userExist.PhoneNumber != phoneNumber)
+            {
+                await CheckUserExistByPhoneNumber(phoneNumber);
+            }
+        }
         #endregion
     }
 }

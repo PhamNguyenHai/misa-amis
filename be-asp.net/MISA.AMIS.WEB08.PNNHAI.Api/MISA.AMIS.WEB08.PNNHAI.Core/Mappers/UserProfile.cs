@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MISA.AMIS.WEB08.PNNHAI.Core.Mappers
+namespace MISA.AMIS.WEB08.PNNHAI.Core
 {
     public class UserProfile : Profile
     {
@@ -16,6 +16,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Mappers
             CreateMap<UserModel, UserDto>();
             CreateMap<UserCreateDto, User>();
             CreateMap<UserUpdateDto, User>();
+            CreateMap<FilterResult<UserModel>, FilterResult<UserDto>>();
         }
     }
 }

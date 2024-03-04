@@ -118,6 +118,29 @@ const MisaResources = {
       },
     },
 
+    userPageText: {
+      sidebarTitle: "Người dùng",
+      pageTitle: "Quản lý người dùng",
+      successAction: {
+        deleteSucess: "Xóa thành công 1 bản ghi.",
+        deleteManySucess: "Xóa thành công các bản ghi đã chọn.",
+        saveDataSuccess: "Lưu thông tin thành công.",
+        importSuccess: "Nhập khẩu dữ liệu thành công.",
+      },
+      confirmTitle: {
+        ConfirmToDeleteMany:
+          "Bạn có chắc chắn muốn xóa những người dùng đã chọn không ?",
+        ConfirmToDelete:
+          "Bạn có chắc chắn muốn xóa 1 người dùng đã chọn không ?",
+        ConfirmToSaveWhileDataChanged:
+          "Dữ liệu đã bị thay đổi. Bạn có muốn cất không ?",
+      },
+      notifyTitle: {
+        notifyNothingChange:
+          "Dữ liệu không có gì thay đổi. Không thể thực hiện cập nhật.",
+      },
+    },
+
     purchasePageText: {
       sidebarTitle: "Mua hàng",
       pageTitle: "Trang Mua hàng",
@@ -143,8 +166,12 @@ const MisaResources = {
     unselectedAll: "Bỏ chọn",
     delete: "Xóa tất cả",
     addEmployee: {
-      name: "Thêm mới nhân viên",
+      name: "Thêm nhân viên",
       tooltip: "Thêm mới nhân viên (insert)",
+    },
+    addUser: {
+      name: "Thêm người dùng",
+      tooltip: "Thêm mới người dùng (insert)",
     },
     cancel: "Hủy",
     save: {
@@ -207,7 +234,7 @@ const MisaResources = {
     edit: "Sửa",
     duplicate: "Nhân bản",
     delete: "Xóa",
-    disable: "Ngưng sử dụng",
+    resetPassword: "Đặt lại mật khẩu",
   },
 
   formText: {
@@ -221,6 +248,35 @@ const MisaResources = {
         tooltip: "Mật khẩu đăng nhập",
       },
     },
+    userForm: {
+      addFormTitle: "Thêm mới người dùng",
+      editFormTitle: "Sửa thông tin người dùng",
+      fullName: {
+        title: "Họ và tên",
+        tooltip: "Họ và tên",
+      },
+      phoneNumber: {
+        title: "Số điện thoại",
+        tooltip: "Số điện thoại người dùng",
+      },
+      email: {
+        title: "Email",
+        tooltip: "Email người dùng",
+      },
+      role: {
+        title: "Quyền tài khoản",
+        tooltip: "Quyền tài khoản người dùng",
+      },
+      password: {
+        title: "Mật khẩu",
+        tooltip: "Mật khẩu người dùng",
+      },
+      repeatedPassword: {
+        title: "Nhập lại mật khẩu",
+        tooltip: "Mật khẩu nhập lại của người dùng",
+      },
+    },
+
     employeeForm: {
       addFormTitle: "Thêm mới nhân viên",
       editFormTitle: "Sửa thông tin nhân viên",
@@ -308,10 +364,6 @@ const MisaResources = {
     warning: "Cảnh báo !",
     infor: "Thông tin !",
     error: "Lỗi !",
-  },
-
-  datePicker: {
-    today: "Hôm nay",
   },
 
   dataFormat: {

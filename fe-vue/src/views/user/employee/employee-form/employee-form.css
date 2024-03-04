@@ -1,34 +1,3 @@
-.form-overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #bababa96;
-  z-index: 3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.form {
-  position: relative;
-  width: 1000px;
-  height: 625px;
-  margin: 50px auto;
-  border-radius: 5px;
-  background-color: white;
-  padding: 15px 20px;
-  box-sizing: border-box;
-}
-
-.form-header {
-  display: flex;
-  justify-content: space-between;
-}
-
 .form-header-left {
   display: flex;
   align-items: center;
@@ -38,7 +7,7 @@
 }
 
 .form-title {
-  font-size: 25px;
+  font-size: 24px;
   margin: 0;
 }
 
@@ -63,14 +32,6 @@
   width: 18px;
   height: 18px;
   cursor: pointer;
-}
-
-.form-main {
-  padding: 20px 0px 40px;
-  border-bottom: 1px solid var(--border-color-default);
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 4px;
 }
 
 .gender-field-area {
@@ -101,14 +62,6 @@
 .form-field-area label {
   font-size: 13px;
   width: fit-content;
-}
-
-.form-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 80px;
-  box-sizing: border-box;
 }
 
 .form-footer .button {

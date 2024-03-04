@@ -54,12 +54,14 @@ baseAxios.interceptors.response.use(
               isRefresh = false;
               return baseAxios(error.config);
             }
-          } catch (_error) {
-            return Promise.reject(_error);
+          } catch (err) {
+            store.dispatch("logout");
+            return Promise.reject(err);
           }
         } else {
           store.state.dialogNotify.isShow = true;
-          store.state.dialogNotify.text = "Có lỗi xác thực";
+          store.state.dialogNotify.text =
+            "Có lỗi xác thực. Vui lòng đăng nhập lại.";
         }
       } else if (status === 403) {
         // alert("Không tìm thấy tài nguyên. " + error.response.data.UserMessage);

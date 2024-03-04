@@ -209,16 +209,18 @@
             <td>
               <div class="functions-area">
                 <span
+                  v-if="firstRowFunction !== null"
                   class="function-name"
                   @click.stop="
                     handleNotifyWithRowFunction(
-                      $_MisaEnums.ROW_MODE.EDIT,
+                      firstRowFunction.rowMode,
                       tableRow[tableColumns.objectId]
                     )
                   "
-                  >{{ $_MisaResources.tableFunctions.edit }}</span
+                  >{{ firstRowFunction.functionName }}</span
                 >
                 <div
+                  v-if="ortherRowFunctions !== null"
                   :class="{
                     'drop-icon': true,
                     'drop-icon-active':
@@ -245,33 +247,18 @@
       <teleport to="#app">
         <div
           class="drop-list-function"
-          v-if="functionalRowId"
+          v-if="functionalRowId && ortherRowFunctions !== null"
           :style="styleToolEdit"
         >
           <div
             class="function-item"
+            v-for="(rowFunction, index) in ortherRowFunctions"
+            :key="index"
             @click.stop="
-              handleNotifyWithRowFunction(
-                $_MisaEnums.ROW_MODE.DUPLICATE,
-                functionalRowId
-              )
+              handleNotifyWithRowFunction(rowFunction.rowMode, functionalRowId)
             "
           >
-            {{ $_MisaResources.tableFunctions.duplicate }}
-          </div>
-          <div
-            class="function-item"
-            @click.stop="
-              handleNotifyWithRowFunction(
-                $_MisaEnums.ROW_MODE.DELETE,
-                functionalRowId
-              )
-            "
-          >
-            {{ $_MisaResources.tableFunctions.delete }}
-          </div>
-          <div class="function-item">
-            {{ $_MisaResources.tableFunctions.disable }}
+            {{ rowFunction.functionName }}
           </div>
         </div>
       </teleport>
@@ -280,7 +267,12 @@
 </template>
 <script>
 import { convertCamelCaseToPascelCase } from "@/js/common/common";
-import { convertDateForFE, convertGender } from "@/js/helpers/convert-data.js";
+import {
+  convertDateForFE,
+  convertGender,
+  convertUserRole,
+  formatPhoneNumber,
+} from "@/js/helpers/convert-data.js";
 import { filterColumnResources } from "@/js/helpers/filter-column-resources";
 
 export default {
@@ -294,6 +286,9 @@ export default {
     // data cho table
     // Component sử dụng : EmployeePage
     tableData: { type: Array },
+
+    // Component sử dụng : EmployeePage
+    rowFunctions: { type: Array },
   },
 
   emits: [
@@ -381,6 +376,42 @@ export default {
         left: this.styleToolEdit.left + "px",
         top: this.styleToolEdit.top + "px",
       };
+    },
+
+    /**
+     * Author : PNNHai
+     * Date :
+     * Description : Hàm để lấy giá trị row function đầu tiên
+     */
+    firstRowFunction() {
+      try {
+        if (this.rowFunctions.length > 0) {
+          const firstFunction = this.rowFunctions[0];
+          return firstFunction;
+        }
+        return null;
+      } catch (err) {
+        console.error(err);
+        return null;
+      }
+    },
+
+    /**
+     * Author : PNNHai
+     * Date :
+     * Description : Hàm để lấy danh sách các row function còn lại
+     */
+    ortherRowFunctions() {
+      try {
+        if (this.rowFunctions.length > 1) {
+          const ortherFunctions = this.rowFunctions.slice(1);
+          return ortherFunctions;
+        }
+        return null;
+      } catch (err) {
+        console.error(err);
+        return null;
+      }
     },
   },
 
@@ -476,6 +507,10 @@ export default {
           return convertDateForFE(value);
         } else if (formatType === this.$_MisaEnums.FORMAT_TYPE.GENDER) {
           return convertGender(value);
+        } else if (formatType === this.$_MisaEnums.FORMAT_TYPE.USER_ROLE) {
+          return convertUserRole(value);
+        } else if (formatType === this.$_MisaEnums.FORMAT_TYPE.PHONE_NUMBER) {
+          return formatPhoneNumber(value);
         }
         return value;
       } catch (err) {
