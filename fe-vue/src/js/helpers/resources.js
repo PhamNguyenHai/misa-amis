@@ -248,6 +248,20 @@ const MisaResources = {
         tooltip: "Mật khẩu đăng nhập",
       },
     },
+    changePasswordForm: {
+      oldPassword: {
+        title: "Mật khẩu hiện tại",
+        tooltip: "Mật khẩu hiện tại của bạn",
+      },
+      newPassword: {
+        title: "Mật khẩu mới",
+        tooltip: "Mật khẩu bạn muốn thay đổi",
+      },
+      repeatedNewPassword: {
+        title: "Xác nhận mật khẩu mới",
+        tooltip: "Nhập lại mật khẩu mới của bạn",
+      },
+    },
     userForm: {
       addFormTitle: "Thêm mới người dùng",
       editFormTitle: "Sửa thông tin người dùng",

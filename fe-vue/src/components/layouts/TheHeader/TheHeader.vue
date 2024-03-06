@@ -72,14 +72,15 @@
                 </div>
               </div>
               <ul class="user-functions">
-                <li class="user-option">
+                <router-link to="/security/change-password" class="user-option">
                   <div class="account-change-password-icon"></div>
                   Đổi mật khẩu
-                </li>
-                <li class="user-option">
+                </router-link>
+
+                <router-link to="/security/login-logs" class="user-option">
                   <div class="account-setting-icon"></div>
-                  Thiết lập tài khoản
-                </li>
+                  Lịch sử đăng nhập
+                </router-link>
               </ul>
               <div class="user-logout-area" @click.stop="handleLogout">
                 <div class="logout-icon"></div>

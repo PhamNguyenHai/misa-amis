@@ -929,9 +929,9 @@ export default {
      */
     async handleDialogResponded(responseStatus) {
       try {
+        await this.handleConfirmCloseChangedForm(responseStatus);
         // Close dialog
         this.handleCloseDialog();
-        await this.handleConfirmCloseChangedForm(responseStatus);
       } catch (err) {
         console.error(err);
       }

@@ -62,12 +62,12 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                 int jwtExpireTime = int.Parse(_configuration["AppSettings:JWTExpireHours"]);
                 int refreshTokenExpireTime = int.Parse(_configuration["AppSettings:RefreshTokenExpireDays"]);
 
-                DateTime jwtExpirationTime = DateTime.UtcNow.AddMinutes(jwtExpireTime);
-                DateTime refreshExpirationTime = DateTime.UtcNow.AddDays(refreshTokenExpireTime);
+                DateTime jwtExpirationTime = DateTime.Now.AddMinutes(jwtExpireTime);
+                DateTime refreshExpirationTime = DateTime.Now.AddDays(refreshTokenExpireTime);
 
-                // Thời gian hết hạn cho access token (Thời gian tính theo UTC)
+                // Thời gian hết hạn cho access token (Thời gian tính theo local time)
                 var accessToken = GenerateJwtToken(userToLogin, jwtExpirationTime);
-                // Thời gian hết hạn cho refresh token (Thời gian tính theo UTC)
+                // Thời gian hết hạn cho refresh token (Thời gian tính theo local time)
                 var refreshToken = GenerateRefreshToken();
 
                 // Lấy thông tin thiết bị login
@@ -160,7 +160,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             }
 
             // Check 4: Check refresh token đã hết hạn chưa
-            if (storedToken.RefreshTokenExpirationDate < DateTime.UtcNow)
+            if (storedToken.RefreshTokenExpirationDate < DateTime.Now)
             {
                 throw new ValidateException("Refresh token đã hết hạn");
             }
@@ -178,8 +178,8 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                 // Thu hồi token trong db
                 await _tokenRepository.RevokeTokenByIdAsync(storedToken.TokenId);
 
-                // Cập nhật thời gian đăng xuất là UTC hiện tại
-                await _loginLogRepository.ChangeLogoutDateByLoginIdAsync(storedToken.LoginId, DateTime.UtcNow);
+                // Cập nhật thời gian đăng xuất là local time hiện tại
+                await _loginLogRepository.ChangeLogoutDateByLoginIdAsync(storedToken.LoginId, DateTime.Now);
 
                 // Commit
                 _unitOfWork.Commit();
@@ -191,7 +191,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             }
 
             // Xóa cookie máy khách
-            SetCookieToClient(_httpContextAccessor.HttpContext.Request, "refreshToken", "", DateTime.UtcNow.AddDays(-1));
+            SetCookieToClient(_httpContextAccessor.HttpContext.Request, "refreshToken", "", DateTime.Now.AddDays(-1));
         }
 
         public async Task<string> RefreshTokenAsync()
@@ -241,9 +241,9 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             // Check 4: Check xem accessToken có expire không
             // Ra số -> cần chuyển về thời gian
             long.TryParse(validatedTokenResult.ClaimsPrincipal.Claims.FirstOrDefault(claim => claim.Type == JwtRegisteredClaimNames.Exp).Value, 
-                out long utcExpireDate);
-            var expireDate = ConvertUnixTimeToDateTime(utcExpireDate);
-            if(expireDate > DateTime.UtcNow)
+                out long expireDateTime);
+            var expireDate = ConvertUnixTimeToDateTime(expireDateTime);
+            if(expireDate > DateTime.Now)
             {
                 throw new ValidateException("Access token chưa hết hạn không thể làm mới");
             }
@@ -269,7 +269,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             }
 
             // Check 8: Check refresh token đã hết hạn chưa
-            if (storedToken.RefreshTokenExpirationDate < DateTime.UtcNow)
+            if (storedToken.RefreshTokenExpirationDate < DateTime.Now)
             {
                 throw new ValidateException("Refresh token đã hết hạn");
             }
@@ -292,9 +292,9 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             int newRefreshTokenExpireTime = int.Parse(_configuration["AppSettings:RefreshTokenExpireDays"]);
 
             // Thời gian hết hạn của access token
-            DateTime newJwtExpirationTime = DateTime.UtcNow.AddMinutes(newJwtExpireTime);
-            // Thời gian hết hạn cho refresh token mới (Thời gian tính theo UTC)
-            DateTime newRefreshExpirationTime = DateTime.UtcNow.AddDays(newRefreshTokenExpireTime);
+            DateTime newJwtExpirationTime = DateTime.Now.AddMinutes(newJwtExpireTime);
+            // Thời gian hết hạn cho refresh token mới (Thời gian tính theo local time)
+            DateTime newRefreshExpirationTime = DateTime.Now.AddDays(newRefreshTokenExpireTime);
             var newAccessToken = GenerateJwtToken(userToRefreshToken, newJwtExpirationTime);
             var newRefreshToken = GenerateRefreshToken();
 
@@ -485,17 +485,17 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// <summary>
         /// Hàm thực hiện convert giờ utc từ dạng long -> date time utc
         /// </summary>
-        /// <param name="utcExpireDate">Giờ utc dạng long</param>
-        /// <returns>Giờ UTC dạng date time</returns>
+        /// <param name="expireDate">Giờ utc dạng long</param>
+        /// <returns>Giờ local time dạng date time</returns>
         /// Author: PNNHai
         /// Date
-        private DateTime ConvertUnixTimeToDateTime(long utcExpireDate)
+        private DateTime ConvertUnixTimeToDateTime(long expireDate)
         {
             DateTime unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            DateTime expirationDateTime = unixEpoch.AddSeconds(utcExpireDate);
+            DateTime expirationDateTime = unixEpoch.AddSeconds(expireDate);
 
-            // Chuyển đổi thành giờ UTC
-            DateTime utcExpirationDateTime = expirationDateTime.ToUniversalTime();
+            // Chuyển đổi thành giờ local time
+            DateTime utcExpirationDateTime = expirationDateTime.ToLocalTime();
 
             return utcExpirationDateTime;
         }

@@ -190,6 +190,7 @@
 }
 
 .user-option {
+  text-decoration: none;
   height: 40px;
   font-size: 14px;
   list-style: none;

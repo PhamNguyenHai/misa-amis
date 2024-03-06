@@ -49,6 +49,7 @@ const MisaEnums = {
     CLOSE: 0,
     DELETE: 1,
     DELETE_MANY: 2,
+    SAVE: 3,
   },
   FILTER_COLUMN_TYPE: {
     TEXT_TYPE: 0,

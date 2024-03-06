@@ -7,6 +7,9 @@ import store from "@/js/store";
 import MisaLogin from "@/views/anonymous/login/MisaLogin.vue";
 import MisaHome from "@/views/anonymous/home/MisaHome.vue";
 
+// Role (Common)
+import MisaChangePassword from "@/views/common/change-password/MisaChangePassword.vue";
+
 // Admin
 import AdminHomePage from "@/views/admin/home/AdminHome.vue";
 import EmployeeAdminPage from "@/views/admin/employee/employee-page/EmployeePage.vue";
@@ -34,6 +37,20 @@ const routers = [
     component: MisaLogin,
   },
 
+  // ROLE (COMMON)
+  {
+    path: "/security/change-password",
+    name: "MisaChangePassword",
+    component: MisaChangePassword,
+    meta: { requiresAuth: true, adminOnly: true, userOnly: true },
+  },
+  {
+    path: "/security/login-logs",
+    name: "AdminLoginLog",
+    component: AdminLoginLog,
+    meta: { requiresAuth: true, adminOnly: true, userOnly: true },
+  },
+
   //    ADMIN
   {
     path: "/admin",
@@ -57,12 +74,6 @@ const routers = [
     path: "/admin/user-management",
     name: "UserManagementPage",
     component: UserManagementPage,
-    meta: { requiresAuth: true, adminOnly: true },
-  },
-  {
-    path: "/admin/login-log",
-    name: "AdminLoginLog",
-    component: AdminLoginLog,
     meta: { requiresAuth: true, adminOnly: true },
   },
   {

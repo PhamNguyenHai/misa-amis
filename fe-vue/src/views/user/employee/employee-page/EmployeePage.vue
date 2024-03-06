@@ -651,6 +651,8 @@ export default {
         }
 
         this.handleCloseDialog();
+        // Sau khi thực hiện xong thì reset trạng thái của confirm action
+        this.confirmAction = null;
       } catch (err) {
         console.error(err);
       }
@@ -680,16 +682,9 @@ export default {
             this.filterData();
             // Sau khi xóa xong thì reset lại danh sách id
             this.handleUnselecAll();
-            // Close dialog
-            this.handleCloseDialog();
           }
           // dù xóa được hay không đều reset id to delete = null
           this.employeeIdToDelete = null;
-        }
-        // Với trường hợp response = no
-        else {
-          // Close dialog
-          this.handleCloseDialog();
         }
       } catch (err) {
         console.error(err);
@@ -721,14 +716,7 @@ export default {
             this.filterData();
             // Sau khi xóa xong thì reset lại danh sách id
             this.handleUnselecAll();
-            // Close dialog
-            this.handleCloseDialog();
           }
-        }
-        // Với trường hợp response = no
-        else {
-          // Close dialog
-          this.handleCloseDialog();
         }
       } catch (err) {
         console.error(err);
