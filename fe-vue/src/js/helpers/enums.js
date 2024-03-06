@@ -33,6 +33,7 @@ const MisaEnums = {
     DATE_FOR_FE: 1,
     USER_ROLE: 2,
     PHONE_NUMBER: 3,
+    DATE_TIME_FOR_FE: 1,
   },
   DIALOG_TYPE_BUTTON: {
     NOTIFY: 0,

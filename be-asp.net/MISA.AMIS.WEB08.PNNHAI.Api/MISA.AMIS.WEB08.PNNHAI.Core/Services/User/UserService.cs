@@ -53,7 +53,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             var userToLogin = await _userRepository.CheckLoginInforAsync(userLoginInfor.EmailOrPhoneNumber, userLoginInfor.Password);
             if(userToLogin == null)
             {
-                throw new NotFoundException("Người dùng không tồn tại");
+                throw new NotFoundException("Thông tin đăng nhập không hợp lệ");
             }
             else
             {
@@ -62,7 +62,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                 int jwtExpireTime = int.Parse(_configuration["AppSettings:JWTExpireHours"]);
                 int refreshTokenExpireTime = int.Parse(_configuration["AppSettings:RefreshTokenExpireDays"]);
 
-                DateTime jwtExpirationTime = DateTime.UtcNow.AddHours(jwtExpireTime);
+                DateTime jwtExpirationTime = DateTime.UtcNow.AddMinutes(jwtExpireTime);
                 DateTime refreshExpirationTime = DateTime.UtcNow.AddDays(refreshTokenExpireTime);
 
                 // Thời gian hết hạn cho access token (Thời gian tính theo UTC)
@@ -292,7 +292,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             int newRefreshTokenExpireTime = int.Parse(_configuration["AppSettings:RefreshTokenExpireDays"]);
 
             // Thời gian hết hạn của access token
-            DateTime newJwtExpirationTime = DateTime.UtcNow.AddHours(newJwtExpireTime);
+            DateTime newJwtExpirationTime = DateTime.UtcNow.AddMinutes(newJwtExpireTime);
             // Thời gian hết hạn cho refresh token mới (Thời gian tính theo UTC)
             DateTime newRefreshExpirationTime = DateTime.UtcNow.AddDays(newRefreshTokenExpireTime);
             var newAccessToken = GenerateJwtToken(userToRefreshToken, newJwtExpirationTime);

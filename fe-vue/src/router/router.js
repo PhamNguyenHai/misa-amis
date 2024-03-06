@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import MisaEnums from "@/js/helpers/enums";
-import userService from "@/js/services/user-service";
+import store from "@/js/store";
+// import { decodeJwtToken } from "@/js/helpers/jwt-helper";
 
 // Anonymous
 import MisaLogin from "@/views/anonymous/login/MisaLogin.vue";
@@ -13,6 +14,7 @@ import EmployeeStatisticalAdminPage from "@/views/admin/employee-statistical/Emp
 import UserManagementPage from "@/views/admin/user/user-page/UserManagementPage.vue";
 import ManagementPage from "@/views/admin/management/ManagementPage.vue";
 import TaxPage from "@/views/admin/tax/TaxPage.vue";
+import AdminLoginLog from "@/views/admin/login-log/AdminLoginLog.vue";
 
 // User
 import UserHomePage from "@/views/user/home/UserHome.vue";
@@ -58,6 +60,12 @@ const routers = [
     meta: { requiresAuth: true, adminOnly: true },
   },
   {
+    path: "/admin/login-log",
+    name: "AdminLoginLog",
+    component: AdminLoginLog,
+    meta: { requiresAuth: true, adminOnly: true },
+  },
+  {
     path: "/admin/management",
     name: "ManagementPage",
     component: ManagementPage,
@@ -90,15 +98,17 @@ const router = createRouter({
   routes: routers,
 });
 
-router.beforeEach(async (to, from, next) => {
-  const userId = localStorage.getItem("userId");
-  let roleType = null;
-  if (userId) {
-    const res = await userService.getById(userId);
-    if (res?.success) {
-      roleType = res.data.role;
-    }
-  }
+router.beforeEach((to, from, next) => {
+  // const token = localStorage.getItem("accessToken");
+  // let roleType = null;
+  // if (token) {
+  //   try {
+  //     roleType = parseInt(decodeJwtToken(token).role);
+  //   } catch (err) {
+  //     console.err(err);
+  //   }
+  // }
+  const roleType = store.state.loginStatus.userRole;
 
   if (to.name === "MisaLogin" && roleType != null) {
     // Nếu người dùng đã đăng nhập và truy cập vào trang đăng nhập,

@@ -39,6 +39,7 @@ import TheMain from "@/components/layouts/TheMain/TheMain.vue";
 import MisaLoading from "./components/base/loading/MisaLoading.vue";
 import MisaToast from "@/components/base/toast/MisaToast.vue";
 import userService from "./js/services/user-service";
+import { decodeJwtToken } from "./js/helpers/jwt-helper";
 
 export default {
   name: "App",
@@ -50,8 +51,7 @@ export default {
     MisaToast,
   },
 
-  created() {
-    // Lấy trạng thái người dùng đăng nhập
+  mounted() {
     this.getCurrentUser();
   },
 
@@ -72,23 +72,18 @@ export default {
      * Date:
      * Description: Hàm thực hiện lấy ra người dùng hiện tại (nếu có trong local storage)
      */
-    async getCurrentUser() {
+    getCurrentUser() {
       try {
         const accessToken = localStorage.getItem("accessToken");
-        const userId = localStorage.getItem("userId");
-
-        if (accessToken && userId) {
-          const res = await userService.getById(userId);
-          if (res?.success) {
-            const user = res.data;
-            this.$store.commit("updateLoginStatus", {
-              accessToken,
-              userId,
-              fullName: user.fullName,
-              userRole: user.role,
-              email: user.email,
-            });
-          }
+        if (accessToken) {
+          const jwtData = decodeJwtToken(accessToken);
+          this.$store.commit("updateLoginStatus", {
+            accessToken,
+            userId: jwtData.userId,
+            fullName: jwtData.fullName,
+            userRole: parseInt(jwtData.role),
+            email: jwtData.email,
+          });
         }
       } catch (err) {
         console.error(err);

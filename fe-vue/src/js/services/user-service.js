@@ -91,6 +91,60 @@ class UserService extends BaseService {
       console.error(err);
     }
   }
+
+  /**
+   * Author: PNNHai
+   * Date:
+   * @param {*} userId : Id người dùng cần đổi mật khẩu
+   * @returns : response từ api về sau đổi mật khẩu
+   * Description: method thực hiện thay đổi mật khẩu
+   */
+  async changePassword(userId) {
+    try {
+      const res = await this.baseApiService.put(
+        this.endpoint(`/Change-Password/${userId}`)
+      );
+      return res;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  /**
+   * Author: PNNHai
+   * Date:
+   * @param {*} userId : Id người dùng cần reset mật khẩu
+   * @returns : response từ api về sau đổi mật khẩu
+   * Description: method thực hiện reset mật khẩu người dùng
+   */
+  async resetPassword(userId) {
+    try {
+      const res = await this.baseApiService.put(
+        this.endpoint(`/Reset-Password/${userId}`)
+      );
+      return res;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  /**
+   * Author: PNNHai
+   * Date:
+   * @param {*} userId : Id người dùng cần lấy nhật kí đăng nhập, đăng xuất của người dùng
+   * @returns : response từ api về sau khi
+   * Description: method thực hiện lấy nhật kí đăng nhập, đăng xuất của người dùng
+   */
+  async getLoginLog(userId) {
+    try {
+      const res = await this.baseApiService.get(
+        this.endpoint(`/Login-Log/${userId}`)
+      );
+      return res;
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }
 
 const userService = new UserService();

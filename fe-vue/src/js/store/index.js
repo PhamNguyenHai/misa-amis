@@ -7,8 +7,8 @@ const storeData = {
     loginStatus: {
       accessToken: null,
       userId: null,
-      userRole: null,
       fullName: null,
+      userRole: null,
       email: null,
     },
 
@@ -124,7 +124,6 @@ const storeData = {
   actions: {
     logout({ commit }) {
       localStorage.removeItem("accessToken");
-      localStorage.removeItem("userId");
       commit("resetLoginStatus");
     },
   },

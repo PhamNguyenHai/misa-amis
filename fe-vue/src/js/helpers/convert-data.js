@@ -93,3 +93,28 @@ export const formatPhoneNumber = (phoneNumber) => {
   const cleaned = phoneNumber.replace(/\D/g, ""); // Xóa tất cả các ký tự không phải là số trong số điện thoại
   return cleaned.replace(/(\d{4})(\d{3})(\d{3})/, "$1.$2.$3"); // Định dạng số điện thoại với dấu chấm
 };
+
+/**
+ * Author: PNNHai
+ * Date:
+ * @param {*} inputDate : thời gian đầu vào
+ * @returns
+ * Description: Hàm thực hiện format thời gian
+ */
+export const convertDateTimeForFE = (inputDate) => {
+  try {
+    if (inputDate) {
+      const date = new Date(inputDate);
+      let day = String(date.getDate()).padStart(2, "0");
+      let month = String(date.getMonth() + 1).padStart(2, "0");
+      const year = date.getFullYear();
+      const hour = String(date.getHours()).padStart(2, "0");
+      const minute = String(date.getMinutes()).padStart(2, "0");
+
+      return `${hour}:${minute} ${day}/${month}/${year}`;
+    }
+    return "";
+  } catch (err) {
+    console.error(err);
+  }
+};

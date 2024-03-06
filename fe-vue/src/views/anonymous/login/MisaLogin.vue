@@ -180,7 +180,6 @@ export default {
           if (accountInfor) {
             // set accessToken vào localStorage
             localStorage.setItem("accessToken", accountInfor.accessToken);
-            localStorage.setItem("userId", accountInfor.userId);
 
             // Lấy thông tin chi tiết người dùng
             const respon = await userService.getById(accountInfor.userId);
