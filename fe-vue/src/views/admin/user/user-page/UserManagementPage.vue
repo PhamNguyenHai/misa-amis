@@ -352,6 +352,18 @@ export default {
       }
     },
 
+    async resetUserPassword(userId) {
+      try {
+        this.$store.state.isLoading = true;
+        const res = await userService.resetPassword(userId);
+        return res;
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.$store.state.isLoading = false;
+      }
+    },
+
     /**
      * Author: PNNHai
      * Date:
@@ -458,7 +470,13 @@ export default {
 
             break;
           case this.$_MisaEnums.ROW_MODE.RESET_PASSWORD: {
-            alert(1);
+            const res = await this.resetUserPassword(rowId);
+            if (res?.success) {
+              this.$store.commit("addToast", {
+                type: "success",
+                message: "Reset mật khẩu thành công",
+              });
+            }
             break;
           }
           default:

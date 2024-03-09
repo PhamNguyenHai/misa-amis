@@ -1,0 +1,180 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core.UnitTest\\MISA.AMIS.WEB08.PNNHAI.Core.UnitTest.csproj": {}
+  },
+  "projects": {
+    "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core.UnitTest\\MISA.AMIS.WEB08.PNNHAI.Core.UnitTest.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core.UnitTest\\MISA.AMIS.WEB08.PNNHAI.Core.UnitTest.csproj",
+        "projectName": "MISA.AMIS.WEB08.PNNHAI.Core.UnitTest",
+        "projectPath": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core.UnitTest\\MISA.AMIS.WEB08.PNNHAI.Core.UnitTest.csproj",
+        "packagesPath": "C:\\Users\\phamn\\.nuget\\packages\\",
+        "outputPath": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core.UnitTest\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\phamn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj": {
+                "projectPath": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.5.0, )"
+            },
+            "NSubstitute": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "NSubstitute.Analyzers.CSharp": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.15, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.3, )"
+            },
+            "NUnit.Analyzers": {
+              "target": "Package",
+              "version": "[3.6.1, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.4.2, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj",
+        "projectName": "MISA.AMIS.WEB08.PNNHAI.Core",
+        "projectPath": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\MISA.AMIS.WEB08.PNNHAI.Core.csproj",
+        "packagesPath": "C:\\Users\\phamn\\.nuget\\packages\\",
+        "outputPath": "D:\\Save VS Code\\misa-amis\\be-asp.net\\MISA.AMIS.WEB08.PNNHAI.Api\\MISA.AMIS.WEB08.PNNHAI.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\phamn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "EPPlus": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.27, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "UAParser": {
+              "target": "Package",
+              "version": "[3.1.47, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

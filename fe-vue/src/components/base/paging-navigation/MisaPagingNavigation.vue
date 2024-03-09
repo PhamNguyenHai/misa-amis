@@ -43,6 +43,28 @@ export default {
     };
   },
 
+  // created() {
+  //   this.currentPageProcessing = this.currentPage;
+  //   this.pageSizeProcessing = this.pageSize;
+  // },
+
+  watch: {
+    /**
+     * Author: PNNHai
+     * Date:
+     * Description: Hàm thực hiện theo dõi nếu như kích thước trang thay đổi thì tự động cho về 1
+     */
+    pageSize: function (newValue, oldValue) {
+      try {
+        if (newValue !== oldValue) {
+          this.onClickChangePage(this.$_MisaEnums.PAGE_TYPE.PAGE_NUMBER, 1);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  },
+
   computed: {
     /**
      * Author : PNNHai

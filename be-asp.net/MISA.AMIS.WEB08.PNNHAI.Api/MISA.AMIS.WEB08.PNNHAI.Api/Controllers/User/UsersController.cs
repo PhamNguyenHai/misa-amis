@@ -42,14 +42,9 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
         }
 
         [HttpPut("Change-Password/{userId}")]
-        public async Task<IActionResult> ChangPassword(Guid userId, [FromBody]string password)
+        public async Task<IActionResult> ChangPassword(Guid userId, [FromBody] UserPasswordChangeDto userPasswordChange)
         {
-            var userPasswordChange = new UserPasswordChangeDto()
-            {
-                UserId = userId,
-                ChangePassword = password
-            };
-            await _userService.ChangePasswordAsync(userPasswordChange);
+            await _userService.ChangePasswordAsync(userId, userPasswordChange);
             return Ok("Đổi mật khẩu thành công");
         }
 

@@ -92,14 +92,17 @@ class EmployeeService extends BaseService {
   /**
    * Author: PNNHai
    * Date:
+   * @param {*} userId : Id người dùng thực hiện
    * @param {*} file : file truyền vào để import
    * @returns trả về kết quả sau khi đọc file
    * Description: method thực hiện import file excel
    */
-  async importExcelFile(file) {
+  async importExcelFile(userId, file) {
     try {
       const res = await this.baseApiService.post(
-        this.endpoint("/Import"),
+        this.endpoint(
+          `/Import?userId=${userId}&workingTable=Employee&importSheetName=DanhSachNhanVien`
+        ),
         file,
         {
           headers: {
@@ -116,15 +119,15 @@ class EmployeeService extends BaseService {
   /**
    * Author: PNNHai
    * Date:
-   * @param {*} workingImportTable : bảng thực hiện import
+   * @param {*} userId : Id người dùng thực hiện
    * @param {*} selectType : loại lựa chọn (0: không insert; 1: có import)
    * @returns trạng thái import
    */
-  async confirmImport(workingImportTable, selectType) {
+  async confirmImport(userId, selectType) {
     try {
       const res = await this.baseApiService.post(
         this.endpoint(
-          `/Confirm-Import-Excel?workingTable=${workingImportTable}&confirmType=${selectType}`
+          `/Confirm-Import-Excel?userId=${userId}&workingTable=Employee&confirmType=${selectType}`
         )
       );
       return res;

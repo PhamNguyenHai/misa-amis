@@ -1,0 +1,43 @@
+.login-log-area {
+}
+
+.login-log-heading {
+  padding-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.login-log-main {
+}
+
+.login-log-list {
+  list-style: none;
+}
+
+.login-log-item {
+  padding: 10px 20px;
+  box-sizing: border-box;
+  font-size: 13px;
+  background-color: var(--background-color-default);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  column-gap: 60px;
+  min-height: 110px;
+}
+
+.login-log-item + .login-log-item {
+  margin-top: 20px;
+}
+
+.login-log-item-heading {
+  color: var(--primary-color);
+}
+
+.login-log-item-heading.login-log-logout-heading {
+  color: var(--danger-color);
+}
+
+.login-log-infor {
+  padding: 2px 0;
+  box-sizing: border-box;
+}

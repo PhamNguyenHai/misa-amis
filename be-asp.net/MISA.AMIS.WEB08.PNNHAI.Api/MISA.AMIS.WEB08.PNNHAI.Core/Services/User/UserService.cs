@@ -50,10 +50,12 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         public async Task<LoginedUserInfor> LoginAsync(UserLoginDto userLoginInfor)
         {
             // Kiểm tra thông tin đăng nhập có chính xác không
-            var userToLogin = await _userRepository.CheckLoginInforAsync(userLoginInfor.EmailOrPhoneNumber, userLoginInfor.Password);
+            var userToLogin = await _userRepository.FindUserByLoginInforAsync(userLoginInfor.EmailOrPhoneNumber, 
+                userLoginInfor.Password);
+
             if(userToLogin == null)
             {
-                throw new NotFoundException("Thông tin đăng nhập không hợp lệ");
+                throw new NotFoundException(Core.Resources.AppResource.LoginInforInvalidError);
             }
             else
             {
@@ -143,26 +145,26 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             // Check 1: Check xem có cookie gửi lên có chứa refresh token không
             if (string.IsNullOrEmpty(refreshInTokenCookieValue))
             {
-                throw new ValidateException("Refresh token không được gửi lên");
+                throw new ValidateException(Core.Resources.AppResource.RefreshTokenNotPostedError);
             }
 
             // Check 2: Check xem refresh token có trong db không
             var storedToken = await _tokenRepository.FindTokenByRefreshTokenAsync(refreshInTokenCookieValue);
             if (storedToken == null)
             {
-                throw new ValidateException("Refresh token không tồn tại");
+                throw new ValidateException(Core.Resources.AppResource.RefreshTokenNotExistedError);
             }
 
             // Check 3: Check token đã bị thu hồi hay chưa
             if (storedToken.IsRevoked == true)
             {
-                throw new ValidateException("Token đã bị thu hồi hoặc hết hạn");
+                throw new ValidateException(Core.Resources.AppResource.TokenRevokedOrExpiredError);
             }
 
             // Check 4: Check refresh token đã hết hạn chưa
             if (storedToken.RefreshTokenExpirationDate < DateTime.Now)
             {
-                throw new ValidateException("Refresh token đã hết hạn");
+                throw new ValidateException(Core.Resources.AppResource.RefreshTokenExpiredError);
             }
 
             // Nếu thỏa mãn
@@ -207,12 +209,12 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             // Kiểm tra xem có cookie gửi lên có chứa refresh token không
             if (string.IsNullOrEmpty(refreshInTokenCookieValue))
             {
-                throw new ValidateException("Refresh token không được gửi lên");
+                throw new ValidateException(Core.Resources.AppResource.RefreshTokenNotPostedError);
             }
             // Kiểm tra xem trong header có access token không
             if (string.IsNullOrEmpty(accessTokenInHeader))
             {
-                throw new ValidateException("Access token không được gửi lên");
+                throw new ValidateException(Core.Resources.AppResource.AccessTokenNotPostedError);
             }
 
             // Lấy access token bằng cách bỏ Bearer đi
@@ -225,7 +227,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             ValidatedTokenResult? validatedTokenResult = ValidateJwtToken(accessToken);
             if (validatedTokenResult == null)
             {
-                throw new ValidateException("Token gửi lên không hợp lệ");
+                throw new ValidateException(Core.Resources.AppResource.TokenPostedInvalidError);
             }
 
             // Check 3: Check xem thuật toán mã hóa của access token có thỏa mãn không
@@ -234,7 +236,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                 var algorithm = jwtSecurityToken.Header.Alg;
                 if (!string.Equals(algorithm, SecurityAlgorithms.HmacSha512, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    throw new ValidateException("Token gửi lên không hợp lệ");
+                    throw new ValidateException(Core.Resources.AppResource.TokenPostedInvalidError);
                 }
             }
 
@@ -245,33 +247,33 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             var expireDate = ConvertUnixTimeToDateTime(expireDateTime);
             if(expireDate > DateTime.Now)
             {
-                throw new ValidateException("Access token chưa hết hạn không thể làm mới");
+                throw new ValidateException(Core.Resources.AppResource.AccessTokenNotExpiredCantRefreshError);
             }
 
             // Check 5: Check xem refresh token có trong db không
             var storedToken = await _tokenRepository.FindTokenByRefreshTokenAsync(refreshInTokenCookieValue);
             if (storedToken == null)
             {
-                throw new ValidateException("Refresh token không tồn tại");
+                throw new ValidateException(Core.Resources.AppResource.RefreshTokenNotExistedError);
             }
 
             // Check 6: Check xem access token và refresh token có phải là 1 cặp trong phiên làm việc trước không
             // Nhằm tránh trường hợp lấy access token cũ để refresh
             if(storedToken.AccessToken != accessToken)
             {
-                throw new ValidateException("Access token không hợp lệ");
+                throw new ValidateException(Core.Resources.AppResource.AccessTokenInvalidError);
             }
 
             // Check 7: Check token đã bị thu hồi hay chưa
             if (storedToken.IsRevoked == true)
             {
-                throw new ValidateException("Token đã bị thu hồi hoặc hết hạn");
+                throw new ValidateException(Core.Resources.AppResource.TokenRevokedOrExpiredError);
             }
 
             // Check 8: Check refresh token đã hết hạn chưa
             if (storedToken.RefreshTokenExpirationDate < DateTime.Now)
             {
-                throw new ValidateException("Refresh token đã hết hạn");
+                throw new ValidateException(Core.Resources.AppResource.RefreshTokenExpiredError);
             }
 
 
@@ -282,7 +284,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             var userModelToRefreshToken = await _userRepository.GetByIdAsync(userId);
             if (userModelToRefreshToken == null)
             {
-                throw new NotFoundException("Người dùng không tồn tại");
+                throw new NotFoundException(Core.Resources.AppResource.UserNotExistedError);
             }
             User userToRefreshToken = _mapper.Map<User>(userModelToRefreshToken);
 
@@ -336,13 +338,26 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             return newAccessToken;
         }
 
-        public async Task ChangePasswordAsync(UserPasswordChangeDto userPasswordChange)
+        public async Task ChangePasswordAsync(Guid id, UserPasswordChangeDto userPasswordChange)
         {
             // Check id có tồn tại không nếu ko -> exception
-            await _userRepository.GetByIdAsync(userPasswordChange.UserId);
+            await _userRepository.GetByIdAsync(id);
 
-            // Nếu có
-            await _userRepository.ChangePasswordAsync(userPasswordChange);
+            // Check xem mật khẩu cũ có hợp lệ không
+            var isPasswordMatched = await _userRepository.IsPasswordMatched(id, userPasswordChange.CurrentPassword);
+            if (!isPasswordMatched)
+            {
+                throw new ValidateException(Core.Resources.AppResource.CurrentPasswordPostedNotMatchedError);
+            }
+
+            // Check xem mật khẩu muốn đổi có khác mật khẩu hiện tại không
+            if (userPasswordChange.CurrentPassword == userPasswordChange.ChangePassword)
+            {
+                throw new ValidateException(Core.Resources.AppResource.NewPasswordMatchedCurrentPasswordError);
+            }
+
+            // Nếu thỏa mãn thì thực hiện đổi mật khẩu
+            await _userRepository.ChangePasswordAsync(id, userPasswordChange.ChangePassword);
         }
 
         public async Task ResetPassword(Guid id)
@@ -353,12 +368,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             // Nếu có tồn tại
             // Pass mặc định: Abc@123
             var passwordDefault = _configuration["AppSettings:ResetedPasswordDefault"];
-            var userChangePassword = new UserPasswordChangeDto
-            {
-                UserId = id,
-                ChangePassword = passwordDefault
-            };
-            await _userRepository.ChangePasswordAsync(userChangePassword);
+            await _userRepository.ChangePasswordAsync(id, passwordDefault);
         }
 
         /// <summary>
@@ -495,15 +505,13 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             DateTime expirationDateTime = unixEpoch.AddSeconds(expireDate);
 
             // Chuyển đổi thành giờ local time
-            DateTime utcExpirationDateTime = expirationDateTime.ToLocalTime();
-
-            return utcExpirationDateTime;
+            DateTime expDateTime = expirationDateTime.ToLocalTime();
+            return expDateTime;
         }
 
         /// <summary>
         /// Hàm thực hiện set cookie cho máy khách
         /// </summary>
-        /// <param name="context">Http context</param>
         /// <param name="name">Tên key cookie cần set</param>
         /// <param name="value">Giá trị cookie cần set</param>
         /// <param name="dateTimeOffset">Thời gian hết hạn</param>
@@ -566,19 +574,69 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         // ============================================ VALIDATE NGHIỆP VỤ =================================================
         public override async Task ValidateForInserting(UserCreateDto entityCreateDto)
         {
-            // Check trùng email
-            await _userRepository.CheckUserExistByEmail(entityCreateDto.Email);
-            // Check trùng sđt
-            await _userRepository.CheckUserExistByPhoneNumber(entityCreateDto.PhoneNumber);
+            // Check email chưa tồn tại ko -> nếu đã tồn tại -> exception
+            await CheckUserNotExistedByEmail(entityCreateDto.Email);
+
+            // Check sđt chưa tồn tại không -> nếu đã tồn tại -> exception
+            await CheckUserNotExistedByPhoneNumber(entityCreateDto.PhoneNumber);
+
         }
 
         public override async Task ValidateForUpdating(Guid id, UserUpdateDto entityUpdateDto)
         {
-            // Validate cập nhật email
-            await _userRepository.CheckUserEmailUpdateToExistedEmail(id, entityUpdateDto.Email);
+            // Check xem id có tồn tại không. Nếu ko tồn tại -> exception
+            var employeeExist = await GetByIdAsync(id);
+
+            // Validate cập nhật email.
+            // Kiểm tra email muốn cập nhật có thay đổi so với ban đầu không. Nếu đã thay đổi -> kiểm tra
+            // xem nó có được cập nhật sang email chưa tồn tại không (nếu có throw exception)
+            if (employeeExist.Email != entityUpdateDto.Email)
+            {
+                await CheckUserNotExistedByEmail(entityUpdateDto.Email);
+            }
 
             // Validate cập nhật sđt
-            await _userRepository.CheckUserPhoneNumberUpdateToExistedPhoneNumber(id, entityUpdateDto.PhoneNumber);
+            // Kiểm tra SĐT muốn cập nhật có thay đổi so với ban đầu không. Nếu đã thay đổi -> kiểm tra
+            // xem nó có được cập nhật sang SĐT chưa tồn tại không (nếu có throw exception)
+            if (employeeExist.PhoneNumber != entityUpdateDto.PhoneNumber)
+            {
+                await CheckUserNotExistedByPhoneNumber(entityUpdateDto.PhoneNumber);
+            }
+        }
+
+        /// <summary>
+        /// Hàm thực hiện kiểm tra xem Email chưa tồn tại không
+        /// </summary>
+        /// <param name="email">Email cần check</param>
+        /// <returns></returns>
+        /// <exception cref="ValidateException">Tồn tại người dùng có email như đã nhập vào</exception>
+        /// Author: PNNHai
+        /// Date
+        private async Task CheckUserNotExistedByEmail(string email)
+        {
+            var userExistedByEmail = await _userRepository.FindUserByEmail(email);
+
+            if (userExistedByEmail != null)
+            {
+                throw new ValidateException(Core.Resources.AppResource.EmailExistedError);
+            }
+        }
+
+        /// <summary>
+        /// Hàm thực hiện kiểm tra xem SĐT chưa tồn tại không
+        /// </summary>
+        /// <param name="phoneNumber">SĐT cần check</param>
+        /// <exception cref="ValidateException">Tồn tại người dùng có sđt như đã nhập</exception>
+        /// Author: PNNHai
+        /// Date
+        private async Task CheckUserNotExistedByPhoneNumber(string phoneNumber)
+        {
+            var userExistedByPhoneNumber = await _userRepository.FindUserByPhoneNumber(phoneNumber);
+
+            if (userExistedByPhoneNumber != null)
+            {
+                throw new ValidateException(Core.Resources.AppResource.PhoneNumberExistedError);
+            }
         }
         #endregion
     }

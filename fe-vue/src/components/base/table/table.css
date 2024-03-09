@@ -92,6 +92,7 @@
   height: 5px;
   cursor: pointer;
   padding: 5px 10px;
+  border: 1px solid var(--white-color);
 }
 
 .drop-icon:hover {
@@ -211,12 +212,21 @@ tbody tr:nth-child(2) .drop-icon + .drop-list-function {
   float: right;
 }
 
+.filter-icon-area {
+  width: 20px;
+  height: 19px;
+}
+
 .filter-data-icon {
   background: url("/src/assets/img/Sprites.64af8f61.svg") no-repeat -1602px -91px;
   width: 20px;
   height: 19px;
   cursor: pointer;
   display: none;
+}
+
+.filter-icon--block {
+  display: block;
 }
 
 .filter-data--active {
@@ -291,10 +301,6 @@ tbody tr:nth-child(2) .drop-icon + .drop-list-function {
 }
 
 .main-content-table th:hover .filter-data-icon {
-  display: block;
-}
-
-.filter-data-icon:has(+ .filter-column-area) {
   display: block;
 }
 

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MISA.AMIS.WEB08.PNNHAI.Core;
 
@@ -47,16 +46,18 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
         /// <param name="importFile">Form chứa dữ liệu nhập khẩu</param>
         /// <returns>Trạng thái status code</returns>
         [HttpPost("Import")]
-        public async Task<IActionResult> ImportExcelFile(IFormFile? importFile)
+        public async Task<IActionResult> ImportExcelFile(Guid userId, IFormFile? importFile, 
+            string workingTable, string importSheetName)
         {
-            var res = await _employeeExcelService.ReadExcelFileAsync(importFile, "DanhSachNhanVien", "Employee");
+            //var res = await _employeeExcelService.ReadExcelFileAsync(userId, importFile, "DanhSachNhanVien", "Employee");
+            var res = await _employeeExcelService.ReadExcelFileAsync(userId, importFile, importSheetName, workingTable);
             return StatusCode(StatusCodes.Status200OK, res);
         }
 
         [HttpPost("Confirm-Import-Excel")]
-        public async Task<IActionResult> Confirm(string workingTable, ConfirmType confirmType)
+        public async Task<IActionResult> Confirm(Guid userId, string workingTable, ConfirmType confirmType)
         {
-            await _employeeExcelService.ConfirmImport(workingTable, confirmType);
+            await _employeeExcelService.ConfirmImport(userId, workingTable, confirmType);
             return StatusCode(StatusCodes.Status200OK);
         }
 

@@ -56,10 +56,10 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         void RemoveByKeyCache(string key);
 
         /// <summary>
-        /// Hàm thực hiện lấy danh sách dữ liệu đã cache vào để thực hiện thêm
+        /// Hàm thực hiện lấy danh sách dữ liệu đã cache với key
         /// </summary>
-        /// <param name="tableName">bảng muốn thêm</param>
+        /// <param name="key">key muốn xóa cache dữ liệu</param>
         /// <returns>danh sách object</returns>
-        List<object> GetListObjectByTableName(string tableName);
+        List<object> GetListObjectByKey(string key);
     }
 }

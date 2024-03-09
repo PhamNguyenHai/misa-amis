@@ -19,14 +19,14 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
 
         #region Methods
         /// <summary>
-        /// Hàm thực hiện kiểm tra thông tin đăng nhập người dùng 
+        /// Hàm thực hiện lấy thông tin user thông qua thông tin đăng nhập người dùng 
         /// </summary>
         /// <param name="emailOrPhoneNumber">email hoặc số điện thoại đăng nhập</param>
         /// <param name="password">mật khẩu</param>
         /// <returns>Người dùng thỏa mãn</returns>
         /// Author: PNNHai
         /// Date:
-        public async Task<User?> CheckLoginInforAsync(string emailOrPhoneNumber, string password)
+        public async Task<User?> FindUserByLoginInforAsync(string emailOrPhoneNumber, string password)
         {
             string storedProcedureName = "Proc_user_CheckLoginInfor";
 
@@ -39,13 +39,13 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
             return user;
         }
 
-        public async Task ChangePasswordAsync(UserPasswordChangeDto userPasswordChange)
+        public async Task ChangePasswordAsync(Guid id, string newPassword)
         {
             string storedProcedureName = "Proc_user_ChangePassword";
 
             var parametters = new DynamicParameters();
-            parametters.Add("i_UserId", userPasswordChange.UserId);
-            parametters.Add("i_ChangedPassword", userPasswordChange.ChangePassword);
+            parametters.Add("i_UserId", id);
+            parametters.Add("i_ChangedPassword", newPassword);
 
             await _uow.Connection.ExecuteAsync(storedProcedureName, parametters,
                 commandType: CommandType.StoredProcedure, transaction: _uow.Transaction);
@@ -55,10 +55,10 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
         /// Hàm thực hiện tìm kiếm người dùng thông qua email
         /// </summary>
         /// <param name="email">email của người dùng cần tìm</param>
-        /// <returns>User</returns>
+        /// <returns>User || null</returns>
         /// Author: PNNHai
         /// Date:
-        private async Task<User> FindUserByEmail(string email)
+        public async Task<User?> FindUserByEmail(string email)
         {
             string sqlCommand = "SELECT * FROM view_user WHERE Email = @email";
 
@@ -73,10 +73,10 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
         /// Hàm thực hiện tìm kiếm người dùng thông qua sdt
         /// </summary>
         /// <param name="phoneNumber">sđt của người dùng cần tìm</param>
-        /// <returns>User</returns>
+        /// <returns>User || null</returns>
         /// Author: PNNHai
         /// Date:
-        private async Task<User> FindUserByPhoneNumber(string phoneNumber)
+        public async Task<User?> FindUserByPhoneNumber(string phoneNumber)
         {
             string sqlCommand = "SELECT * FROM view_user WHERE PhoneNumber = @phoneNumber";
 
@@ -87,46 +87,18 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
             return existedUser;
         }
 
-        public async Task CheckUserExistByEmail(string email)
+        public async Task<bool> IsPasswordMatched(Guid id, string password)
         {
-            var existedUser = await FindUserByEmail(email);
-            if(existedUser != null)
-            {
-                throw new ValidateException("Email đã tồn tại trong hệ thống");
-            }
-        }
+            string functionExecuteCommand = $"SELECT Func_user_CheckPasswordExisted(@id, @password)";
 
-        public async Task CheckUserExistByPhoneNumber(string phoneNumber)
-        {
-            var existedUser = await FindUserByPhoneNumber(phoneNumber);
-            if (existedUser != null)
-            {
-                throw new ValidateException("Số điện thoại đã tồn tại trong hệ thống");
-            }
-        }
+            var parameters = new DynamicParameters();
+            parameters.Add($"@id", id);
+            parameters.Add($"@password", password);
 
-        public async Task CheckUserEmailUpdateToExistedEmail(Guid id, string email)
-        {
-            // Kiểm tra xem id truyền vào có tồn tại không (Nếu không throw exception ko tìm thấy)
-            var userExist = await GetByIdAsync(id);
-
-            // Nếu cập nhật sang email khác -> kiểm tra xem email muốn cập nhật tồn tại chưa
-            if (userExist.Email != email)
-            {
-                await CheckUserExistByEmail(email);
-            }
-        }
-
-        public async Task CheckUserPhoneNumberUpdateToExistedPhoneNumber(Guid id, string phoneNumber)
-        {
-            // Kiểm tra xem id truyền vào có tồn tại không (Nếu không throw exception ko tìm thấy)
-            var userExist = await GetByIdAsync(id);
-
-            // Nếu cập nhật sang sdt khác -> kiểm tra xem sdt muốn cập nhật tồn tại chưa
-            if (userExist.PhoneNumber != phoneNumber)
-            {
-                await CheckUserExistByPhoneNumber(phoneNumber);
-            }
+            // Kiểm tra khớp mật khẩu không
+            var isMatched = await _uow.Connection.QueryFirstOrDefaultAsync<bool>(functionExecuteCommand, parameters, 
+                transaction: _uow.Transaction);
+            return isMatched;
         }
         #endregion
     }

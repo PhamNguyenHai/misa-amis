@@ -37,11 +37,12 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// <summary>
         /// Thực hiện đổi mật khẩu cho tài khoản
         /// </summary>
+        /// <param name="id">Mã định danh của người dùng cần thay mật khẩu</param>
         /// <param name="userPasswordChange">Thông tin tài khoản cần thực hiện thay đổi và mật khẩu thay đổi</param>
         /// <returns></returns>
         /// Author: PNNHai
         /// Date:
-        Task ChangePasswordAsync(UserPasswordChangeDto userPasswordChange);
+        Task ChangePasswordAsync(Guid id, UserPasswordChangeDto userPasswordChange);
 
         /// <summary>
         /// Thực hiện reset mật khẩu người dùng

@@ -66,10 +66,11 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// <summary>
         /// Hàm thực hiện xác nhận có import dữ liệu vào db hay không
         /// </summary>
+        /// <param name="userId">mã định danh người dùng đang thực hiện import</param>
         /// <param name="workingTable">Bảng thực hiện thêm</param>
         /// <param name="confirmType">Trạng thái xác nhận (0: ko; 1: có)</param>
         /// <returns></returns>
-        public async Task ConfirmImport(string workingTable, ConfirmType confirmType)
+        public async Task ConfirmImport(Guid userId, string workingTable, ConfirmType confirmType)
         {
             var currentTableName = typeof(TEntity).Name;
             if (workingTable.ToLower().Trim() != currentTableName.ToLower())
@@ -79,7 +80,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
             {
                 // Nếu người dùng đồng ý nhập khẩu
                 case ConfirmType.Yes:
-                    var validData = _excelRepository.GetListObjectByTableName(currentTableName);
+                    var validData = _excelRepository.GetListObjectByKey($"{userId}_{currentTableName}");
 
                     if (validData == null)
                     {
@@ -95,7 +96,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
 
                 // Nếu không đồng ý nhập khẩu
                 case ConfirmType.No:
-                    var dataInCache = _excelRepository.GetListObjectByTableName(currentTableName);
+                    var dataInCache = _excelRepository.GetListObjectByKey($"{userId}_{currentTableName}");
                     if (dataInCache == null)
                     {
                         throw new ValidateException(Core.Resources.AppResource.ImportDataNotFountOrTimeout);
@@ -103,9 +104,6 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
 
                     // Xóa cache
                     _excelRepository.RemoveByKeyCache(currentTableName);
-
-                    var abc = _excelRepository.GetListObjectByTableName(currentTableName);
-
                     break;
 
                 default:
@@ -116,6 +114,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// <summary>
         /// Hàm thực hiện đọc dữ liệu từ file excel
         /// </summary>
+        /// <param name="userId">mã định danh người dùng đang thực hiện import</param>
         /// <param name="importFile">file truyền lên</param>
         /// <param name="sheetUsed">sheet cần đọc</param>
         /// <param name="workingObjectTable">Bảng trong csdl thực hiện nhập khẩu</param>
@@ -123,7 +122,8 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// <exception cref="ValidateException">Lỗi file không hợp lệ</exception>
         /// Author: PNNHai
         /// Date:
-        public async Task<IEnumerable<TRespondDto>> ReadExcelFileAsync(IFormFile importFile, string sheetUsed, string workingObjectTable)
+        public async Task<IEnumerable<TRespondDto>> ReadExcelFileAsync(Guid userId, IFormFile importFile, 
+            string sheetUsed, string workingObjectTable)
         {
             // Kiểm tra xem file có được gửi lên không 
             if (importFile == null || importFile.Length <= 0)
@@ -172,7 +172,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
                     if (_validEntityToCreate.Count() > 0)
                     {
                         var tableName = typeof(TEntity).Name;
-                        _excelRepository.SetCache(tableName, _validEntityToCreate.Cast<object>().ToList());
+                        _excelRepository.SetCache($"{userId}_{tableName}", _validEntityToCreate.Cast<object>().ToList());
                     }
 
                     return objectResults;

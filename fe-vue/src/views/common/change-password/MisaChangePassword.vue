@@ -129,6 +129,7 @@
 </template>
 <script>
 import getFieldInvalidError from "@/js/helpers/validate";
+import userService from "@/js/services/user-service";
 export default {
   name: "MisaChangePasswordPage",
 
@@ -146,7 +147,12 @@ export default {
 
       validateFormRules: {
         oldPassword: ["required", "maxLength_50"],
-        newPassword: ["required", "maxLength_50"],
+        newPassword: [
+          "required",
+          "minLength_6",
+          "strongPassword",
+          "maxLength_50",
+        ],
         repeatedNewPassword: ["required", "maxLength_50"],
       },
 
@@ -237,6 +243,18 @@ export default {
           }
         }
 
+        // Nếu mật khẩu và mật khẩu nhập lại không khớp
+        if (
+          this.formData.newPassword &&
+          this.formData.repeatedNewPassword &&
+          this.formData.newPassword !== this.formData.repeatedNewPassword
+        ) {
+          this.itemListDialogContent.push(
+            "Mật khẩu nhập lại và mật khẩu không khớp."
+          );
+          isOk = false;
+        }
+
         // Nếu có error ở các trường -> hiển thị dialog error
         if (this.itemListDialogContent.length > 0) {
           this.dialog.isShow = true;
@@ -247,6 +265,56 @@ export default {
         return isOk;
       } catch (err) {
         console.error(err);
+      }
+    },
+
+    async changePassword(userId, changePasswordInfor) {
+      try {
+        this.$store.state.isLoading = true;
+        const res = await userService.changePassword(
+          userId,
+          changePasswordInfor
+        );
+        if (res?.success) {
+          return res.data;
+        }
+        return null;
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.$store.state.isLoading = false;
+      }
+    },
+
+    /**
+     * Author : PNNHai
+     * Date :
+     * Description : Hàm xóa các error của các trường. Để reset form
+     */
+    resetTextFieldError() {
+      try {
+        // Bỏ toàn bộ error có trong dialog
+        this.itemListDialogContent = [];
+        for (let keyAttr in this.errorMessages) {
+          this.errorMessages[keyAttr] = "";
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    /**
+     * Author : PNNHai
+     * Date :
+     * Description : Hàm xóa dữ liệu của các trường. Để reset form
+     */
+    resetFieldData() {
+      try {
+        for (let keyAttr in this.formData) {
+          this.formData[keyAttr] = null;
+        }
+      } catch (error) {
+        console.error(error);
       }
     },
 
@@ -301,7 +369,7 @@ export default {
     async handleDialogResponded(responseStatus) {
       try {
         if (this.confirmAction === this.$_MisaEnums.CONFIRM_ACTION.SAVE) {
-          this.handleConfirmSaveNewPassword(responseStatus);
+          await this.handleConfirmSaveNewPassword(responseStatus);
         }
 
         // Tắt dialog đi
@@ -313,11 +381,29 @@ export default {
       }
     },
 
-    handleConfirmSaveNewPassword(response) {
+    async handleConfirmSaveNewPassword(response) {
       try {
         // Với trường hợp response = yes
         if (response === this.$_MisaEnums.DIALOG_RESPONSE.YES) {
-          alert("Xoas");
+          const changePasswordInfor = {
+            currentPassword: this.formData.oldPassword,
+            changePassword: this.formData.newPassword,
+          };
+
+          const changePasswordStatus = await this.changePassword(
+            this.$store.state.loginStatus.userId,
+            changePasswordInfor
+          );
+
+          if (changePasswordStatus) {
+            this.$store.commit("addToast", {
+              type: "success",
+              message: "Đổi mật khẩu thành công",
+            });
+            // Reset form
+            this.resetFieldData();
+            this.resetTextFieldError();
+          }
         }
       } catch (err) {
         console.error(err);

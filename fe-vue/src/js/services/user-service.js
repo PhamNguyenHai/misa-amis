@@ -99,10 +99,14 @@ class UserService extends BaseService {
    * @returns : response từ api về sau đổi mật khẩu
    * Description: method thực hiện thay đổi mật khẩu
    */
-  async changePassword(userId) {
+  async changePassword(userId, { currentPassword, changePassword }) {
     try {
       const res = await this.baseApiService.put(
-        this.endpoint(`/Change-Password/${userId}`)
+        this.endpoint(`/Change-Password/${userId}`),
+        {
+          currentPassword,
+          changePassword,
+        }
       );
       return res;
     } catch (err) {

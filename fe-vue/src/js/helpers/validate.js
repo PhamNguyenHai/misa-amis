@@ -1,7 +1,8 @@
 import MisaResources from "./resources";
 
-// textLength là biến giá trị max length được gán ở getFieldValidateRuleFunctions
-let textLength = 0;
+// maxLengthText là biến giá trị max length được gán ở getFieldValidateRuleFunctions
+let maxLengthText = 0;
+let minLengthText = 0;
 
 /**
  * Author: PNNHai
@@ -21,9 +22,20 @@ const validateRulesObj = {
       : MisaResources.validateErrorMessages.numberOnly;
   },
 
+  strongPassword: (value) => {
+    return value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{6,}$/)
+      ? ""
+      : MisaResources.validateErrorMessages.strongPassword;
+  },
+
+  minLength: (value) =>
+    value.length < minLengthText
+      ? MisaResources.validateErrorMessages.minLength(minLengthText)
+      : "",
+
   maxLength: (value) =>
-    value.length > textLength
-      ? MisaResources.validateErrorMessages.maxLength(textLength)
+    value.length > maxLengthText
+      ? MisaResources.validateErrorMessages.maxLength(maxLengthText)
       : "",
 
   email: (value) =>
@@ -70,8 +82,11 @@ const getFieldValidateRuleFunctions = (fieldRules) => {
     fieldRules.forEach((rule) => {
       // Đối với rule nào có maxLength thì sẽ phải cắt rules ở vị trí có kí tự "_" -> cuối để lấy length
       if (rule.includes("maxLength")) {
-        textLength = rule.slice(rule.indexOf("_") + 1);
+        maxLengthText = rule.slice(rule.indexOf("_") + 1);
         rulesFunctions.push(validateRulesObj["maxLength"]);
+      } else if (rule.includes("minLength")) {
+        minLengthText = rule.slice(rule.indexOf("_") + 1);
+        rulesFunctions.push(validateRulesObj["minLength"]);
       } else {
         rulesFunctions.push(validateRulesObj[rule]);
       }

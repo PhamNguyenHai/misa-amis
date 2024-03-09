@@ -61,6 +61,33 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Access token không hợp lệ..
+        /// </summary>
+        public static string AccessTokenInvalidError {
+            get {
+                return ResourceManager.GetString("AccessTokenInvalidError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Access token chưa hết hạn không thể làm mới..
+        /// </summary>
+        public static string AccessTokenNotExpiredCantRefreshError {
+            get {
+                return ResourceManager.GetString("AccessTokenNotExpiredCantRefreshError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Access token không được gửi lên..
+        /// </summary>
+        public static string AccessTokenNotPostedError {
+            get {
+                return ResourceManager.GetString("AccessTokenNotPostedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tồn tại mã định danh không thỏa mãn..
         /// </summary>
         public static string ContainsInvalidIdError {
@@ -75,6 +102,15 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         public static string ContainWrongColumnInFilePosted {
             get {
                 return ResourceManager.GetString("ContainWrongColumnInFilePosted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu hiện tại gửi lên không khớp..
+        /// </summary>
+        public static string CurrentPasswordPostedNotMatchedError {
+            get {
+                return ResourceManager.GetString("CurrentPasswordPostedNotMatchedError", resourceCulture);
             }
         }
         
@@ -102,6 +138,24 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         public static string DeleteSuccessful {
             get {
                 return ResourceManager.GetString("DeleteSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phòng ban không tồn tại..
+        /// </summary>
+        public static string DepartmentNotExistedError {
+            get {
+                return ResourceManager.GetString("DepartmentNotExistedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email đã tồn tại trong hệ thống..
+        /// </summary>
+        public static string EmailExistedError {
+            get {
+                return ResourceManager.GetString("EmailExistedError", resourceCulture);
             }
         }
         
@@ -268,11 +322,29 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thông tin đăng nhập không hợp lệ..
+        /// </summary>
+        public static string LoginInforInvalidError {
+            get {
+                return ResourceManager.GetString("LoginInforInvalidError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chỉ được phép thực hiện xóa tối đa {0} bản ghi..
         /// </summary>
         public static string MoreRecordDeleteError {
             get {
                 return ResourceManager.GetString("MoreRecordDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu muốn thay đổi không khác mật khẩu hiện tại..
+        /// </summary>
+        public static string NewPasswordMatchedCurrentPasswordError {
+            get {
+                return ResourceManager.GetString("NewPasswordMatchedCurrentPasswordError", resourceCulture);
             }
         }
         
@@ -291,6 +363,15 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         public static string NotImplementWithObjError {
             get {
                 return ResourceManager.GetString("NotImplementWithObjError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số điện thoại đã tồn tại trong hệ thống..
+        /// </summary>
+        public static string PhoneNumberExistedError {
+            get {
+                return ResourceManager.GetString("PhoneNumberExistedError", resourceCulture);
             }
         }
         
@@ -322,6 +403,33 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Refresh token đã hết hạn..
+        /// </summary>
+        public static string RefreshTokenExpiredError {
+            get {
+                return ResourceManager.GetString("RefreshTokenExpiredError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh token không tồn tại..
+        /// </summary>
+        public static string RefreshTokenNotExistedError {
+            get {
+                return ResourceManager.GetString("RefreshTokenNotExistedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh token không được gửi lên..
+        /// </summary>
+        public static string RefreshTokenNotPostedError {
+            get {
+                return ResourceManager.GetString("RefreshTokenNotPostedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chỉ chấp nhận tệp excel (.xlsx)..
         /// </summary>
         public static string SendWithoutExcelFileError {
@@ -349,6 +457,24 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Token gửi lên không hợp lệ..
+        /// </summary>
+        public static string TokenPostedInvalidError {
+            get {
+                return ResourceManager.GetString("TokenPostedInvalidError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Token đã bị thu hồi hoặc hết hạn..
+        /// </summary>
+        public static string TokenRevokedOrExpiredError {
+            get {
+                return ResourceManager.GetString("TokenRevokedOrExpiredError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Xác thực người dùng không thành công.
         /// </summary>
         public static string UnauthorizeError {
@@ -363,6 +489,15 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         public static string UpdateSuccessful {
             get {
                 return ResourceManager.GetString("UpdateSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Người dùng không tồn tại..
+        /// </summary>
+        public static string UserNotExistedError {
+            get {
+                return ResourceManager.GetString("UserNotExistedError", resourceCulture);
             }
         }
         

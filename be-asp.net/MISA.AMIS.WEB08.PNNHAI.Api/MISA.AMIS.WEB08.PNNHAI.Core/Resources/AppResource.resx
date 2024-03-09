@@ -117,11 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccessTokenInvalidError" xml:space="preserve">
+    <value>Access token không hợp lệ.</value>
+  </data>
+  <data name="AccessTokenNotExpiredCantRefreshError" xml:space="preserve">
+    <value>Access token chưa hết hạn không thể làm mới.</value>
+  </data>
+  <data name="AccessTokenNotPostedError" xml:space="preserve">
+    <value>Access token không được gửi lên.</value>
+  </data>
   <data name="ContainsInvalidIdError" xml:space="preserve">
     <value>Tồn tại mã định danh không thỏa mãn.</value>
   </data>
   <data name="ContainWrongColumnInFilePosted" xml:space="preserve">
     <value>Tệp nhập khẩu không đúng mẫu! Tồn tại cột không thỏa mãn dữ liệu quản lý.</value>
+  </data>
+  <data name="CurrentPasswordPostedNotMatchedError" xml:space="preserve">
+    <value>Mật khẩu hiện tại gửi lên không khớp.</value>
   </data>
   <data name="DataConflict" xml:space="preserve">
     <value>{0} xung đột kiểu dữ liệu.</value>
@@ -131,6 +143,12 @@
   </data>
   <data name="DeleteSuccessful" xml:space="preserve">
     <value>Xóa thành công.</value>
+  </data>
+  <data name="DepartmentNotExistedError" xml:space="preserve">
+    <value>Phòng ban không tồn tại.</value>
+  </data>
+  <data name="EmailExistedError" xml:space="preserve">
+    <value>Email đã tồn tại trong hệ thống.</value>
   </data>
   <data name="EmailWrongFormat" xml:space="preserve">
     <value>Email sai định dạng.</value>
@@ -186,14 +204,23 @@
   <data name="LandlineNumberWrongFormat" xml:space="preserve">
     <value>Số điện thoại cố định sai định dạng.</value>
   </data>
+  <data name="LoginInforInvalidError" xml:space="preserve">
+    <value>Thông tin đăng nhập không hợp lệ.</value>
+  </data>
   <data name="MoreRecordDeleteError" xml:space="preserve">
     <value>Chỉ được phép thực hiện xóa tối đa {0} bản ghi.</value>
+  </data>
+  <data name="NewPasswordMatchedCurrentPasswordError" xml:space="preserve">
+    <value>Mật khẩu muốn thay đổi không khác mật khẩu hiện tại.</value>
   </data>
   <data name="NotFoundById" xml:space="preserve">
     <value>Không tìm thấy thông tin theo Id.</value>
   </data>
   <data name="NotImplementWithObjError" xml:space="preserve">
     <value>Chưa có chức năng nhập khẩu với đối tượng này.</value>
+  </data>
+  <data name="PhoneNumberExistedError" xml:space="preserve">
+    <value>Số điện thoại đã tồn tại trong hệ thống.</value>
   </data>
   <data name="PhoneNumberWrongFormat" xml:space="preserve">
     <value>Số điện thoại di động sai định dạng.</value>
@@ -204,6 +231,15 @@
   <data name="PostedWithWrongSheet" xml:space="preserve">
     <value>Bạn đã gửi tệp với sheet không thỏa mãn lên.</value>
   </data>
+  <data name="RefreshTokenExpiredError" xml:space="preserve">
+    <value>Refresh token đã hết hạn.</value>
+  </data>
+  <data name="RefreshTokenNotExistedError" xml:space="preserve">
+    <value>Refresh token không tồn tại.</value>
+  </data>
+  <data name="RefreshTokenNotPostedError" xml:space="preserve">
+    <value>Refresh token không được gửi lên.</value>
+  </data>
   <data name="SendWithoutExcelFileError" xml:space="preserve">
     <value>Chỉ chấp nhận tệp excel (.xlsx).</value>
   </data>
@@ -213,11 +249,20 @@
   <data name="SystemError" xml:space="preserve">
     <value>Có lỗi xảy ra. Vui lòng liên hệ Misa để được giúp đỡ.</value>
   </data>
+  <data name="TokenPostedInvalidError" xml:space="preserve">
+    <value>Token gửi lên không hợp lệ.</value>
+  </data>
+  <data name="TokenRevokedOrExpiredError" xml:space="preserve">
+    <value>Token đã bị thu hồi hoặc hết hạn.</value>
+  </data>
   <data name="UnauthorizeError" xml:space="preserve">
     <value>Xác thực người dùng không thành công</value>
   </data>
   <data name="UpdateSuccessful" xml:space="preserve">
     <value>Cập nhật thành công.</value>
+  </data>
+  <data name="UserNotExistedError" xml:space="preserve">
+    <value>Người dùng không tồn tại.</value>
   </data>
   <data name="ValueNotFound" xml:space="preserve">
     <value>{0} có giá trị không tồn tại.</value>

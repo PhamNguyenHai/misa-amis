@@ -304,7 +304,8 @@ export default {
         this.$store.state.isLoading = true;
         const formData = new FormData();
         formData.append("importFile", this.importFile);
-        const res = await employeeService.importExcelFile(formData);
+        const userId = this.$store.state.loginStatus.userId;
+        const res = await employeeService.importExcelFile(userId, formData);
         return res;
       } catch (err) {
         console.error(err);
@@ -365,8 +366,9 @@ export default {
       try {
         if (this.validRecordsCount > 0) {
           this.$store.state.isLoading = true;
+          const userId = this.$store.state.loginStatus.userId;
           const res = await employeeService.confirmImport(
-            "Employee",
+            userId,
             this.$_MisaEnums.COMFIRM_TYPE.AGREE
           );
           if (res?.success) {

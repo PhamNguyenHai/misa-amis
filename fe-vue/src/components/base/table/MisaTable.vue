@@ -24,16 +24,20 @@
             >
               {{ header.title }}
               <div class="filter-data">
-                <div
-                  class="filter-data-icon"
-                  :class="{
-                    'filter-data--active': isFilterColumnAccessed(
-                      header.columnKey
-                    ),
-                  }"
-                  :title="$_MisaResources.filterPopup.tooltipForFilterIcon"
-                  @click.stop="handleShowFilterColumnPopup(header.columnKey)"
-                ></div>
+                <div class="filter-icon-area">
+                  <div
+                    class="filter-data-icon"
+                    :class="{
+                      'filter-icon--block':
+                        header.columnKey === filterPopupColumnName,
+                      'filter-data--active': isFilterColumnAccessed(
+                        header.columnKey
+                      ),
+                    }"
+                    :title="$_MisaResources.filterPopup.tooltipForFilterIcon"
+                    @click.stop="handleShowFilterColumnPopup(header.columnKey)"
+                  ></div>
+                </div>
                 <div
                   class="filter-column-area"
                   title=""

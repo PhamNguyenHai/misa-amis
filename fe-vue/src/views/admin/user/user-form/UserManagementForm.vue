@@ -259,7 +259,7 @@ export default {
         role: ["required"],
         email: ["required", "email", "maxLength_100"],
         phoneNumber: ["required", "phoneNumber", "maxLength_50"],
-        password: ["required", "maxLength_50"],
+        password: ["required", "minLength_6", "strongPassword", "maxLength_50"],
         repeatedPassword: ["required", "maxLength_50"],
       },
 

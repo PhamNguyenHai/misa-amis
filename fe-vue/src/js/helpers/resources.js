@@ -11,8 +11,10 @@ const MisaResources = {
     invalidValue: "không hợp lệ.",
     invalidFormat: "sai định dạng.",
     numberOnly: "chỉ cho phép nhập số.",
+    strongPassword: "không đủ mạnh",
     notMoreThanCurrentDate: "không được lớn hơn ngày hiện tại.",
     maxLength: (max) => `chỉ được phép nhập tối đa ${max} kí tự`,
+    minLength: (min) => `cần ít nhất ${min} kí tự`,
   },
 
   errorHandle: {

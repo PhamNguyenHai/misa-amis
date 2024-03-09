@@ -9,6 +9,7 @@ import MisaHome from "@/views/anonymous/home/MisaHome.vue";
 
 // Role (Common)
 import MisaChangePassword from "@/views/common/change-password/MisaChangePassword.vue";
+import LoginLog from "@/views/common/login-log/LoginLog.vue";
 
 // Admin
 import AdminHomePage from "@/views/admin/home/AdminHome.vue";
@@ -17,7 +18,6 @@ import EmployeeStatisticalAdminPage from "@/views/admin/employee-statistical/Emp
 import UserManagementPage from "@/views/admin/user/user-page/UserManagementPage.vue";
 import ManagementPage from "@/views/admin/management/ManagementPage.vue";
 import TaxPage from "@/views/admin/tax/TaxPage.vue";
-import AdminLoginLog from "@/views/admin/login-log/AdminLoginLog.vue";
 
 // User
 import UserHomePage from "@/views/user/home/UserHome.vue";
@@ -46,8 +46,8 @@ const routers = [
   },
   {
     path: "/security/login-logs",
-    name: "AdminLoginLog",
-    component: AdminLoginLog,
+    name: "LoginLog",
+    component: LoginLog,
     meta: { requiresAuth: true, adminOnly: true, userOnly: true },
   },
 

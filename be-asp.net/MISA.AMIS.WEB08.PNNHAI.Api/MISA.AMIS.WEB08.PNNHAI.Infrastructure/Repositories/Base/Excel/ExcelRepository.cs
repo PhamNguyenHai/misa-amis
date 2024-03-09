@@ -78,7 +78,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
         /// </summary>
         /// <param name="key">key của dữ liệu muốn lấy</param>
         /// <returns>Dữ liệu muốn lấy</returns>
-        /// Author: PNNHai
+        /// Author: PNNHai 
         /// Date:
         public object GetCache(string key)
         {
@@ -87,15 +87,15 @@ namespace MISA.AMIS.WEB08.PNNHAI.Infrastructure
         }
 
         /// <summary>
-        /// Hàm thực hiện lấy danh sách đối tượng từ cache thông qua table name
+        /// Hàm thực hiện lấy danh sách đối tượng từ cache thông qua key
         /// </summary>
-        /// <param name="tableName">tên bảng muốn lấy từ cache</param>
+        /// <param name="key">key muốn xóa cache dữ liệu</param>
         /// <returns>danh sách đối tượng</returns>
         /// Author: PNNHai
         /// Date:
-        public List<object> GetListObjectByTableName(string tableName)
+        public List<object> GetListObjectByKey(string key)
         {
-            var data = _memoryCache.Get<List<object>>(tableName);
+            var data = _memoryCache.Get<List<object>>(key);
             return data;
         }
 

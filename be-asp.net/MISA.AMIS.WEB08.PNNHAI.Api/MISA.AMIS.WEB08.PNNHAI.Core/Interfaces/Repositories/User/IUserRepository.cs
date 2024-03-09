@@ -10,58 +10,49 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
     {
 
         /// <summary>
-        /// Thực hiện kiểm tra thông tin đăng nhập có chính xác không
+        /// Thực hiện lấy thông tin user thông qua thông tin đăng nhập người dùng 
         /// </summary>
         /// <param name="emailOrPhoneNumber">email hoặc số điện thoại đăng nhập</param>
         /// <param name="password">mật khẩu đăng nhập</param>
         /// <returns>Người dùng thỏa mãn</returns>
         /// Author: PNNHai
         /// Date:
-        Task<User?> CheckLoginInforAsync(string emailOrPhoneNumber, string password);
+        Task<User?> FindUserByLoginInforAsync(string emailOrPhoneNumber, string password);
 
         /// <summary>
         /// Thực hiện đổi mật khẩu cho tài khoản
         /// </summary>
-        /// <param name="userPasswordChange">Thông tin tài khoản cần thực hiện thay đổi và mật khẩu thay đổi</param>
+        /// <param name="id">id người dùng cần đổi mật khẩu</param>
+        /// <param name="newPassword">mật khẩu mới cần set</param>
         /// <returns></returns>
         /// Author: PNNHai
         /// Date:
-        Task ChangePasswordAsync(UserPasswordChangeDto userPasswordChange);
+        Task ChangePasswordAsync(Guid id, string newPassword);
 
         /// <summary>
-        /// Thực hiện check trùng email người dùng
+        /// Thực hiện kiểm tra xem mật khẩu truyền vào có phải là mật khẩu hiện tại của người dùng với id không
         /// </summary>
-        /// <param name="email">Email cần check</param>
-        /// <returns></returns>
+        /// <param name="id">id người dùng cần kiểm tra</param>
+        /// <param name="password">mật khẩu cần kiểm tra</param>
+        /// <returns>true (nếu mật khẩu match) || false (nếu mật khẩu ko match)</returns>
+        Task<bool> IsPasswordMatched(Guid id, string password);
+
+        /// <summary>
+        /// Thực hiện tìm người dùng thông qua email
+        /// </summary>
+        /// <param name="email">Email của người dùng muốn thực hiện tìm kiếm</param>
+        /// <returns>Người dùng || null</returns>
         /// Author: PNNHai
         /// Date:
-        Task CheckUserExistByEmail(string email);
+        Task<User?> FindUserByEmail(string email);
 
         /// <summary>
-        /// Thực hiện check trùng sđt người dùng
+        /// Thực hiện tìm người dùng thông qua số điện thoại
         /// </summary>
-        /// <param name="phoneNumber">SDT cần check</param>
-        /// <returns></returns>
+        /// <param name="phoneNumber">SĐT của người dùng muốn thực hiện tìm kiếm</param>
+        /// <returns>Người dùng || null</returns>
         /// Author: PNNHai
         /// Date:
-        Task CheckUserExistByPhoneNumber(string phoneNumber);
-
-        /// <summary>
-        /// Thực hiện check xem email muốn update có thỏa mãn không
-        /// </summary>
-        /// <param name="id">Id người dùng cần update</param>
-        /// <param name="email">Email muốn update</param>
-        /// <returns></returns>
-        /// Author: PNNHai
-        /// Date:
-        Task CheckUserEmailUpdateToExistedEmail(Guid id, string email);
-
-        /// <summary>
-        /// Thực hiện check xem sđt muốn update có thỏa mãn không
-        /// </summary>
-        /// <param name="id">Id người dùng cần update</param>
-        /// <param name="phoneNumber">sđt muốn update</param>
-        /// <returns></returns>
-        Task CheckUserPhoneNumberUpdateToExistedPhoneNumber(Guid id, string phoneNumber);
+        Task<User?> FindUserByPhoneNumber(string phoneNumber);      
     }
 }

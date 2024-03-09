@@ -21,21 +21,23 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// <summary>
         /// Thực hiện đọc file excel được truyền lên
         /// </summary>
+        /// <param name="userId">mã định danh người dùng đang thực hiện import</param>
         /// <param name="importFile">file truyền lên</param>
         /// <param name="sheetUsed">sheet sử dụng</param>
         /// <param name="workingObjectTable">table sẽ thực hiện import vào</param>
         /// <returns>Danh sách dữ liệu các dòng sau khi đọc kèm theo trạng thái lỗi (nếu có)</returns>
         /// Author: PNNHai
         /// Date
-        Task<IEnumerable<TRespondDto>> ReadExcelFileAsync(IFormFile importFile, string sheetUsed, string workingObjectTable);
+        Task<IEnumerable<TRespondDto>> ReadExcelFileAsync(Guid userId, IFormFile importFile, string sheetUsed, string workingObjectTable);
 
         /// <summary>
         /// Hàm thực hiện xác nhận nhập khẩu file vào db
         /// </summary>
+        /// <param name="userId">mã định danh người dùng đang thực hiện xác nhận import</param>
         /// <param name="workingTable">Tên bảng thực hiện import</param>
         /// <param name="confirmType">Trạng thái người dùng có xác nhận import hay không (0: ko; 1: có)</param>
         /// Author: PNNHai
         /// Date
-        Task ConfirmImport(string workingTable, ConfirmType confirmType);
+        Task ConfirmImport(Guid userId, string workingTable, ConfirmType confirmType);
     }
 }
