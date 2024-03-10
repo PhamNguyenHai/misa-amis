@@ -6,7 +6,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Api
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class EmployeesController
         : BaseWithCodeController<Employee, EmployeeDto, EmployeeCreateDto, EmployeeUpdateDto>
     {

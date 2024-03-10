@@ -13,7 +13,6 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// Service thêm mới đối tượng
         /// </summary>
         /// <param name="entityCreateDto">Phần tử cần thêm mới</param>
-        /// <returns></returns>
         /// Author: PNNHai
         /// Date: 
         Task CreateAsync(TEntityCreateDto entityCreateDto);
@@ -23,7 +22,6 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// </summary>
         /// <param name="id">Mã định danh cần cập nhật</param>
         /// <param name="entityUpdateDto">Thông tin đối tượng update</param>
-        /// <returns></returns>
         /// Author: PNNHai
         /// Date: 
         Task UpdateAsync(Guid id, TEntityUpdateDto entityUpdateDto);
@@ -32,7 +30,6 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// Service xóa đối tượng
         /// </summary>
         /// <param name="id">Mã định danh của đối tượng cần xóa</param>
-        /// <returns></returns>
         /// Author: PNNHai
         /// Date: 
         Task DeleteAsync(Guid id);
@@ -41,10 +38,8 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// Service xóa nhiều đối tượng
         /// </summary>
         /// <param name="ids">Danh sách mã định danh cần xóa</param>
-        /// <returns></returns>
         /// Author: PNNHai
         /// Date: 
         Task DeleteMultipalAsync(List<Guid> ids);
-
     }
 }

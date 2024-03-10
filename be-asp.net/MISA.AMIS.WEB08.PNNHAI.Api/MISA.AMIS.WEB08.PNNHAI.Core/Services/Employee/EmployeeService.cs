@@ -60,7 +60,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// <exception cref="ValidateException">Mã nhân viên đã tồn tại</exception>
         /// Author: PNNHai
         /// Date
-        private async Task CheckEmployeeCodeNotExistedByCode(string employeeCode)
+        public async Task CheckEmployeeCodeNotExistedByCode(string employeeCode)
         {
             // Kiểm tra mã nhân viên có tồn tại chưa (nếu chưa thì ok nếu rồi thì throw exception)
             var employeeExist = await _employeeRepository.FindByCodeAsync(employeeCode);
@@ -78,7 +78,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// <exception cref="ValidateException">Phòng ban không tồn tại</exception>
         /// Author: PNNHai
         /// Date
-        private async Task CheckDepartmentExisted(Guid departmentId)
+        public async Task CheckDepartmentExisted(Guid departmentId)
         {
             var departmentExisted = await _departmentRepository.FindByIdAsync(departmentId);
             if(departmentExisted == null)

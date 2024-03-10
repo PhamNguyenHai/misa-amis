@@ -1,0 +1,22 @@
+Role: Admin | User
+
+Admin: 
+	- Management employees (CRUD)
+	- Management users (CRUD)
+	- Reset user's password
+	- Change password
+	- View login log
+	- Search, filter, paging employee
+	- Search, filter, paging user
+	- Statistical by chart
+	- Login
+	- Logout
+
+User: 
+	- Management employees (CRUD)
+	- Change password
+	- View login log
+	- Search, filter, paging employee
+	- Login
+	- Logout
+

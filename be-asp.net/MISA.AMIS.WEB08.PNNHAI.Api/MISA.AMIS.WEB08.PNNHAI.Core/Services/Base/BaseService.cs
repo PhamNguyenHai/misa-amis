@@ -48,7 +48,6 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
 
             // insert vào DB
             await _baseRepository.InsertAsync(entity);
-
         }
 
         /// <summary>

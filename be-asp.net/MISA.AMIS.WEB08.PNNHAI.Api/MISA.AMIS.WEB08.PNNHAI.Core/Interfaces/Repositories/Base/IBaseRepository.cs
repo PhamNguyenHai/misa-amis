@@ -12,28 +12,28 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// Thêm mới dữ liệu
         /// </summary>
         /// <param name="entity">Đối tượng cần thêm mới</param>
-        /// <returns></returns>
-        Task InsertAsync(TEntity entity);
+        /// <returns>Số dòng bị ảnh hưởng</returns>
+        Task<int> InsertAsync(TEntity entity);
 
         /// <summary>
         /// Cập nhật dữ liệu
         /// </summary>
         /// <param name="entity">Thông tin sẽ sửa</param>
-        /// <returns></returns>
-        Task UpdateAsync(TEntity entity);
+        /// <returns>Số dòng bị ảnh hưởng</returns>
+        Task<int> UpdateAsync(TEntity entity);
 
         /// <summary>
         /// Xóa dữ liệu
         /// </summary>
         /// <param name="entity">Đối tượng cần xóa</param>
-        /// <returns></returns>
-        Task DeleteAsync(TEntity entity);
+        /// <returns>Số dòng bị ảnh hưởng</returns>
+        Task<int> DeleteAsync(TEntity entity);
 
         /// <summary>
         /// Xóa nhiều đối tượng
         /// </summary>
         /// <param name="entities">Danh sách đối tượng cần xóa</param>
-        /// <returns></returns>
-        Task DeleteMultipalAsync(List<TEntity> entities);
+        /// <returns>Số dòng bị ảnh hưởng</returns>
+        Task<int> DeleteMultipalAsync(List<TEntity> entities);
     }
 }
