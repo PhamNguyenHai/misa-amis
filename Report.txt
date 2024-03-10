@@ -1,8 +1,15 @@
 Role: Admin | User
 
+Acc:
+Email: thanhlongnguyen@gmail.com | Phone: 0923145100 | Pass: Long@123 | Role: Admin
+Email: namxuan@gmail.com	 | Phone: 0934145122 | Pass: Nam@123  | Role: User
+Reset default password: Abc@123
+
 Admin: 
 	- Management employees (CRUD)
 	- Management users (CRUD)
+	- Import excel
+	- Export excel
 	- Reset user's password
 	- Change password
 	- View login log
