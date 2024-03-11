@@ -133,6 +133,15 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Danh sách id gửi lên rỗng..
+        /// </summary>
+        public static string DeleteIdsEmptyError {
+            get {
+                return ResourceManager.GetString("DeleteIdsEmptyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Xóa thành công..
         /// </summary>
         public static string DeleteSuccessful {

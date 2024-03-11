@@ -141,6 +141,9 @@
   <data name="DateOfBirthNoMoreThanCurrent" xml:space="preserve">
     <value>Ngày sinh không được lớn hơn ngày hiện tại.</value>
   </data>
+  <data name="DeleteIdsEmptyError" xml:space="preserve">
+    <value>Danh sách id gửi lên rỗng.</value>
+  </data>
   <data name="DeleteSuccessful" xml:space="preserve">
     <value>Xóa thành công.</value>
   </data>

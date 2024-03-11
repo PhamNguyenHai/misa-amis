@@ -101,75 +101,6 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.UnitTest
         }
 
         [Test]
-        public async Task ValidateForInserting_ExistedEmployeeCodeAndExistedDepartmentId_ThrowExcepton()
-        {
-            // Arrange
-            var employeeCode = "NV-00001";
-            var departmentId = Guid.NewGuid();
-
-            var employeeCreateDto = new EmployeeCreateDto();
-
-            var expectedMessage = string.Format(Core.Resources.AppResource.ExistedEmployeeCode, employeeCode);
-
-            _mockEmployeeService.When(a => a.CheckDepartmentExisted(departmentId)).Do(async _ => await Task.CompletedTask);
-
-            _mockEmployeeService.CheckEmployeeCodeNotExistedByCode(employeeCode)
-                .ThrowsAsync(new ValidateException(expectedMessage));
-
-            // Act
-            var exception = Assert.ThrowsAsync<ValidateException>(
-                async () => await _mockEmployeeService.ValidateForInserting(employeeCreateDto));
-
-            // Assert
-            Assert.That(exception.Message, Is.EqualTo(expectedMessage));
-            await _mockEmployeeService.Received(1).CheckEmployeeCodeNotExistedByCode(employeeCode);
-            await _mockEmployeeService.Received(1).CheckDepartmentExisted(departmentId);
-        }
-
-        [Test]
-        public async Task ValidateForInserting_ExistedEmployeeCodeAndNotExistedDepartmentId_ThrowExcepton()
-        {
-            // Arrange
-            var employeeCreateDto = new EmployeeCreateDto();
-            var employeeCode = "NV-00001";
-
-            var employee = new Employee()
-            {
-                EmployeeCode = employeeCode
-            };
-
-            var departmentId = Guid.NewGuid();
-
-            var expectedMessage = Core.Resources.AppResource.DepartmentNotExistedError;
-
-            _mockEmployeeService.CheckDepartmentExisted(departmentId)
-                .ThrowsAsync(new ValidateException(expectedMessage));
-
-
-            // Act
-            var exception = Assert.ThrowsAsync<ValidateException>(
-                async () => await _mockEmployeeService.ValidateForInserting(employeeCreateDto));
-
-            // Assert
-            Assert.That(exception.Message, Is.EqualTo(expectedMessage));
-            await _mockEmployeeService.Received(1).CheckEmployeeCodeNotExistedByCode(employeeCode);
-            await _mockEmployeeService.Received(1).CheckDepartmentExisted(departmentId);
-        }
-
-        //[Test]
-        //public async Task ValidateForInserting_NotExistedEmployeeCodeAndExistedDepartmentId_Success()
-        //{
-
-        //}
-
-        //[Test]
-        //public async Task ValidateForInserting_NotExistedEmployeeCodeAndNotExistedDepartmentId_ThrowException()
-        //{
-
-        //}
-
-
-        [Test]
         public async Task CreateAsync_ValidInput_ReturnIdNotEmpty()
         {
             // Arrange
@@ -177,15 +108,12 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.UnitTest
 
             var employee = new Employee();
 
-            //_mockEmployeeService.When(x => x.ValidateForInserting(employeeCreateDto))
-            //    .Do(async _ => await Task.CompletedTask);
-
             _mockMapper.Map<Employee>(employeeCreateDto).Returns(employee);
 
             // Act
             await _mockEmployeeService.CreateAsync(employeeCreateDto);
 
-            // Assert
+            // Assert=
             Assert.That(employee.EmployeeId, Is.Not.EqualTo(Guid.Empty));
         }
 
@@ -208,6 +136,113 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core.UnitTest
             // Assert
             await _mockEmployeeService.Received(1).ValidateForInserting(employeeCreateDto);
             await _mockEmployeeRepository.Received(1).InsertAsync(employee);
+        }
+
+        [Test]
+        public async Task UpdateAsync_ExistedId_ReturnEmployeeIdSameInputId()
+        {
+            // Arrange
+            var employeeId = Guid.NewGuid();
+            var employeeUpdateDto = new EmployeeUpdateDto();
+
+            var employee = new Employee();
+
+            _mockMapper.Map<Employee>(employeeUpdateDto).Returns(employee);
+
+            // Act
+            await _mockEmployeeService.UpdateAsync(employeeId, employeeUpdateDto);
+
+            // Assert
+            Assert.That(employee.EmployeeId, Is.EqualTo(employeeId));
+        }
+
+        [Test]
+        public async Task UpdateAsync_ValidInput_Success()
+        {
+            // Arrange
+            var employeeId = Guid.NewGuid();
+            var employeeUpdateDto = new EmployeeUpdateDto();
+            var employee = new Employee();
+
+            _mockMapper.Map<Employee>(employeeUpdateDto).Returns(employee);
+
+            // Act
+            await _mockEmployeeService.UpdateAsync(employeeId, employeeUpdateDto);
+
+            // Assert
+            await _mockEmployeeRepository.Received(1).GetByIdAsync(employeeId);
+            await _mockEmployeeService.Received(1).ValidateForUpdating(employeeId, employeeUpdateDto);
+            await _mockEmployeeRepository.Received(1).UpdateAsync(employee);
+        }
+
+        [Test]
+        public async Task DeleteAsync_ValidInput_Success()
+        {
+            // Arrange
+            var employeeId = Guid.NewGuid();
+            var employeeModel = new EmployeeModel();
+            var employee = new Employee();
+
+            _mockMapper.Map<Employee>(employeeModel).Returns(employee);
+
+            _mockEmployeeRepository.GetByIdAsync(employeeId).Returns(employeeModel);
+
+            // Act
+            await _mockEmployeeService.DeleteAsync(employeeId);
+
+            // Assert
+            await _mockEmployeeRepository.Received(1).GetByIdAsync(employeeId);
+            await _mockEmployeeRepository.Received(1).DeleteAsync(employee);
+        }
+
+        [Test]
+        public async Task DeleteMultipalAsync_EmptyListIds_ThrowException()
+        {
+            // Arrange
+            var ids = new List<Guid>();
+            var expectedMessage = Core.Resources.AppResource.DeleteIdsEmptyError;
+
+            // Act & Assert
+            var exception = Assert.ThrowsAsync<ValidateException>(async () => await _mockEmployeeService.DeleteMultipalAsync(ids));
+
+            Assert.That(exception.Message, Is.EqualTo(expectedMessage));
+        }
+
+        [Test]
+        public async Task DeleteMultipalAsync_ValidListIds_Success()
+        {
+            // Arrange
+            var ids = new List<Guid>();
+            var employeeToDelete = new List<Employee>();
+            for (int i = 1; i<= 10; i++)
+            {
+                var employeeId = Guid.NewGuid();
+                ids.Add(employeeId);
+                employeeToDelete.Add(new Employee() { EmployeeId = employeeId });
+            }
+
+            _mockEmployeeService.ValidateAndMapDeleteIdsToDeleteEntities(ids).Returns(employeeToDelete);
+
+            // Act
+            await _mockEmployeeService.DeleteMultipalAsync(ids);
+
+            // Assert
+            await _mockEmployeeService.Received(1).ValidateAndMapDeleteIdsToDeleteEntities(ids);
+            await _mockEmployeeRepository.Received(1).DeleteMultipalAsync(employeeToDelete);
+        }
+
+        [Test]
+        public async Task ValidateAndMapDeleteIdsToDeleteEntities_MoreThan20Ids_ThrowException()
+        {
+            // Arrange
+            var ids = Enumerable.Range(1, 25).Select(x => Guid.NewGuid()).ToList();
+            var expectedMessage = String.Format(Core.Resources.AppResource.MoreRecordDeleteError, 20);
+            // Act and Assert
+            var exception = Assert.ThrowsAsync<ValidateException>(
+                async () => await _mockEmployeeService.ValidateAndMapDeleteIdsToDeleteEntities(ids));
+
+            // Assert
+            Assert.AreEqual(expectedMessage, exception.Message);
         }
     }
 }

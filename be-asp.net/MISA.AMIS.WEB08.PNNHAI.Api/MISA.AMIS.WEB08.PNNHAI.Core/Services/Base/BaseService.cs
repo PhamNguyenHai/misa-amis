@@ -105,6 +105,10 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// Date: 
         public async Task DeleteMultipalAsync(List<Guid> ids)
         {
+            if (ids.Count == 0)
+            {
+                throw new ValidateException(Core.Resources.AppResource.DeleteIdsEmptyError);
+            }
             // Validate kiểm tra xem có tồn tại Id nào không thỏa mãn không. Nếu có không cho xóa và throw excception
             // Sau đó chuyển list ids thành list entities
             var deleteEntities = await ValidateAndMapDeleteIdsToDeleteEntities(ids);
@@ -141,7 +145,7 @@ namespace MISA.AMIS.WEB08.PNNHAI.Core
         /// <param name="ids">Danh sách mã định danh cần xóa</param>
         /// <returns>Danh sách phần tử cần xóa</returns>
         /// <exception cref="ValidateException">Tồn tại id không thỏa mãn</exception>
-        public virtual async Task<List<TEntity>> ValidateAndMapDeleteIdsToDeleteEntities(List<Guid> ids)
+        public async Task<List<TEntity>> ValidateAndMapDeleteIdsToDeleteEntities(List<Guid> ids)
         {
             // Validate
             if (ids.Count > 20)
